@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+body{
+    background-color: #f2f2f2 !important;
+}
+
+main{
+    padding: 2rem;
+    max-width: 1500px;
+    margin: 0 auto;
+    font-family: 'Inter', sans-serif;
+}
+
+.flex{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.filter button{
+    padding: .8rem 4rem;
+    border-radius: .5rem;
+    border: 1px solid #AFAFAF;
+    background-color: white;
+    color: #4F4C4D;
+    font-weight: 600;
+}
+
+/*--------------Modal----------------*/
+
+#exampleModal .modal-body div{
+    margin: 1rem;
+}
+
+.modal-body .input-wrapper{
+    margin: 0 !important;
+}
+
+.modal-body .input-wrapper input{
+    width: 46%;
+}
+
+.modal-col{
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+form .row{
+    gap: 1rem;
+}
+
+.modal-body form .numberInput
+{
+    padding: .7rem;
+    border: none;
+    border-radius: .4rem;
+    outline: 1px solid gray;
+    -webkit-box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.25);
+    box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.25);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.modal-body form button{
+    border: none;
+    border-radius: .5rem;
+    margin-top: .5rem;
+    box-sizing: border-box;
+    width: 100%;
+    padding: .7rem;
+    background-color: #286DF3;
+    color: white;
+}
+
+.modal-btn{
+    padding: .5rem 5rem;
+    border-radius: 1rem;
+    border: 1px solid black;
+    font-weight: 500;
+}
+
+form .typeText{
+    padding: .7rem;
+    border: none;
+    border-radius: .4rem;
+    outline: 1px solid gray;
+    -webkit-box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.25);
+    box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.25);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#exampleModal form div{
+    flex-grow: 1;
+    line-height: 1.8;
+}
+
+form select{
+    border: none;
+    outline: 1px solid gray;
+    padding: .9rem;
+    border-radius: .4rem;
+    -webkit-box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
+    box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
+    width: 100%;
+}
+
+.input-wrapper{
+    background-color: white;
+    outline: 1px solid gray;
+    border-radius: .4rem;
+    -webkit-box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
+    box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
+}
+
+.input-wrapper input{
+    padding: .7rem .6rem;
+    width: 55px;
+    border: none;
+}
+
+.input-wrapper input[type="number"]:focus{
+    outline: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.modal-col input{
+    display: none;
+}
+
+.labels{
+    margin: .2rem;
+    padding: .9rem 5rem;
+    display: inline-block;
+    border-radius: .9rem;
+    font-size: 15px;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.modal-col input[type="radio"]:checked+label{
+    background-color: #286DF3;
+    color: white;
+    border: none;
+    font-weight: 500;
+}
+
+/*--------------------modal---------------------*/
+/*----Cards-------*/
+
+.cards{
+    margin: 4rem auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-auto-rows: auto;
+    grid-gap: 1rem;
+}
+
+.card {
+    background-color: white;
+    transition: 0.3s;
+    width: 100%;
+    border-radius: .5rem;
+}
+
+.card img{
+    border-radius: .5rem .5rem 0 0;
+}
+
+.container h4{
+    margin: 0 0 .5rem 0;
+    color: rgb(37,58,84);
+    font-size: large;
+}
+
+.container p{
+    margin: 0;
+    font-size: small;
+    color: gray;
+}
+  
+.container {
+    padding: 20px 16px;
+}
+
+.info{
+    border-top: 2px solid #f2f2f2;
+    padding: 20px 16px;
+    display: flex;
+    gap: 3rem;
+}
+
+.info sup{
+    font-size: 11px;
+}
+
+.icon{
+    color: rgb(37,58,84);
+}
+
+.info p{
+    margin: 5px 0 0 0;
+    font-size: small;
+    color: gray;
+}
+
+/*----Cards-------*/

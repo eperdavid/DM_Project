@@ -74,7 +74,7 @@ body{
     border: none;
 }
 
-form input[type="text"]{
+form .typeText{
     padding: .7rem;
     border: none;
     border-radius: .4rem;
@@ -86,7 +86,7 @@ form input[type="text"]{
     box-sizing: border-box;
 }
 
-form div{
+#exampleModal form div{
     flex-grow: 1;
     line-height: 1.8;
 }
@@ -224,9 +224,28 @@ main{
 
 /*----Cards-------*/
 
+.wrapper{
+    max-width: 1500px;
+    margin: 5rem auto;
+    padding: 2rem;
+}
+
+.wrapper button{
+    background-color: #286DF3;
+    border-radius: .7rem;
+    border: none;
+}
+
+.wrapper button a{
+    display: block;
+    padding: .7rem;
+    text-decoration: none;
+    color: white;
+}
+
 .cards{
     margin: 4rem auto;
-    width: 80%;
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-auto-rows: auto;
@@ -282,3 +301,56 @@ main{
 }
 
 /*----Cards-------*/
+/*--------------Modal----------------*/
+
+#exampleModal .modal-body div{
+    margin: 1rem;
+}
+
+.modal-body .input-wrapper{
+    margin: 0 !important;
+}
+
+.modal-body .input-wrapper input{
+    width: 46%;
+}
+
+.modal-col{
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+form .row{
+    gap: 1rem;
+}
+
+.modal-body form .numberInput
+{
+    padding: .7rem;
+    border: none;
+    border-radius: .4rem;
+    outline: 1px solid gray;
+    -webkit-box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.25);
+    box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.25);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.modal-body form button{
+    border: none;
+    border-radius: .5rem;
+    margin-top: .5rem;
+    box-sizing: border-box;
+    width: 100%;
+    padding: .7rem;
+    background-color: #286DF3;
+    color: white;
+}
+
+.modal-btn{
+    padding: .5rem 5rem;
+    border-radius: 1rem;
+    border: 1px solid black;
+    font-weight: 500;
+}
