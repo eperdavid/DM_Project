@@ -9,7 +9,7 @@
     <title>Document</title>
 </head>
 <body>
-    <?php include 'nav.html'; ?>
+    <?php include 'nav.php'; ?>
     <div class="header">
         <form>
             <div class="rent-sell">
@@ -320,102 +320,105 @@
                 <div class="swiper-button-prev"></div>
             </div>
         </div>
+        <div class="wrappergap">
         <div class="wrapper">
-        <h3>Kiadó lakások</h3>
-        <button><a href="#">Mutass többet</a></button>
-        <div class="cards">
-            <div class="card">
-                <img src="../img/szabadka.jpg" alt="Avatar" style="width:100%">
-                <div class="container">
-                  <h4><b>24,000 USD</b></h4> 
-                  <p>12. Váci utca, Budapest</p> 
+            <h3>Kiadó lakások</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            <button><a href="#">Mutass többet</a></button>
+            <div class="cards">
+                <div class="card">
+                    <img src="../img/szabadka.jpg" alt="Avatar" style="width:100%">
+                    <div class="container">
+                    <h4><b>24,000 USD</b></h4> 
+                    <p>12. Váci utca, Budapest</p> 
+                    </div>
+                    <div class="info">
+                        <div>
+                            <div class="icon">
+                                <i class="fa-solid fa-vector-square"></i>
+                                <span><b>360m<sup>2</sup></b></span>
+                            </div>
+                            <p>Alapterület</p>
+                        </div>
+                        <div>
+                            <div class="icon">
+                                <i class="fa-solid fa-door-open"></i>
+                                <span><b>3</b></span>
+                            </div>
+                            <p>Szobák</p>
+                        </div>
+                        <div>
+                            <div class="icon">
+                                <i class="fa-solid fa-building"></i>
+                                <span><b>1.</b></span>
+                            </div>
+                            <p>Emelet</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="info">
-                    <div>
-                        <div class="icon">
-                            <i class="fa-solid fa-vector-square"></i>
-                            <span><b>360m<sup>2</sup></b></span>
-                        </div>
-                        <p>Alapterület</p>
+            
+                <div class="card">
+                    <img src="../img/szabadka.jpg" alt="Avatar" style="width:100%">
+                    <div class="container">
+                    <h4><b>24,000 USD</b></h4> 
+                    <p>12. Váci utca, Budapest</p> 
                     </div>
-                    <div>
-                        <div class="icon">
-                            <i class="fa-solid fa-door-open"></i>
-                            <span><b>3</b></span>
+                    <div class="info">
+                        <div>
+                            <div class="icon">
+                                <i class="fa-solid fa-vector-square"></i>
+                                <span><b>360m<sup>2</sup></b></span>
+                            </div>
+                            <p>Alapterület</p>
                         </div>
-                        <p>Szobák</p>
+                        <div>
+                            <div class="icon">
+                                <i class="fa-solid fa-door-open"></i>
+                                <span><b>3+1 fél</b></span>
+                            </div>
+                            <p>Szobák</p>
+                        </div>
+                        <div>
+                            <div class="icon">
+                                <i class="fa-solid fa-maximize"></i>
+                                <span><b>1107m<sup>2</sup></b></span>
+                            </div>
+                            <p>Telekterület</p>
+                        </div>
                     </div>
-                    <div>
-                        <div class="icon">
-                            <i class="fa-solid fa-building"></i>
-                            <span><b>1.</b></span>
+                </div>
+                <div class="card">
+                    <img src="../img/szabadka.jpg" alt="Avatar" style="width:100%">
+                    <div class="container">
+                    <h4><b>24,000 USD</b></h4> 
+                    <p>12. Váci utca, Budapest</p> 
+                    </div>
+                    <div class="info">
+                        <div>
+                            <div class="icon">
+                                <i class="fa-solid fa-vector-square"></i>
+                                <span><b>360m<sup>2</sup></b></span>
+                            </div>
+                            <p>Alapterület</p>
                         </div>
-                        <p>Emelet</p>
+                        <div>
+                            <div class="icon">
+                                <i class="fa-solid fa-door-open"></i>
+                                <span><b>3</b></span>
+                            </div>
+                            <p>Szobák</p>
+                        </div>
+                        <div>
+                            <div class="icon">
+                                <i class="fa-solid fa-building"></i>
+                                <span><b>1.</b></span>
+                            </div>
+                            <p>Emelet</p>
+                        </div>
                     </div>
                 </div>
             </div>
-           
-            <div class="card">
-                <img src="../img/szabadka.jpg" alt="Avatar" style="width:100%">
-                <div class="container">
-                  <h4><b>24,000 USD</b></h4> 
-                  <p>12. Váci utca, Budapest</p> 
-                </div>
-                <div class="info">
-                    <div>
-                        <div class="icon">
-                            <i class="fa-solid fa-vector-square"></i>
-                            <span><b>360m<sup>2</sup></b></span>
-                        </div>
-                        <p>Alapterület</p>
-                    </div>
-                    <div>
-                        <div class="icon">
-                            <i class="fa-solid fa-door-open"></i>
-                            <span><b>3+1 fél</b></span>
-                        </div>
-                        <p>Szobák</p>
-                    </div>
-                    <div>
-                        <div class="icon">
-                            <i class="fa-solid fa-maximize"></i>
-                            <span><b>1107m<sup>2</sup></b></span>
-                        </div>
-                        <p>Telekterület</p>
-                    </div>
-                </div>
             </div>
-            <div class="card">
-                <img src="../img/szabadka.jpg" alt="Avatar" style="width:100%">
-                <div class="container">
-                  <h4><b>24,000 USD</b></h4> 
-                  <p>12. Váci utca, Budapest</p> 
-                </div>
-                <div class="info">
-                    <div>
-                        <div class="icon">
-                            <i class="fa-solid fa-vector-square"></i>
-                            <span><b>360m<sup>2</sup></b></span>
-                        </div>
-                        <p>Alapterület</p>
-                    </div>
-                    <div>
-                        <div class="icon">
-                            <i class="fa-solid fa-door-open"></i>
-                            <span><b>3</b></span>
-                        </div>
-                        <p>Szobák</p>
-                    </div>
-                    <div>
-                        <div class="icon">
-                            <i class="fa-solid fa-building"></i>
-                            <span><b>1.</b></span>
-                        </div>
-                        <p>Emelet</p>
-                    </div>
-                </div>
-            </div>
-        </div>
         </div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>

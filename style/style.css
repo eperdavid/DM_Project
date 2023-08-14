@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
 
+#navm0{
+    margin-bottom: 0 !important;
+}
+
 :root{
     --textColor: #286DF3;
 }
@@ -10,14 +14,13 @@ body{
 }
 /*------------search with img ---------------*/
 .header{
-    background-image: url('../img/bg.png');
-    min-height: 600px;
-    width: 85%;
+    background-image: url('../img/city.jpg');
+    min-height: 850px;
+    width: 100%;
     background-size: cover;
     margin: 0 auto;
-    border-radius: 3rem;
     display: flex;
-    max-width: 1400px;
+    max-width: 2000px;
     justify-content: center;
     align-items: center;
     font-family: 'Inter', sans-serif;
@@ -84,6 +87,10 @@ form .typeText{
     box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.25);
     width: 100%;
     box-sizing: border-box;
+}
+
+.header form div{
+    flex-grow: 1;
 }
 
 #exampleModal form div{
@@ -224,10 +231,17 @@ main{
 
 /*----Cards-------*/
 
+.wrappergap{
+    padding: 0 1rem;
+}
+
 .wrapper{
     max-width: 1500px;
-    margin: 5rem auto;
+    margin: 3rem auto;
     padding: 2rem;
+    background-color: white;
+    border-radius: .5rem;
+    border: 1px solid rgba(119, 119, 119, 0.25);
 }
 
 .wrapper button{
@@ -247,7 +261,7 @@ main{
     margin: 4rem auto;
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     grid-auto-rows: auto;
     grid-gap: 1rem;
 }
@@ -257,6 +271,7 @@ main{
     transition: 0.3s;
     width: 100%;
     border-radius: .5rem;
+    border: 1px solid rgba(119, 119, 119, 0.25) !important;
 }
 
 .card img{
@@ -353,4 +368,31 @@ form .row{
     border-radius: 1rem;
     border: 1px solid black;
     font-weight: 500;
+}
+
+@media only screen and (max-width: 500px) {
+    .cards{
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        font-size: small;
+    }
+
+    .info{
+        gap: 1rem;
+    }
+
+    .wrapper{
+        padding: 1rem;
+    }
+
+    .wrappergap{
+        padding: 0;
+    }
+
+    .container h4{
+        font-size: medium;
+    }
+
+    .wrapper a, .wrapper p{
+        font-size: 14px;
+    }
 }
