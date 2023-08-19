@@ -70,6 +70,9 @@ session_start();
           <a class="nav-link p-2 m-1" href="properties.php">Ingatlanok</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link p-2 m-1" href="properties.php">Épitkezési telkek</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link p-2 m-1 bg-primary rounded color-danger text-light" href="addProperty.php"><b>Hirdetésfeladás</b></a>
         </li>
       </ul>
@@ -80,10 +83,6 @@ session_start();
     <!-- Right elements -->
     <div class="d-flex align-items-center">
       <!-- Icon -->
-      <a class="link-secondary me-3" href="#">
-        <i class="fa-solid fa-message fa-xl"></i>
-        <span class="badge rounded-pill badge-notification bg-danger">1</span>
-      </a>
 
       <!-- Avatar -->
       <div class="dropdown">
@@ -107,7 +106,7 @@ session_start();
           if($_SESSION['userlevel'] == 1)
           {
             echo '<li>
-                    <a class="dropdown-item" href="#">Hirdetéseim</a>
+                    <a class="dropdown-item" href="myProperties.html">Hirdetéseim</a>
                   </li>
                   <li>
                     <a class="dropdown-item" href="../actions/logoutAction.php">Kijelentkezés</a>
@@ -192,7 +191,7 @@ session_start();
   <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
     <form id="regForm">
 
-      <!-- Name input -->
+      <!-- Lastname input -->
       <div class="mb-4">
         <div class="form-outline">
           <input type="text" id="registerName" name="lastname" class="form-control" />
@@ -202,7 +201,7 @@ session_start();
       </div>
      
 
-      <!-- Username input -->
+      <!-- Firstname input -->
       <div class="mb-4">
         <div class="form-outline">
           <input type="text" id="registerUsername" name="firstname" class="form-control" />
@@ -218,6 +217,15 @@ session_start();
           <label class="form-label" for="registerEmail">Email</label>
         </div>
         <span class="errorMSG" id="errorEmail"></span>
+      </div>
+
+      <!-- Phone input -->
+      <div class="mb-4">
+        <div class="form-outline">
+          <input type="number" id="registerPhone" name="phone" class="form-control" />
+          <label class="form-label" for="registerEmail">Telefonszám</label>
+        </div>
+        <span class="errorMSG" id="phoneErrorMsg"></span>
       </div>
 
       <!-- Password input -->
@@ -292,6 +300,25 @@ session_start();
             }
             else{
               $("#errorFirstname").text("");
+            }
+            if(data.includes("invalidPhonenumber"))
+            {
+              $("#phoneErrorMsg").text("Ezt a mezőt kötelező kitölteni!");
+            }
+            else{
+              if(data.includes("notValidNumber"))
+              {
+                $("#phoneErrorMsg").text("Érvénytelen formátum");
+              }
+              else{
+                if(data.includes("existPhoneNum"))
+                {
+                  $("#phoneErrorMsg").text("Ez a telefonszám már foglalt");
+                }
+                else{
+                  $("#phoneErrorMsg").text("");
+                }
+              } 
             }
 
             if(data.includes("invalidEmail"))

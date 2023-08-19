@@ -242,15 +242,24 @@ if(isset($_POST['form3_submit']) and $_POST['form3_submit'] == 'form3_chk')
             if(ImgChecK($_FILES) == 1)
             {
 
-                $sql = 'INSERT INTO property (user_id, rent_sell, type, city, street, housenumber, area, rooms, halfrooms, propertycondition, comfort, furnished, height, wc, airconditioner, animal, smoking, barrier_free, moved, level, maxLevel, elevator, rentalPeriod, overhead, common, price, description) VALUES ("'.$_SESSION["id"].'","'.$_SESSION["rent-sell-option"].'","'.$_SESSION["type"].'","'.$_SESSION["city"].'","'.$_SESSION["street"].'","'.$_SESSION["housenumber"].'","'.$_SESSION["area"].'","'.$_SESSION["rooms"].'","'.$_SESSION["halfrooms"].'","'.$_SESSION["condition"].'","'.$_SESSION["comfort"].'","'.$_SESSION["furnished"].'","'.$_SESSION["height"].'","'.$_SESSION["wc"].'","'.$_SESSION["airconditioner"].'","'.$_SESSION["animal"].'","'.$_SESSION["smoking"].'","'.$_SESSION["barrier-free"].'","'.$_SESSION["moved"].'","'.$_SESSION["level"].'","'.$_SESSION["maxLevel"].'","'.$_SESSION["elevator"].'","'.$_SESSION["rentalPeriod"].'","'.$_SESSION["overhead"].'","'.$_SESSION["common"].'","'.$_SESSION["price"].'","'.$_SESSION["description"].'")';
+                $sql = 'UPDATE property SET rent_sell="'.$_SESSION["rent-sell-option"].'",type="'.$_SESSION["type"].'",city="'.$_SESSION["city"].'",street="'.$_SESSION["street"].'",housenumber="'.$_SESSION["housenumber"].'",area="'.$_SESSION["area"].'",rooms="'.$_SESSION["rooms"].'",halfrooms="'.$_SESSION["halfrooms"].'",propertycondition="'.$_SESSION["condition"].'",comfort="'.$_SESSION["comfort"].'",furnished="'.$_SESSION["furnished"].'",height="'.$_SESSION["height"].'",wc="'.$_SESSION["wc"].'",airconditioner="'.$_SESSION["airconditioner"].'",animal="'.$_SESSION["animal"].'",smoking="'.$_SESSION["smoking"].'",barrier_free="'.$_SESSION["barrier-free"].'",moved="'.$_SESSION["moved"].'",level="'.$_SESSION["level"].'",maxLevel="'.$_SESSION["maxLevel"].'",elevator="'.$_SESSION["elevator"].'",rentalPeriod="'.$_SESSION["rentalPeriod"].'",overhead="'.$_SESSION["overhead"].'",common="'.$_SESSION["common"].'", price="'.$_SESSION["price"].'",description="'.$_SESSION["description"].'" WHERE property_id='.$_POST['editid'].'';
                 mysqli_query($conn, $sql);
 
-                $last_id = mysqli_insert_id($conn);
+                $last_id = $_POST['editid'];
 
                 $folder = "../img/$last_id";
 
-                if(!file_exists($folder))
+                if(file_exists($folder))
                 {
+                    $files = glob($folder . "/*");
+
+                    foreach ($files as $file) {
+                        if (is_file($file)) {
+                          unlink($file);
+                        }
+                    }
+                }
+                else{
                     mkdir($folder,0777,true);
                 }
 
@@ -279,7 +288,7 @@ if(isset($_POST['form3_submit']) and $_POST['form3_submit'] == 'form3_chk')
             }
         }
         else{
-            $sql = 'UPDATE property SET rent_sell="'.$_SESSION["rent-sell-option"].'",type="'.$_SESSION["type"].'",city="'.$_SESSION["city"].'",street="'.$_SESSION["street"].'",housenumber="'.$_SESSION["housenumber"].'",area="'.$_SESSION["area"].'",rooms="'.$_SESSION["rooms"].'",halfrooms="'.$_SESSION["halfrooms"].'",propertycondition="'.$_SESSION["condition"].'",comfort="'.$_SESSION["comfort"].'",furnished="'.$_SESSION["furnished"].'",height="'.$_SESSION["height"].'",wc="'.$_SESSION["wc"].'",airconditioner="'.$_SESSION["airconditioner"].'",animal="'.$_SESSION["animal"].'",smoking="'.$_SESSION["smoking"].'",barrier_free="'.$_SESSION["barrier-free"].'",moved="'.$_SESSION["moved"].'",level="'.$_SESSION["level"].'",maxLevel="'.$_SESSION["maxLevel"].'",elevator="'.$_SESSION["elevator"].'",rentalPeriod="'.$_SESSION["rentalPeriod"].'",overhead="'.$_SESSION["overhead"].'",common="'.$_SESSION["common"].'", price="'.$_SESSION["price"].'",description="'.$_SESSION["description"].'" WHERE user_id='.$_SESSION['id'].'';
+            $sql = 'UPDATE property SET rent_sell="'.$_SESSION["rent-sell-option"].'",type="'.$_SESSION["type"].'",city="'.$_SESSION["city"].'",street="'.$_SESSION["street"].'",housenumber="'.$_SESSION["housenumber"].'",area="'.$_SESSION["area"].'",rooms="'.$_SESSION["rooms"].'",halfrooms="'.$_SESSION["halfrooms"].'",propertycondition="'.$_SESSION["condition"].'",comfort="'.$_SESSION["comfort"].'",furnished="'.$_SESSION["furnished"].'",height="'.$_SESSION["height"].'",wc="'.$_SESSION["wc"].'",airconditioner="'.$_SESSION["airconditioner"].'",animal="'.$_SESSION["animal"].'",smoking="'.$_SESSION["smoking"].'",barrier_free="'.$_SESSION["barrier-free"].'",moved="'.$_SESSION["moved"].'",level="'.$_SESSION["level"].'",maxLevel="'.$_SESSION["maxLevel"].'",elevator="'.$_SESSION["elevator"].'",rentalPeriod="'.$_SESSION["rentalPeriod"].'",overhead="'.$_SESSION["overhead"].'",common="'.$_SESSION["common"].'", price="'.$_SESSION["price"].'",description="'.$_SESSION["description"].'" WHERE property_id='.$_POST['editid'].'';
             mysqli_query($conn, $sql);
 
             

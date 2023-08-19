@@ -60,16 +60,29 @@ if(isset($_POST['form1_submit']) and $_POST['form1_submit'] == 'form1_chk')
     {
         if(strlen((string)$_POST['phone']) == 10)
         {
-            $phonenum = $_POST['phone'];
-            $sql = "SELECT phone FROM users WHERE phone='$phonenum'";
+            $originalPhone = "";
+            $sql = 'SELECT phone FROM users WHERE id="'.$_SESSION['id'].'"';
             $result = mysqli_query($conn, $sql);
 
             if (mysqli_num_rows($result) > 0) {
-                array_push($error, 'existphError');
-                $is_OK = false;
+                while($row = mysqli_fetch_assoc($result)) {
+                    $originalPhone = $row['phone'];
+                }
             }
-            else{
-                $_SESSION['phone'] = $_POST['phone'];
+
+            if($originalPhone != $_POST['phone'])
+            {
+                $phonenum = $_POST['phone'];
+                $sql = "SELECT phone FROM users WHERE phone='$phonenum'";
+                $result = mysqli_query($conn, $sql);
+
+                if (mysqli_num_rows($result) > 0) {
+                    array_push($error, 'existphError');
+                    $is_OK = false;
+                }
+                else{
+                    $_SESSION['phone'] = $_POST['phone'];
+                }
             }
         }
         else{

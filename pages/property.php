@@ -10,6 +10,7 @@
     <title>Document</title>
 </head>
 <body>
+  <?php include 'nav.php'; ?>
     <main>
         <div class="img-info">
             <div class="img">

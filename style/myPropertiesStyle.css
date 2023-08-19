@@ -1,0 +1,215 @@
+body{
+    background-color: #f2f2f2 !important;
+}
+
+main{
+    max-width: 1500px;
+    margin: 1rem auto;
+    padding: 0 1rem;
+}
+
+.userData{
+    background-color: white;
+    padding: 1rem;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .5rem;
+}
+
+.userData p{
+    color: rgb(59, 59, 59);
+}
+
+.inputs div{
+    display: flex;
+    flex-direction: column;
+    gap:.4rem;
+}
+
+.inputsFlex{
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.inputs{
+    display: flex;
+    flex-direction: column;
+    gap: .1rem;
+    flex: 1;
+}
+
+.inputs input{
+    padding: .5rem;
+    border-radius: .5rem;
+    border: none;
+    outline: 1px solid gray;
+    min-width: 280px;
+}
+
+.userData button{
+    margin-top: 1.5rem;
+    display: block;
+    width: 100%;
+    border: none;
+    padding: .5rem;
+    background-color: #286DF3;
+    color: white;
+    border-radius: .5rem;
+}
+
+.errorMSG{
+    visibility: hidden;
+}
+
+/*---------------------cards-------------------------*/
+
+.wrapper{
+    max-width: 1500px;
+    margin: 1rem auto;
+    padding: 2rem 1rem;
+    background-color: white;
+    border-radius: .5rem;
+    border: 1px solid rgba(119, 119, 119, 0.25);
+}
+
+.wrapper p{
+    font-weight: 500;
+    color: rgb(59, 59, 59);
+}
+
+.wrapper button{
+    background-color: #286DF3;
+    border-radius: .7rem;
+    border: none;
+}
+
+.wrapper button a{
+    display: block;
+    padding: .7rem;
+    text-decoration: none;
+    color: white;
+}
+
+.cards{
+    margin: 2rem auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-auto-rows: auto;
+    grid-gap: 1rem;
+    position: relative;
+}
+
+.card-icons{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+}
+
+.card-icons div a{
+    text-decoration: none;
+}
+
+.card-icons i{
+    padding: .8rem;
+    background-color: white;
+    border-radius: .5rem;
+    color: black;
+    opacity: .6;
+    transition: .4s;
+}
+
+.card-icons div:nth-child(2) i{
+    background-color: rgb(253, 63, 63);
+    color: white;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.card-icons div:nth-child(2) i:hover{
+    opacity: 1;
+}
+
+.card-icons div:nth-child(1) i:hover{
+    opacity: 1;
+}
+
+.card {
+    background-color: white;
+    transition: 0.3s;
+    width: 100%;
+    border-radius: .5rem !important;
+    border: 1px solid rgba(119, 119, 119, 0.25) !important;
+}
+
+.card img{
+    border-radius: .5rem .5rem 0 0;
+}
+
+.container h4{
+    margin: 0 0 .5rem 0;
+    color: rgb(37,58,84);
+    font-size: large;
+}
+
+.container p{
+    margin: 0;
+    font-size: small;
+    color: gray;
+}
+  
+.container {
+    padding: 20px 16px;
+}
+
+.info{
+    border-top: 2px solid #f2f2f2;
+    padding: 20px 16px;
+    display: flex;
+    gap: 3rem;
+}
+
+.info sup{
+    font-size: 11px;
+}
+
+.icon{
+    color: rgb(37,58,84);
+}
+
+.info p{
+    margin: 5px 0 0 0;
+    font-size: small;
+    color: gray;
+}
+
+@media only screen and (max-width: 500px) {
+    .cards{
+        grid-template-columns: repeat(auto-fill, minmax(285px, 1fr));
+        font-size: small;
+    }
+
+    .info{
+        gap: 1rem;
+    }
+
+    .wrapper{
+        padding: 1rem;
+    }
+
+    .container h4{
+        font-size: medium;
+    }
+
+    .wrapper a, .wrapper p{
+        font-size: 14px;
+    }
+
+    .userData p{
+        font-size: small;
+    }
+}

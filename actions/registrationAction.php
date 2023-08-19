@@ -56,6 +56,29 @@ else{
     }
 }
 
+if(empty($_POST['phone']))
+{
+    array_push($error, 'invalidPhonenumber');
+    $is_OK = false;
+}
+else{
+    if(strlen((string)$_POST['phone']) != 10)
+    {
+        array_push($error, 'notValidNumber');
+        $is_OK = false;
+    }
+    else{
+        $sql = 'SELECT phone FROM users WHERE phone="'.$_POST['phone'].'"';
+        $result = mysqli_query($conn, $sql);
+
+        if(mysqli_num_rows($result) > 0)
+        {
+            array_push($error, 'existPhoneNum');
+            $is_OK = false;
+        }
+    }
+}
+
 
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
@@ -71,11 +94,12 @@ if($is_OK == true)
     $firtname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
     $email = $_POST['email'];
+    $phone = $_POST['phone'];
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
     $token = bin2hex(random_bytes(16));
 
 
-    $sql = "INSERT INTO users (firstname, lastname, email, password, token) VALUES ('$firtname', '$lastname', '$email','$password', '$token')";
+    $sql = "INSERT INTO users (firstname, lastname,phone, email, password, token) VALUES ('$firtname', '$lastname','$phone', '$email','$password', '$token')";
     mysqli_query($conn, $sql);
 
     $mail = new PHPMailer(true);
@@ -96,7 +120,7 @@ if($is_OK == true)
     $mail->isHTML(true);                                  //Set email format to HTML
 
     $mail->Subject = 'Regisztracio';
-    $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+    $mail->Body    = '<a href="localhost/DM_Project/actions/emailActivation.php?token='.$token.'">Aktivacio</a>';
     
     $mail->send();
 

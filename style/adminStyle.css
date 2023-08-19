@@ -1,6 +1,11 @@
+body{
+    background-color: #f2f2f2;
+}
+
 main{
     max-width: 1500px;
     margin: 0 auto;
+    padding: 0 1rem;
 }
 
 .data-icon{
@@ -11,6 +16,7 @@ main{
 
 .data-icon h3{
     margin: 0;
+    color: #5a5c69!important;
 }
 
 .card-info{
@@ -25,22 +31,57 @@ main{
     padding: 2rem;
     border-radius: .5rem;
     min-width: 300px;
+    background-color: white;
+}
+
+.card-info .Card:nth-child(1){
+    border-left: 8px solid #286DF3 !important;
+}
+.card-info .Card:nth-child(2){
+    border-left: 8px solid #5686FF !important;
+}
+.card-info .Card:nth-child(3){
+    border-left: 8px solid #7AA1FF !important;
+}
+.card-info .Card:nth-child(4){
+    border-left: 8px solid #84adff !important;
+}
+
+.card-info .Card:nth-child(1) label{
+    color: #286DF3;
+}
+.card-info .Card:nth-child(2) label{
+    color: #5686FF;
+}
+.card-info .Card:nth-child(3) label{
+    color: #7AA1FF;
+}
+.card-info .Card:nth-child(4) label{
+    color: #84adff;
+}
+
+.Card label{
+    font-weight: 500;
 }
 
 .data-icon i{
     font-size: 35px;
 }
 
-.table-chart{
+.ad-chart{
     margin-top: 1rem;
     display: flex;
 }
 
 .table{
-    flex: 5;
-    padding: 1rem;
     border: 1px solid rgba(0, 0, 0, .125);
     border-radius: .5rem;
+    background-color: white;
+}
+
+.ad{
+    flex: 5;
+    min-width: 0;
 }
 
 .chart{
@@ -86,4 +127,77 @@ thead th{
     border-radius: .5rem !important;
     border: none !important; 
 }
+
+.table-content{
+    padding: 1rem;
+}
+
+.table-header{
+    background-color: #f8f9fc;
+    width: 100%;
+    padding: 1rem 2rem;
+    color: #286DF3;
+    font-weight: 500;
+    font-size: 18px;
+    border-bottom: 1px solid rgb(180, 179, 179);
+    border-radius: .5rem .5rem 0 0;
+}
 /*---------datatable--------------*/
+/*-----------swiper---------------*/
+
+.swiper {
+    width: 100%;
+    height: 100%;
+  }
+
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+
+  .citys{
+    width: 100%;
+    padding: 2rem 0 4rem 0;
+    background-color: white;
+    border-top: 1px solid #dee2e6;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.city-card h4{
+    font-size: large;
+    margin: 1rem 0;
+    color: black;
+}
+
+.city-container p{
+    margin-bottom: 0;
+    font-size: medium;
+}
+
+.city-card {
+    width: 100%;
+}
+
+.city-card img{
+    max-width: 200px !important;
+    height: 200px;
+    margin: 0 auto;
+    object-fit: cover;
+    border-radius: 50%;
+}
+  
+.city-container {
+    padding: 0 16px;
+}

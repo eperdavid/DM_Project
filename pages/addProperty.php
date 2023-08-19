@@ -358,7 +358,6 @@
                         <span class="errorMsg" id="emailErrorMSG"></span>
                     </div>
                     <div>
-                    '. $_SESSION['phone'].'
                         <label>Telefon (nem kötelező)</label>
                         <input type="number" name="phone" value="'.$phoneNumber.'">
                         <input type="hidden" name="originalphone" value="'.$phoneNumber.'">
@@ -608,6 +607,7 @@
 
                     <div>
                         <input type="file" name="images[]" multiple>
+                        <input type="hidden" name="editid" value="'.$_GET['edit'].'">
                     </div>
                     <div>
                         <br>
