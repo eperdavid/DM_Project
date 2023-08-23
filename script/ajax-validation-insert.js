@@ -12,19 +12,26 @@ $.ajax({
     data: form.serialize(), // serializes the form's elements.
     success: function(data)
     {
-        if(data.includes("phoneError"))
+        if(data.includes("emptyPhone"))
         {
-            $("#phoneErrorMSG").text("Érvénytelen telefonszám");
+            $("#phoneErrorMSG").text("Ezt a mezőt kötelező kitölteni");
         }
         else{
-            if(data.includes("existphError"))
+            if(data.includes("phoneError"))
             {
-                $("#phoneErrorMSG").text("Ez a telefonszám már foglalt!");
+                $("#phoneErrorMSG").text("Érvénytelen telefonszám");
             }
             else{
-                $("#phoneErrorMSG").text("");
+                if(data.includes("existphError"))
+                {
+                    $("#phoneErrorMSG").text("Ez a telefonszám már foglalt!");
+                }
+                else{
+                    $("#phoneErrorMSG").text("");
+                }
             }
         }
+        
 
         if(data.includes("none"))
         {
@@ -134,13 +141,6 @@ success: function(data)
     else{
         $("#overheadErrorMSG").text("");
     }
-    if(data.includes("commonError"))
-    {
-        $("#commonErrorMSG").text("Ezt a mezőt kötelező kitölteni!");
-    }
-    else{
-        $("#commonErrorMSG").text("");
-    }
     if(data.includes("priceError"))
     {
         $("#priceErrorMSG").text("Ezt a mezőt kötelező kitölteni!");
@@ -154,6 +154,157 @@ success: function(data)
     }
     else{
         $("#descriptionErrorMSG").text("");
+    }
+
+// Kiadó ház
+    if(data.includes("rentHouseroomsError"))
+    {
+        $("#rentHouseroomsErrorMSG").text("Ezt a mezőt kötelező kitölteni!");
+    }
+    else{
+        $("#rentHouseroomsErrorMSG").text("");
+    }
+    if(data.includes("halfroomError"))
+    {
+        $("#rentHousehalfroomsErrorMSG").text("Nem lehet negatív szám!");
+    }
+    else{
+        $("#rentHousehalfroomsErrorMSG").text("");
+    }
+    if(data.includes("rentHouseplotAreaError"))
+    {
+        $("#rentHouseplotAreaErrorMSG").text("Ezt a mezőt kötelező kitölteni!");
+    }
+    else{
+        $("#rentHouseplotAreaErrorMSG").text("");
+    }
+    if(data.includes("rentHousemaxLevelError"))
+    {
+        $("#rentHousemaxLevelErrorMSG").text("Ezt a mezőt kötelező kitölteni!");
+    }
+    else{
+        $("#rentHousemaxLevelErrorMSG").text("");
+    }
+    if(data.includes("rentHouserentalPeriod"))
+    {
+        $("#rentHouserentalPeriodErrorMSG").text("Ezt a mezőt kötelező kitölteni!");
+    }
+    else{
+        $("#rentHouserentalPeriodErrorMSG").text("");
+    }
+    if(data.includes("rentHouseoverheadError"))
+    {
+        $("#rentHouseoverheadErrorMSG").text("Ezt a mezőt kötelező kitölteni!");
+    }
+    else{
+        $("#rentHouseoverheadErrorMSG").text("");
+    }
+// --Kiadó ház
+
+// Eladó lakás
+    if(data.includes("sellApartmentroomsError"))
+    {
+        $("#sellApartmentroomsErrorMSG").text("Ezt a mezőt kötelező kitölteni!");
+    }
+    else{
+        $("#sellApartmentroomsErrorMSG").text("");
+    }
+    if(data.includes("sellApartmenthalfroomError"))
+    {
+        $("#sellApartmenthalfroomsErrorMSG").text("Nem lehet negatív szám!");
+    }
+    else{
+        $("#sellApartmenthalfroomsErrorMSG").text("");
+    }
+    if(data.includes("sellApartmentlevelError"))
+    {
+        $("#sellApartmentlevelErrorMSG").text("Ezt a mezőt kötelező kitölteni!");
+    }
+    else{
+        if(data.includes("sellApartmentlevelBiggerError"))
+        {
+            $("#sellApartmentlevelErrorMSG").text("Nem lehet nagyobb mint az épület szintje!");
+        }
+        else{
+            $("#sellApartmentlevelErrorMSG").text("");
+        }    
+    }
+    if(data.includes("sellApartmentmaxLevelError"))
+    {
+        $("#sellApartmentmaxLevelErrorMSG").text("Ezt a mezőt kötelező kitölteni!");
+    }
+    else{
+        $("#sellApartmentmaxLevelErrorMSG").text("");
+    }
+    if(data.includes("sellApartmentoverheadError"))
+    {
+        $("#sellApartmentoverheadErrorMSG").text("Ezt a mezőt kötelező kitölteni!");
+    }
+    else{
+        $("#sellApartmentoverheadErrorMSG").text("");
+    }
+    // -- Eladó lakás
+
+    // Eladó ház
+    if(data.includes("sellHouseroomsError"))
+    {
+        $("#sellHouseroomsErrorMSG").text("Ezt a mezőt kötelező kitölteni!");
+    }
+    else{
+        $("#sellHouseroomsErrorMSG").text("");
+    }
+    if(data.includes("sellHousehalfroomError"))
+    {
+        $("#sellHousehalfroomsErrorMSG").text("Nem lehet negatív szám!");
+    }
+    else{
+        $("#sellHousehalfroomsErrorMSG").text("");
+    }
+    if(data.includes("sellHouseplotAreaError"))
+    {
+        $("#sellHouseplotAreaErrorMSG").text("Ezt a mezőt kötelező kitölteni!");
+    }
+    else{
+        $("#sellHouseplotAreaErrorMSG").text("");
+    }
+    if(data.includes("sellHousemaxLevelError"))
+    {
+        $("#sellHousemaxLevelErrorMSG").text("Ezt a mezőt kötelező kitölteni!");
+    }
+    else{
+        $("#sellHousemaxLevelErrorMSG").text("");
+    }
+    if(data.includes("sellHouseoverheadError"))
+    {
+        $("#sellHouseoverheadErrorMSG").text("Ezt a mezőt kötelező kitölteni!");
+    }
+    else{
+        $("#sellHouseoverheadErrorMSG").text("");
+    }
+// --Eladó ház
+
+// Telek
+
+    if(data.includes("plotFromAreaError"))
+    {
+        $("#PlotFormAreaErrorMSG").text("Ezt a mezőt kötelező kitölteni!");
+    }
+    else{
+        $("#PlotFormAreaErrorMSG").text("");
+    }
+    if(data.includes("coverageError"))
+    {
+        $("#coverageErrorMSG").text("Ezt a mezőt kötelező kitölteni!");
+    }
+    else{
+        if(data.includes("coverageTooHighError"))
+        {
+            $("#coverageErrorMSG").text("Nem lehet nagyobb mint 100%");
+        }
+        else{
+            $("#coverageErrorMSG").text("");
+        }
+
     }
 
 

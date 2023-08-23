@@ -1,5 +1,6 @@
 body{
     background-color: #f2f2f2;
+    font-family: var(--bs-font-sans-serif) !important;
 }
 
 main{
@@ -38,26 +39,26 @@ main{
     border-left: 8px solid #286DF3 !important;
 }
 .card-info .Card:nth-child(2){
-    border-left: 8px solid #5686FF !important;
+    border-left: 8px solid #1cc88a !important;
 }
 .card-info .Card:nth-child(3){
-    border-left: 8px solid #7AA1FF !important;
+    border-left: 8px solid #f6c23e !important;
 }
 .card-info .Card:nth-child(4){
-    border-left: 8px solid #84adff !important;
+    border-left: 8px solid #e74a3b !important;
 }
 
 .card-info .Card:nth-child(1) label{
     color: #286DF3;
 }
 .card-info .Card:nth-child(2) label{
-    color: #5686FF;
+    color: #1cc88a;
 }
 .card-info .Card:nth-child(3) label{
-    color: #7AA1FF;
+    color: #f6c23e;
 }
 .card-info .Card:nth-child(4) label{
-    color: #84adff;
+    color: #e74a3b;
 }
 
 .Card label{
@@ -66,11 +67,14 @@ main{
 
 .data-icon i{
     font-size: 35px;
+    color: #bebec0;
 }
 
 .ad-chart{
-    margin-top: 1rem;
+    margin: 1rem 0;
     display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .table{
@@ -82,10 +86,37 @@ main{
 .ad{
     flex: 5;
     min-width: 0;
+    background-color: white;
+    border-radius: .5rem;
+    border: 1px solid rgba(0, 0, 0, .125);
+    min-width: 500px;
+}
+
+.ad-header{
+    background-color: #f8f9fc;
+    width: 100%;
+    padding: 1rem 2rem;
+    color: #286DF3;
+    font-weight: 500;
+    font-size: 18px;
+    border-bottom: 1px solid rgb(180, 179, 179);
+    border-radius: .5rem .5rem 0 0;
 }
 
 .chart{
     flex: 2;
+    background-color: white;
+    border: 1px solid rgba(119, 119, 119, 0.25);
+    border-radius: .5rem;
+    min-height: 500px;
+}
+
+.flex-chart{
+    height: 85%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0;
 }
 
 /*---------datatable--------------*/
@@ -140,7 +171,11 @@ thead th{
     font-weight: 500;
     font-size: 18px;
     border-bottom: 1px solid rgb(180, 179, 179);
-    border-radius: .5rem .5rem 0 0;
+    border-radius: .5rem .5rem 0 0 !important;
+}
+
+.table-content{
+    overflow-x: auto;
 }
 /*---------datatable--------------*/
 /*-----------swiper---------------*/
@@ -148,13 +183,14 @@ thead th{
 .swiper {
     width: 100%;
     height: 100%;
+    padding: 1rem !important;
+    padding-bottom: 5rem !important;
   }
 
   .swiper-slide {
     text-align: center;
     font-size: 18px;
-    background: #fff;
-    display: flex;
+    display: flex !important;
     justify-content: center;
     align-items: center;
   }
@@ -166,38 +202,89 @@ thead th{
     object-fit: cover;
   }
 
+/*-------------card----------------*/
 
-  .citys{
-    width: 100%;
-    padding: 2rem 0 4rem 0;
+.card {
     background-color: white;
-    border-top: 1px solid #dee2e6;
-    border-bottom: 1px solid #dee2e6;
-}
-
-.city-card h4{
-    font-size: large;
-    margin: 1rem 0;
-    color: black;
-}
-
-.city-container p{
-    margin-bottom: 0;
-    font-size: medium;
-}
-
-.city-card {
+    transition: 0.3s;
     width: 100%;
+    border-radius: .5rem;
+    border: 1px solid rgba(119, 119, 119, 0.25) !important;
 }
 
-.city-card img{
-    max-width: 200px !important;
-    height: 200px;
-    margin: 0 auto;
-    object-fit: cover;
-    border-radius: 50%;
+.card img{
+    border-radius: .5rem .5rem 0 0;
+}
+
+.container h4{
+    margin: 0 0 .5rem 0;
+    color: rgb(37,58,84);
+    font-size: large;
+}
+
+.container p{
+    margin: 0;
+    font-size: small;
+    color: gray;
 }
   
-.city-container {
-    padding: 0 16px;
+.container {
+    padding: 20px 16px;
+    text-align: left;
+}
+
+.info{
+    border-top: 2px solid #f2f2f2;
+    padding: 20px 16px;
+    display: flex;
+    gap: 3rem;
+}
+
+.info sup{
+    font-size: 11px;
+}
+
+.icon{
+    color: rgb(37,58,84);
+}
+
+.info p{
+    margin: 5px 0 0 0;
+    font-size: small;
+    color: gray;
+}
+
+
+@media only screen and (max-width: 650px) {
+    .ad{
+        width: 100%;
+        min-width: 280px;
+    }
+  }
+
+  @media only screen and (max-width: 500px) {
+    .cards{
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        font-size: small;
+    }
+
+    .info{
+        gap: 1rem;
+    }
+
+    .wrapper{
+        padding: 1rem;
+    }
+
+    .wrappergap{
+        padding: 0;
+    }
+
+    .container h4{
+        font-size: medium;
+    }
+
+    .wrapper a, .wrapper p{
+        font-size: 14px;
+    }
 }

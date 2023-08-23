@@ -260,3 +260,31 @@ input[type="file"]::file-selector-button:hover {
         width: 90%;
     }
 }
+
+#rentHouse{
+    display: none;
+}
+
+#rentPlot{
+    display: none;
+}
+
+#sellApartment{
+    display: none;
+}
+
+#sellHouse{
+    display: none;
+}
+
+#rentApartment > div, #rentHouse > div, #rentPlot > div, #sellApartment > div, #sellHouse > div{
+    margin: 1.6rem 0;
+}
+
+.firstDiv{
+    margin-top: 0 !important;
+}
+
+.lastDiv{
+    margin-bottom: 0 !important;
+}

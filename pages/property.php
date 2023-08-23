@@ -1,3 +1,46 @@
+<?php
+if(!empty($_GET['id']))
+{
+  include '../actions/db_config.php';
+
+  $sql = 'SELECT * FROM property WHERE property_id="'.$_GET['id'].'"';
+  $result = mysqli_query($conn, $sql);
+
+  if (mysqli_num_rows($result) > 0) {
+    while($row = mysqli_fetch_assoc($result)) {
+      $city = $row['city'];
+      $street = $row['street'];
+      $price = $row['price'];
+      $area = $row['area'];
+      $room = $row['rooms'];
+
+      
+      $description = $row['description'];
+
+
+
+      $usersql = 'SELECT * FROM users WHERE id="'.$row['user_id'].'"';
+      $userresult = mysqli_query($conn, $usersql);
+      if (mysqli_num_rows($userresult) > 0) {
+        while($row = mysqli_fetch_assoc($userresult)) {
+          $phone = $row['phone'];
+        }
+      }
+    }
+  }
+  else{
+    header('Location: index.php');
+  }
+}
+else{
+  header('Location: index.php');
+}
+
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -94,20 +137,20 @@
                 <h3>Az ingatlanról</h3>
                 <div>
                   <label>Város</label>
-                  <span><b>Szabadka</b></span>
+                  <span><b><?php echo $city; ?></b></span>
                 </div>
                 <div>
                   <label>Utca</label>
-                  <span><b>Kossuth Lajos utca</b></span>
+                  <span><b><?php echo $street; ?></b></span>
                 </div>
                 <hr>
                 <div>
                   <label>Ár</label>
-                  <span><b>EUR 154</b></span>
+                  <span><b>EUR <?php echo $price; ?></b></span>
                 </div>
                 <div>
                   <label>Alapterület</label>
-                  <span><b>64 m<sup>2</sup></b></span>
+                  <span><b><?php echo $area; ?> m<sup>2</sup></b></span>
                 </div>
                 <div>
                   <label>Szobák</label>
@@ -123,18 +166,8 @@
           <h3 style="margin-bottom: 1rem;">Hírdető adatai</h3>
           <div class="owner-contact">
             <div>
-              <label>Teljes neve</label>
-              <span><i class="fa-solid fa-user"></i>&nbsp;<b>Valammmmmmmmi Zoltán</b></span>
-            </div>
-
-            <div>
-              <label>Email</label>
-              <span><i class="fa-solid fa-envelope"></i>&nbsp;<b>valaasdasdasdmi@gmail.com</b></span>
-            </div>
-
-            <div>
               <label>Telefon</label>
-              <span><i class="fa-solid fa-phone"></i>&nbsp;<b>0631234567</b></span>
+              <span><i class="fa-solid fa-phone"></i>&nbsp;<b><?php echo $phone; ?></b></span>
             </div>
 
               <a href="#" class="sendMsg"><i class="fa-solid fa-message"></i>&nbsp;&nbsp;Üzenet küldés</a>
@@ -144,46 +177,119 @@
         <div class="description">
           <h3>Leírás</h3>
           <div class="text">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatur minima eveniet consequuntur aliquid explicabo incidunt
-            tempore deleniti debitis vitae id officiis, nostrum quibusdam officia ipsa natus quos? Nisi, maiores impedit. Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
-            Officiis consequuntur quasiratione quam, dolor repellendus sunt unde expedita, distinctio quos culpa veritatis ea corporis nesciunt ullam quibusdam accusamus
-            explicabo iusto.Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatur minima eveniet consequuntur aliquid explicabo incidunt
-            tempore deleniti debitis vitae id officiis, nostrum quibusdam officia ipsa natus quos? Nisi, maiores impedit. Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
-            Officiis consequuntur quasiratione quam, dolor repellendus sunt unde expedita, distinctio quos culpa veritatis ea corporis nesciunt ullam quibusdam accusamus
-            explicabo iusto.
+            <?php echo $description; ?>
           </div>
         </div>
 
         <div class="data" id="data">
           <h3 style="margin-bottom: 1rem;">Adatok</h3>
-          <div class="data-wrapper">
-            <div>
-              <div><span>Kategória</span><b>Lakás</b></div>
-              <div><span>Állapot</span><b>Újszerű</b></div>
-              <div><span>Komfort</span><b>Összkomfortos</b></div>
-              <div><span>Bútorzott</span><b>Igen</b></div>
-              <div><span>Költözhető</span><b>Azonnal</b></div>
-              <div><span>Állat hozható-e?</span><b>Igen</b></div>
-            </div>
 
-            <div>
-              <div><span>Akadálymentesített</span><b>Igen</b></div>
-              <div><span>Belmagasság</span><b>3m-nél alacsonyabb</b></div>
-              <div><span>Fürdő és wc</span><b>Külön helyiségben</b></div>
-              <div><span>Emelet</span><b>3</b></div>
-              <div><span>Épület szintje</span><b>4</b></div>
-              <div><span>Lift</span><b>Van</b></div>
-            </div>
+          <?php 
+          $result = mysqli_query($conn, $sql);
 
-            <div>
-              <div><span>Dohányzás</span><b>Nem megengedett</b></div>
-              <div><span>Légkondicionáló</span><b>Van</b></div>
-              <div><span>Min. bérleti idő</span><b>12 hónap</b></div>
-              <div><span>Rezsiköltség</span><b>42 <i class="fa-solid fa-euro-sign"></i></b></div>
-              <div><span>Közös költés</span><b>25 <i class="fa-solid fa-euro-sign"></i></b></div>
-              <div><span>Ár</span><b>9999 <i class="fa-solid fa-euro-sign"></i> /hó</b></div>
-            </div>
-          </div>
+          if (mysqli_num_rows($result) > 0) {
+            while($row = mysqli_fetch_assoc($result)) {
+              if($row['rent_sell'] == "Kiadó")
+              {
+                if($row['type'] == "Lakás")
+                {
+                echo '<div class="data-wrapper">
+                        <div>
+                          <div><span>Kategória</span><b>'.$row['type'].'</b></div>
+                          <div><span>Állapot</span><b>'.$row['propertycondition'].'</b></div>
+                          <div><span>Komfort</span><b>'.$row['comfort'].'</b></div>
+                          <div><span>Bútorzott</span><b>'.$row['furnished'].'</b></div>
+                          <div><span>Költözhető</span><b>'.$row['moved'].'</b></div>
+                          <div><span>Állat hozható-e?</span><b>'.$row['animal'].'</b></div>
+                        </div>
+            
+                        <div>
+                          <div><span>Akadálymentesített</span><b>'.$row['barrier_free'].'</b></div>
+                          <div><span>Belmagasság</span><b>'.$row['height'].'</b></div>
+                          <div><span>Fürdő és wc</span><b>'.$row['wc'].'</b></div>
+                          <div><span>Emelet</span><b>'.$row['level'].'</b></div>
+                          <div><span>Épület szintje</span><b>'.$row['maxLevel'].'</b></div>
+                          <div><span>Lift</span><b>'.$row['elevator'].'</b></div>
+                        </div>
+            
+                        <div>
+                          <div><span>Fűtés</span><b>'.$row['heating'].'</b></div>
+                          <div><span>Dohányzás</span><b>'.$row['smoking'].'</b></div>
+                          <div><span>Légkondicionáló</span><b>'.$row['airconditioner'].'</b></div>
+                          <div><span>Min. bérleti idő</span><b>'.$row['rentalPeriod'].' hónap</b></div>
+                          <div><span>Rezsiköltség</span><b>'.$row['overhead'].' <i class="fa-solid fa-euro-sign"></i></b></div>
+                          <div><span>Ár</span><b>'.$row['price'].' <i class="fa-solid fa-euro-sign"></i> /hó</b></div>
+                        </div>
+                      </div>';
+                }
+                if($row['type'] == "Ház")
+                {
+                echo '<div class="data-wrapper">
+                        <div>
+                          <div><span>Kategória</span><b>'.$row['type'].'</b></div>
+                          <div><span>Állapot</span><b>'.$row['propertycondition'].'</b></div>
+                          <div><span>Komfort</span><b>'.$row['comfort'].'</b></div>
+                          <div><span>Bútorzott</span><b>'.$row['furnished'].'</b></div>
+                          <div><span>Költözhető</span><b>'.$row['moved'].'</b></div>
+                          <div><span>Állat hozható-e?</span><b>'.$row['animal'].'</b></div>
+                        </div>
+            
+                        <div>
+                          <div><span>Akadálymentesített</span><b>'.$row['barrier_free'].'</b></div>
+                          <div><span>Belmagasság</span><b>'.$row['height'].'</b></div>
+                          <div><span>Fürdő és wc</span><b>'.$row['wc'].'</b></div>
+                          <div><span>Telekterület</span><b>'.$row['plotArea'].'  m<sup>2</sup></b></div>
+                          <div><span>Épület szintje</span><b>'.$row['maxLevel'].'</b></div>
+                          <div><span>Pince</span><b>'.$row['cellar'].'</b></div>
+                        </div>
+            
+                        <div>
+                          <div><span>Fűtés</span><b>'.$row['heating'].'</b></div>
+                          <div><span>Dohányzás</span><b>'.$row['smoking'].'</b></div>
+                          <div><span>Légkondicionáló</span><b>'.$row['airconditioner'].'</b></div>
+                          <div><span>Min. bérleti idő</span><b>'.$row['rentalPeriod'].' hónap</b></div>
+                          <div><span>Rezsiköltség</span><b>'.$row['overhead'].' <i class="fa-solid fa-euro-sign"></i></b></div>
+                          <div><span>Ár</span><b>'.$row['price'].' <i class="fa-solid fa-euro-sign"></i> /hó</b></div>
+                        </div>
+                      </div>';
+                }
+              }
+              else if($row['rent_sell'] == "Eladó")
+              {
+                if($row['type'] == "Lakás")
+                {
+                  echo '<div class="data-wrapper">
+                          <div>
+                            <div><span>Kategória</span><b>'.$row['type'].'</b></div>
+                            <div><span>Állapot</span><b>'.$row['propertycondition'].'</b></div>
+                            <div><span>Komfort</span><b>'.$row['comfort'].'</b></div>
+                            <div><span>Bútorzott</span><b>'.$row['furnished'].'</b></div>
+                            <div><span>Akadálymentesített</span><b>'.$row['barrier_free'].'</b></div>
+                          </div>
+              
+                          <div>
+                            <div><span>Belmagasság</span><b>'.$row['height'].'</b></div>
+                            <div><span>Fürdő és wc</span><b>'.$row['wc'].'</b></div>
+                            <div><span>Emelet</span><b>'.$row['level'].'</b></div>
+                            <div><span>Épület szintje</span><b>'.$row['maxLevel'].'</b></div>
+                            <div><span>Lift</span><b>'.$row['elevator'].'</b></div>
+                          </div>
+              
+                          <div>
+                            <div><span>Fűtés</span><b>'.$row['heating'].'</b></div>
+                            <div><span>Szigetelés</span><b>'.$row['insulation'].'</b></div>
+                            <div><span>Légkondicionáló</span><b>'.$row['airconditioner'].'</b></div>
+                            <div><span>Rezsiköltség</span><b>'.$row['overhead'].' <i class="fa-solid fa-euro-sign"></i></b></div>
+                            <div><span>Ár</span><b>'.$row['price'].' <i class="fa-solid fa-euro-sign"></i> /hó</b></div>
+                          </div>
+                        </div>';
+                }
+              }
+            }
+          }
+
+          ?>
+          
         </div>
 
         
