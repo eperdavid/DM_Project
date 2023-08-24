@@ -6,10 +6,16 @@
     <link rel="stylesheet" href="../style/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
     <title>Document</title>
 </head>
 <body>
-    <?php include 'nav.php'; ?>
+    <?php
+    include '../actions/db_config.php';
+    include 'nav.php';
+    ?>
     <div class="header">
         <div class="swiper2 mySwiper2">
             <div class="swiper-wrapper">
@@ -32,17 +38,30 @@
                 </div>
 
                 <div>
-                    <label>Város</label><br>    
-                    <input class="typeText" type="text">
+                    <label>Város</label><br>
+                    <div class="search_select_box">
+                        <select class="my-select" data-live-search="true">
+                            <option disabled selected hidden></option>
+                            <?php
+                            foreach($cities as $city)
+                            {
+                                echo '<option>'.$city.'</option>';
+                            }
+                            ?>
+                        </select>
+                    </div>
+
                 </div>
                 <div>
-                    <label>Típus</label><br>    
-                    <select>
-                        <option>Lakás</option>
-                        <option>Kertes ház</option>
-                        <option>Iker ház</option>
-                        <option>Iroda</option>
-                    </select>
+                    <label>Típus</label><br>   
+                    <div class="search_select_box"> 
+                        <select class="my-select">
+                            <option>Lakás</option>
+                            <option>Kertes ház</option>
+                            <option>Iker ház</option>
+                            <option>Iroda</option>
+                        </select>
+                    </div>
                 </div>
                 <div>
                     <label>Ár</label><br>  
@@ -64,13 +83,15 @@
 
                 <div>
                     <label>Szobák</label><br>    
-                    <select>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>4+</option>
-                    </select>
+                    <div class="search_select_box" id="rooms">
+                        <select class="my-select">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>4+</option>
+                        </select>
+                    </div>
                 </div>
                 <div>
                     <br>
@@ -260,72 +281,28 @@
         </div>
     </div>
     </div>
-
     <main>
         <div class="citys">
             <h3 style="text-align: center; margin-bottom: 4rem">Gyorsszűrő városok szerint</h3>
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
+                <?php
 
+                for($i=0; $i<6; $i++)
+                {
+                    $citysql = 'SELECT city FROM property WHERE city="'.$cities[$i].'"';
+                    echo '
                     <div class="swiper-slide">
                         <div class="city-card">
-                            <img src="../img/szabadka.jpg" alt="Avatar" style="width:100%">
+                            <img src="../img/cities/'.$cities[$i].'.jpg" alt="'.$cities[$i].'" style="width:100%">
                             <div class="city-container">
-                              <h4><b>Tokio</b></h4> 
-                              <p>14 találat</p> 
+                              <h4><b>'.$cities[$i].'</b></h4> 
+                              <p>'.mysqli_num_rows(mysqli_query($conn, $citysql)).' találat</p> 
                             </div>
                           </div>                          
-                    </div>
-
-                    <div class="swiper-slide">
-                        <div class="city-card">
-                            <img src="../img/szabadka.jpg" alt="Avatar" style="width:100%">
-                            <div class="city-container">
-                              <h4><b>Szabadka</b></h4> 
-                              <p>14 találat</p> 
-                            </div>
-                          </div>                          
-                    </div>
-
-                    <div class="swiper-slide">
-                        <div class="city-card">
-                            <img src="../img/szabadka.jpg" alt="Avatar" style="width:100%">
-                            <div class="city-container">
-                              <h4><b>Szabadka</b></h4> 
-                              <p>14 találat</p> 
-                            </div>
-                          </div>                          
-                    </div>
-
-                    <div class="swiper-slide">
-                        <div class="city-card">
-                            <img src="../img/szabadka.jpg" alt="Avatar" style="width:100%">
-                            <div class="city-container">
-                              <h4><b>Szabadka</b></h4> 
-                              <p>14 találat</p> 
-                            </div>
-                          </div>                          
-                    </div>
-
-                    <div class="swiper-slide">
-                        <div class="city-card">
-                            <img src="../img/szabadka.jpg" alt="Avatar" style="width:100%">
-                            <div class="city-container">
-                              <h4><b>Szabadka</b></h4> 
-                              <p>14 találat</p> 
-                            </div>
-                          </div>                          
-                    </div>
-
-                    <div class="swiper-slide">
-                        <div class="city-card">
-                            <img src="../img/szabadka.jpg" alt="Avatar" style="width:100%">
-                            <div class="city-container">
-                              <h4><b>Szabadka</b></h4> 
-                              <p>14 találat</p> 
-                            </div>
-                          </div>                          
-                    </div>
+                    </div>';
+                }
+                ?>
 
                 </div>
                 <div class="swiper-button-next"></div>
@@ -338,192 +315,137 @@
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
             <button><a href="#">Mutass többet</a></button>
             <div class="cards">
-                <div class="card">
-                    <img src="../img/szabadka.jpg" alt="Avatar" style="width:100%">
-                    <div class="container">
-                    <h4><b>24,000 USD</b></h4> 
-                    <p>12. Váci utca, Budapest</p> 
-                    </div>
-                    <div class="info">
-                        <div>
-                            <div class="icon">
-                                <i class="fa-solid fa-vector-square"></i>
-                                <span><b>360m<sup>2</sup></b></span>
-                            </div>
-                            <p>Alapterület</p>
-                        </div>
-                        <div>
-                            <div class="icon">
-                                <i class="fa-solid fa-door-open"></i>
-                                <span><b>3</b></span>
-                            </div>
-                            <p>Szobák</p>
-                        </div>
-                        <div>
-                            <div class="icon">
-                                <i class="fa-solid fa-building"></i>
-                                <span><b>1.</b></span>
-                            </div>
-                            <p>Emelet</p>
-                        </div>
-                    </div>
-                </div>
-            
-                <div class="card">
-                    <img src="../img/szabadka.jpg" alt="Avatar" style="width:100%">
-                    <div class="container">
-                    <h4><b>24,000 USD</b></h4> 
-                    <p>12. Váci utca, Budapest</p> 
-                    </div>
-                    <div class="info">
-                        <div>
-                            <div class="icon">
-                                <i class="fa-solid fa-vector-square"></i>
-                                <span><b>360m<sup>2</sup></b></span>
-                            </div>
-                            <p>Alapterület</p>
-                        </div>
-                        <div>
-                            <div class="icon">
-                                <i class="fa-solid fa-door-open"></i>
-                                <span><b>3+1 fél</b></span>
-                            </div>
-                            <p>Szobák</p>
-                        </div>
-                        <div>
-                            <div class="icon">
-                                <i class="fa-solid fa-maximize"></i>
-                                <span><b>1107m<sup>2</sup></b></span>
-                            </div>
-                            <p>Telekterület</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="../img/szabadka.jpg" alt="Avatar" style="width:100%">
-                    <div class="container">
-                    <h4><b>24,000 USD</b></h4> 
-                    <p>12. Váci utca, Budapest</p> 
-                    </div>
-                    <div class="info">
-                        <div>
-                            <div class="icon">
-                                <i class="fa-solid fa-vector-square"></i>
-                                <span><b>360m<sup>2</sup></b></span>
-                            </div>
-                            <p>Alapterület</p>
-                        </div>
-                        <div>
-                            <div class="icon">
-                                <i class="fa-solid fa-door-open"></i>
-                                <span><b>3</b></span>
-                            </div>
-                            <p>Szobák</p>
-                        </div>
-                        <div>
-                            <div class="icon">
-                                <i class="fa-solid fa-building"></i>
-                                <span><b>1.</b></span>
-                            </div>
-                            <p>Emelet</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="../img/szabadka.jpg" alt="Avatar" style="width:100%">
-                    <div class="container">
-                    <h4><b>24,000 USD</b></h4> 
-                    <p>12. Váci utca, Budapest</p> 
-                    </div>
-                    <div class="info">
-                        <div>
-                            <div class="icon">
-                                <i class="fa-solid fa-vector-square"></i>
-                                <span><b>360m<sup>2</sup></b></span>
-                            </div>
-                            <p>Alapterület</p>
-                        </div>
-                        <div>
-                            <div class="icon">
-                                <i class="fa-solid fa-door-open"></i>
-                                <span><b>3</b></span>
-                            </div>
-                            <p>Szobák</p>
-                        </div>
-                        <div>
-                            <div class="icon">
-                                <i class="fa-solid fa-building"></i>
-                                <span><b>1.</b></span>
-                            </div>
-                            <p>Emelet</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="../img/szabadka.jpg" alt="Avatar" style="width:100%">
-                    <div class="container">
-                    <h4><b>24,000 USD</b></h4> 
-                    <p>12. Váci utca, Budapest</p> 
-                    </div>
-                    <div class="info">
-                        <div>
-                            <div class="icon">
-                                <i class="fa-solid fa-vector-square"></i>
-                                <span><b>360m<sup>2</sup></b></span>
-                            </div>
-                            <p>Alapterület</p>
-                        </div>
-                        <div>
-                            <div class="icon">
-                                <i class="fa-solid fa-door-open"></i>
-                                <span><b>3</b></span>
-                            </div>
-                            <p>Szobák</p>
-                        </div>
-                        <div>
-                            <div class="icon">
-                                <i class="fa-solid fa-building"></i>
-                                <span><b>1.</b></span>
-                            </div>
-                            <p>Emelet</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="../img/szabadka.jpg" alt="Avatar" style="width:100%">
-                    <div class="container">
-                    <h4><b>24,000 USD</b></h4> 
-                    <p>12. Váci utca, Budapest</p> 
-                    </div>
-                    <div class="info">
-                        <div>
-                            <div class="icon">
-                                <i class="fa-solid fa-vector-square"></i>
-                                <span><b>360m<sup>2</sup></b></span>
-                            </div>
-                            <p>Alapterület</p>
-                        </div>
-                        <div>
-                            <div class="icon">
-                                <i class="fa-solid fa-door-open"></i>
-                                <span><b>3</b></span>
-                            </div>
-                            <p>Szobák</p>
-                        </div>
-                        <div>
-                            <div class="icon">
-                                <i class="fa-solid fa-building"></i>
-                                <span><b>1.</b></span>
-                            </div>
-                            <p>Emelet</p>
-                        </div>
-                    </div>
-                </div>
+            <?php
+
+            $sql = "SELECT * FROM property ORDER BY property_id DESC LIMIT 6";
+            $result = mysqli_query($conn, $sql);
+
+            if (mysqli_num_rows($result) > 0) {
+                while($row = mysqli_fetch_assoc($result)) {
+                    $rooms=$row['rooms'];
+                    $image = '../img/'.$row['property_id'].'';
+
+                    if(file_exists($image))
+                    {
+                        if(file_exists($image.'/1.jpg'))
+                        {
+                            $image = $image.'/1.jpg';
+                        }
+                        if(file_exists($image.'/1.jpeg'))
+                        {
+                            $image = $image.'/1.jpeg';
+                        }
+                        if(file_exists($image.'/1.png'))
+                        {
+                            $image = $image.'/1.png';
+                        }
+                    }
+                    else{
+                        $image = '../img/noimage.png';
+                    }
+
+                    if($row['halfrooms'] != "" and $row['halfrooms'] != 0)
+                    {
+                        $rooms = $rooms.'+'.$row['halfrooms'].' fél';
+                    }
+                    echo '
+                    <div class="card">
+                        <img src="'.$image.'" alt="Avatar" style="width:100%">
+                        <div class="container">
+                        <h4><b>'.$row['price'].' EUR</b></h4> 
+                        <p>'.$row['housenumber'].'. '.$row['street'].', '.$row['city'].'</p> 
+                        </div>';
+                        if($row['type'] == "Lakás")
+                        {
+                            echo '
+                            <div class="info">
+                                <div>
+                                    <div class="icon">
+                                        <i class="fa-solid fa-vector-square"></i>
+                                        <span><b>'.$row['area'].'m<sup>2</sup></b></span>
+                                    </div>
+                                    <p>Alapterület</p>
+                                </div>
+                                <div>
+                                    <div class="icon">
+                                        <i class="fa-solid fa-door-open"></i>
+                                        <span><b>'.$rooms.'</b></span>
+                                    </div>
+                                    <p>Szobák</p>
+                                </div>
+                                <div>
+                                    <div class="icon">
+                                        <i class="fa-solid fa-building"></i>
+                                        <span><b>'.$row['level'].'.</b></span>
+                                    </div>
+                                    <p>Emelet</p>
+                                </div>
+                            </div>';
+                        }
+                        if($row['type'] == "Ház")
+                        {
+                            echo '
+                            <div class="info">
+                                <div>
+                                    <div class="icon">
+                                        <i class="fa-solid fa-vector-square"></i>
+                                        <span><b>'.$row['area'].'m<sup>2</sup></b></span>
+                                    </div>
+                                    <p>Alapterület</p>
+                                </div>
+                                <div>
+                                    <div class="icon">
+                                        <i class="fa-solid fa-door-open"></i>
+                                        <span><b>'.$rooms.'</b></span>
+                                    </div>
+                                    <p>Szobák</p>
+                                </div>
+                                <div>
+                                    <div class="icon">
+                                        <i class="fa-solid fa-maximize"></i>
+                                        <span><b>'.$row['plotArea'].'m<sup>2</sup></b></span>
+                                    </div>
+                                    <p>Telekterület</p>
+                                </div>
+                            </div>';
+                        }
+                        if($row['type'] == "Telek")
+                        {
+                            echo '
+                            <div class="info">
+                                <div>
+                                    <div class="icon">
+                                        <i class="fa-solid fa-maximize"></i>
+                                        <span><b>'.$row['plotArea'].'m<sup>2</sup></b></span>
+                                    </div>
+                                    <p>Telekterület</p>
+                                </div>
+                                <div>
+                                    <div class="icon">
+                                        <i class="fa-solid fa-door-open"></i>
+                                        <span><b>'.$row['coverage'].'%</b></span>
+                                    </div>
+                                    <p>Beépíthetőség</p>
+                                </div>
+                            </div>';
+                        }
+                        
+                    echo '</div>';
+                }
+            }
+            ?>
+                
             </div>
             </div>
         </div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script src="../script/swiper-index.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+    <script> $('.my-select').selectpicker({ noneResultsText: 'Nincs találat erre {0}'}); </script>
 </body>
 </html>

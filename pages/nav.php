@@ -1,5 +1,6 @@
 <?php 
 session_start();
+$cities = array('Belgrád','Újvidék','Pristina','Nis','Kragujevac','Szabadka','Zombor','Bor','Verbász','Topolya');
 ?>
 
 <!DOCTYPE html>

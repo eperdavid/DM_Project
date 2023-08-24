@@ -13,7 +13,14 @@ if(!empty($_GET['id']))
       $price = $row['price'];
       $area = $row['area'];
       $room = $row['rooms'];
+      $type = $row['type'];
+      $plotArea = $row['plotArea'];
+      $coverage = $row['coverage'];
 
+      if($row['halfrooms'] != "" and $row['halfrooms'] != 0)
+      {
+        $room = $row['rooms'].' + '.$row['halfrooms'];
+      }
       
       $description = $row['description'];
 
@@ -148,14 +155,32 @@ else{
                   <label>Ár</label>
                   <span><b>EUR <?php echo $price; ?></b></span>
                 </div>
-                <div>
-                  <label>Alapterület</label>
-                  <span><b><?php echo $area; ?> m<sup>2</sup></b></span>
-                </div>
-                <div>
-                  <label>Szobák</label>
-                  <span><b>4</b></span>
-                </div>
+                <?php
+                  if($type == "Telek")
+                  {
+                    echo '
+                    <div>
+                      <label>Telekterület</label>
+                      <span><b>'.$plotArea.' m<sup>2</sup></b></span>
+                    </div>
+                    <div>
+                      <label>Beépíthetőség</label>
+                      <span><b>'.$coverage.' %</b></span>
+                    </div>';
+                  }
+                  else{
+                    echo '
+                    <div>
+                      <label>Alapterület</label>
+                      <span><b>'.$area.' m<sup>2</sup></b></span>
+                    </div>
+                    <div>
+                      <label>Szobák</label>
+                      <span><b>'.$room.'</b></span>
+                    </div>';
+                  }
+                ?>
+                
                 <div class="more">
                   <a href="#data">További adatok</a>
                 </div>
@@ -284,7 +309,55 @@ else{
                           </div>
                         </div>';
                 }
+                if($row['type'] == "Ház")
+                {
+                  echo '<div class="data-wrapper">
+                          <div>
+                            <div><span>Kategória</span><b>'.$row['type'].'</b></div>
+                            <div><span>Állapot</span><b>'.$row['propertycondition'].'</b></div>
+                            <div><span>Komfort</span><b>'.$row['comfort'].'</b></div>
+                            <div><span>Bútorzott</span><b>'.$row['furnished'].'</b></div>
+                            <div><span>Telekterület</span><b>'.$row['plotArea'].' m<sup>2</sup></b></div>
+                          </div>
+              
+                          <div>
+                            <div><span>Akadálymentesített</span><b>'.$row['barrier_free'].'</b></div>
+                            <div><span>Belmagasság</span><b>'.$row['height'].'</b></div>
+                            <div><span>Fürdő és wc</span><b>'.$row['wc'].'</b></div>
+                            <div><span>Épület szintje</span><b>'.$row['maxLevel'].'</b></div>
+                            <div><span>Pince</span><b>'.$row['cellar'].'</b></div>
+                          </div>
+              
+                          <div>
+                            <div><span>Fűtés</span><b>'.$row['heating'].'</b></div>
+                            <div><span>Szigetelés</span><b>'.$row['insulation'].'</b></div>
+                            <div><span>Légkondicionáló</span><b>'.$row['airconditioner'].'</b></div>
+                            <div><span>Rezsiköltség</span><b>'.$row['overhead'].' <i class="fa-solid fa-euro-sign"></i></b></div>
+                            <div><span>Ár</span><b>'.$row['price'].' <i class="fa-solid fa-euro-sign"></i> /hó</b></div>
+                          </div>
+                        </div>';
+                }
               }
+
+              if($row['type'] == "Telek")
+                {
+                echo '<div class="data-wrapper">
+                        <div>
+                          <div><span>Kategória</span><b>'.$row['type'].'</b></div>
+                          <div><span>Villany</span><b>'.$row['electricity'].'</b></div>
+                        </div>
+            
+                        <div>
+                          <div><span>Víz</span><b>'.$row['water'].'</b></div>
+                          <div><span>Gáz</span><b>'.$row['gas'].'</b></div>
+                        </div>
+            
+                        <div>
+                          <div><span>Csatorna</span><b>'.$row['canal'].'</b></div>
+                          <div><span>Ár</span><b>'.$row['price'].' <i class="fa-solid fa-euro-sign"></i> /hó</b></b></div>
+                        </div>
+                      </div>';
+                }
             }
           }
 

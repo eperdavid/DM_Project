@@ -516,32 +516,14 @@ if(isset($_POST['form3_submit']) and $_POST['form3_submit'] == 'form3_chk')
 
                 if($is_OK == true)
                 {
-                    unset($_SESSION['rent-sell-option']);
-                    unset($_SESSION['type']);
-                    unset($_SESSION['city']);
-                    unset($_SESSION['street']);
-                    unset($_SESSION['housenumber']);
-                    unset($_SESSION['area']);
-                    unset($_SESSION['rooms']);
-                    unset($_SESSION['halfrooms']);
-                    unset($_SESSION['condition']);
-                    unset($_SESSION['comfort']);
-                    unset($_SESSION['furnished']);
-                    unset($_SESSION['height']);
-                    unset($_SESSION['wc']);
-                    unset($_SESSION['airconditioner']);
-                    unset($_SESSION['animal']);
-                    unset($_SESSION['smoking']);
-                    unset($_SESSION['barrier-free']);
-                    unset($_SESSION['moved']);
-                    unset($_SESSION['level']);
-                    unset($_SESSION['maxLevel']);
-                    unset($_SESSION['elevator']);
-                    unset($_SESSION['rentalPeriod']);
-                    unset($_SESSION['overhead']);
-                    unset($_SESSION['heating']);
-                    unset($_SESSION['price']);
-                    unset($_SESSION['description']);
+
+                    foreach($_SESSION as $key => $val)
+                    {
+                        if ($key !== 'id' and $key !== 'email' and $key !== 'userlevel' and $key !== 'firstname' and $key !== 'lastname' and $key !== 'phone')
+                        {
+                            unset($_SESSION[$key]);
+                        }
+                    }
 
                     echo "ok";
                 }

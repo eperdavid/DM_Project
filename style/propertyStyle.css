@@ -224,10 +224,17 @@ main{
   text-align: justify;
 }
 
+@media only screen and (max-width: 1420px) {
+  .data-wrapper div{
+    font-size: 14px;
+  }
+}
+
 @media only screen and (max-width: 1220px) {
   .data-wrapper div{
     flex: auto;
     width: 100%;
+    font-size: 16px;
   }
 }
 
@@ -260,5 +267,13 @@ main{
 
   .data div div b{
     flex: 3;
+  }
+
+  .data-wrapper div{
+    font-size: 12px;
+  }
+
+  .data{
+    padding: 2rem 1rem;
   }
 }
