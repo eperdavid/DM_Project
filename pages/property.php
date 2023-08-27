@@ -66,76 +66,49 @@ else{
             <div class="img">
                 <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2">
                     <div class="swiper-wrapper">
-                      <div class="swiper-slide">
-                        <a href="../img/szabadka.jpg" data-toggle="lightbox" data-gallery="example-gallery">
-                          <img src="../img/szabadka.jpg" />
-                        </a>
-                      </div>
-                      <div class="swiper-slide">
-                        <a href="../img/room.jpg" data-toggle="lightbox" data-gallery="example-gallery">
-                          <img src="../img/room.jpg" />
-                        </a>
-                      </div>
-                      <div class="swiper-slide">
-                        <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-                      </div>
-                      <div class="swiper-slide">
-                        <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-                      </div>
-                      <div class="swiper-slide">
-                        <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-                      </div>
-                      <div class="swiper-slide">
-                        <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-                      </div>
-                      <div class="swiper-slide">
-                        <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-                      </div>
-                      <div class="swiper-slide">
-                        <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-                      </div>
-                      <div class="swiper-slide">
-                        <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-                      </div>
-                      <div class="swiper-slide">
-                        <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
-                      </div>
+                      <?php
+                      $img = false;
+                      if(file_exists('../img/'.$_GET['id'].''))
+                      {
+                        $img = true;
+                        $imgages = array_diff(scandir('../img/'.$_GET['id'].''), array('..', '.'));
+                        foreach($imgages as $img)
+                        {
+                          echo '
+                          <div class="swiper-slide">
+                            <img src="../img/'.$_GET['id'].'/'.$img.'" />
+                          </div>';
+                        }
+                      }
+                      else{
+                        echo '
+                          <div class="swiper-slide">
+                            <img src="../img/noimage.png" />
+                          </div>';
+                      }
+
+                      ?>
+                      
                     </div>
                     <div class="swiper-button-next"></div>
                     <div class="swiper-button-prev"></div>
                   </div>
                   <div id="thmSlider" thumbsSlider="" class="swiper mySwiper">
                     <div class="swiper-wrapper">
-                      <div class="swiper-slide">
-                        <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-                      </div>
-                      <div class="swiper-slide">
-                        <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-                      </div>
-                      <div class="swiper-slide">
-                        <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-                      </div>
-                      <div class="swiper-slide">
-                        <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-                      </div>
-                      <div class="swiper-slide">
-                        <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-                      </div>
-                      <div class="swiper-slide">
-                        <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-                      </div>
-                      <div class="swiper-slide">
-                        <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-                      </div>
-                      <div class="swiper-slide">
-                        <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-                      </div>
-                      <div class="swiper-slide">
-                        <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-                      </div>
-                      <div class="swiper-slide">
-                        <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
-                      </div>
+                      <?php
+                      if($img == true)
+                      {
+                        foreach($imgages as $img)
+                        {
+                          echo '
+                          <div class="swiper-slide">
+                            <img src="../img/'.$_GET['id'].'/'.$img.'" />
+                          </div>';
+                        }
+                      }
+
+                      ?>
+                      
                     </div>
                   </div>
             </div>
@@ -195,9 +168,13 @@ else{
               <span><i class="fa-solid fa-phone"></i>&nbsp;<b><?php echo $phone; ?></b></span>
             </div>
 
-              <a href="#" class="sendMsg"><i class="fa-solid fa-message"></i>&nbsp;&nbsp;Üzenet küldés</a>
+              <a class="sendMsg" href="#" data-mdb-toggle="modal" data-mdb-target="#messageModal"><i class="fa-solid fa-message"></i>&nbsp;&nbsp;Üzenet küldés</a>
           </div>
         </div>
+
+        
+
+        
 
         <div class="description">
           <h3>Leírás</h3>
@@ -364,6 +341,62 @@ else{
           ?>
           
         </div>
+        <!-- Modal -->
+        <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+          <form id="messageForm" action="../sendMessageAction.php" method="post">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Írj a hirdetőnek</h5>
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+              </div>
+              
+              <div class="modal-body">
+              <div>
+                <div class="form-outline">
+                  <input type="text" id="form12" class="form-control" <?php if(isset($_SESSION['lastname'])) { echo 'value="'.$_SESSION['lastname'].'" disabled'; } else { echo 'name="lastname"'; } ?>/>
+                  <label class="form-label" for="form12">Vezetéknév</label>
+                </div>
+                <span class="errorMsg" id="lastnameErrorMSG">Ezt a mezőt kötelező kitölteni</span>
+              </div>
+              <div>
+                <div class="form-outline">
+                  <input type="text" id="form13" class="form-control" <?php if(isset($_SESSION['firstname'])) { echo 'value="'.$_SESSION['firstname'].'" disabled'; } else { echo 'name="firstname"'; } ?>/>
+                  <label class="form-label" for="form13">Keresztnév</label>
+                </div>
+                <span class="errorMsg" id="firstnameErrorMSG">Ezt a mezőt kötelező kitölteni</span>
+              </div>
+              <div>
+                <div class="form-outline">
+                  <input type="email" id="form14" class="form-control" <?php if(isset($_SESSION['email'])) { echo 'value="'.$_SESSION['email'].'" disabled'; } else { echo 'name="email"'; } ?>/>
+                  <label class="form-label" for="form14">Email</label>
+                </div>
+                <span class="errorMsg" id="emailErrorMSG">Ezt a mezőt kötelező kitölteni</span>
+              </div>
+              <div>
+                <div class="form-outline">
+                  <input type="text" id="form15" name="phone" class="form-control" <?php if(isset($_SESSION['phone'])) { echo 'value="'.$_SESSION['phone'].'" disabled'; } else { echo 'name="phone"'; } ?>/>
+                  <label class="form-label" for="form15">Telefon</label>
+                </div>
+                <span class="errorMsg" id="phoneErrorMSG">Ezt a mezőt kötelező kitölteni</span>
+              </div>
+              <div>
+                <div class="form-outline">
+                  <textarea class="form-control" name="message" id="textAreaExample" data-mdb-showcounter="true" maxlength="200" rows="5"></textarea>
+                  <label class="form-label" for="textAreaExample">Üzenet</label>
+                  <div class="form-helper"></div>
+                </div>
+                <span class="errorMsg" id="messageErrorMSG">Ezt a mezőt kötelező kitölteni</span>
+              </div>
+              
+              </div>
+              <div class="modal-footer">
+                <button class="sendMSG">Küldés</button>
+              </div>
+            </div>
+          </form>
+          </div>
+        </div>
 
         
     </main>
@@ -372,5 +405,10 @@ else{
     <script src="../script/swiper-property.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bs5-lightbox@1.8.3/dist/index.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
+
+    <script src="../script/message-check.js"></script>
 </body>
 </html>

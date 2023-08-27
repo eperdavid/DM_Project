@@ -12,6 +12,7 @@
     <title>Document</title>
 </head>
 <body>
+    <div class="overflow-set">
     <?php
     include '../actions/db_config.php';
     include 'nav.php';
@@ -34,7 +35,6 @@
                     <label for="rent">Kiadó</label>
                     <input type="radio" id="sell" name="rent-sell-option" value="sell">
                     <label for="sell">Eladó</label>
-
                 </div>
 
                 <div>
@@ -112,11 +112,11 @@
         <div class="modal-body">
             <form action="" method="post">
                     <div class="row">
-                        <div class="col modal-col" style="text-align: center;">
-                            <label class="modal-btn" for="rent">Kiadó</label>
+                        <div class="col modal-col widthSet" style="text-align: center;">
+                            <label class="modal-btn rent-sell-btn" for="rent">Kiadó</label>
                         </div>
-                        <div class="col modal-col" style="text-align: center;">
-                            <label class="modal-btn" for="sell">Eladó</label>
+                        <div class="col modal-col widthSet" style="text-align: center;">
+                            <label class="modal-btn rent-sell-btn" for="sell">Eladó</label>
                         </div>
                     </div>
                     <div>
@@ -273,8 +273,11 @@
                         <label>Maximum rezsiköltség</label>
                         <input type="number" class="numberInput">
                     </div>
+                </div>
+                <div class="modal-footer">
                     <div>
                         <button>Keresés</button>
+                    </div>
                     </div>
             </form>
         </div>
@@ -447,5 +450,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
     <script> $('.my-select').selectpicker({ noneResultsText: 'Nincs találat erre {0}'}); </script>
+    </div>
 </body>
 </html>

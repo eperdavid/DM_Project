@@ -1,5 +1,7 @@
 <?php 
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
 $cities = array('Belgrád','Újvidék','Pristina','Nis','Kragujevac','Szabadka','Zombor','Bor','Verbász','Topolya');
 ?>
 
@@ -107,7 +109,7 @@ $cities = array('Belgrád','Újvidék','Pristina','Nis','Kragujevac','Szabadka',
           if($_SESSION['userlevel'] == 1)
           {
             echo '<li>
-                    <a class="dropdown-item" href="myProperties.html">Hirdetéseim</a>
+                    <a class="dropdown-item" href="myProperties.php">Hirdetéseim</a>
                   </li>
                   <li>
                     <a class="dropdown-item" href="../actions/logoutAction.php">Kijelentkezés</a>
@@ -259,8 +261,14 @@ $cities = array('Belgrád','Újvidék','Pristina','Nis','Kragujevac','Szabadka',
   </div>
 </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
-
+    
+    <?php
+    if(strpos($_SERVER['REQUEST_URI'], "property.php") == false)
+    {
+      echo '<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>';
+    }
+    ?>
+    
     <script>
       // this is the id of the form
       $("#regForm").submit(function(e) {

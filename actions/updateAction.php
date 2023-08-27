@@ -51,55 +51,6 @@ function ImgChecK($files){
 session_start();
 include 'db_config.php';
 
-if(isset($_POST['form1_submit']) and $_POST['form1_submit'] == 'form1_chk')
-{
-    $error = array();
-    $is_OK = true;
-
-    if(!empty($_POST['phone']))
-    {
-        if(strlen((string)$_POST['phone']) == 10)
-        {
-            if($_POST['phone'] != $_POST['originalphone'])
-            {
-                $phonenum = $_POST['phone'];
-                $sql = "SELECT phone FROM users WHERE phone='$phonenum'";
-                $result = mysqli_query($conn, $sql);
-
-                if (mysqli_num_rows($result) > 0) {
-                    array_push($error, 'existphError');
-                    $is_OK = false;
-                }
-                else{
-                    $_SESSION['phone'] = $_POST['phone'];
-                }
-            }
-            else{
-                $_SESSION['phone'] = $_POST['originalphone'];
-            }
-        }
-        else{
-            array_push($error, 'phoneError');
-            $is_OK = false;
-        }
-    }
-    else{
-        $_SESSION['phone'] = null;
-    }
-
-    if($is_OK == true)
-    {
-        echo "none";
-    }
-    else{
-        echo json_encode($error);
-    }
-}
-
-
-
-
-
 
 if(isset($_POST['form2_submit']) and $_POST['form2_submit'] == 'form2_chk')
 {
@@ -116,99 +67,498 @@ if(isset($_POST['form2_submit']) and $_POST['form2_submit'] == 'form2_chk')
         array_push($errorForm2, 'housenumberError');
         $is_OK = false;
     }
-    if(empty($_POST['area']) or $_POST['area'] <= 0)
-    {
-        array_push($errorForm2, 'areaError');
-        $is_OK = false;
-    }
-    if(empty($_POST['rooms']) or $_POST['rooms'] <= 0)
-    {
-        array_push($errorForm2, 'roomsError');
-        $is_OK = false;
-    }
-    if(!empty($_POST['halfrooms']))
-    {
-        if($_POST['halfrooms'] < 0)
+
+
+
+        if($_POST['type'] == "Lakás")
         {
-            array_push($errorForm2, 'halfroomError');
-            $is_OK = false;
+            if(empty($_POST['area']) or $_POST['area'] <= 0)
+            {
+                array_push($errorForm2, 'areaError');
+                $is_OK = false;
+            }
+            if(empty($_POST['rooms']) or $_POST['rooms'] <= 0)
+            {
+                array_push($errorForm2, 'roomsError');
+                $is_OK = false;
+            }
+            if(!empty($_POST['halfrooms']))
+            {
+                if($_POST['halfrooms'] < 0)
+                {
+                    array_push($errorForm2, 'halfroomError');
+                    $is_OK = false;
+                }
+            }
+            if(isset($_POST['level']) and isset($_POST['maxLevel']) and $_POST['level'] >= 0 and $_POST['maxLevel'] >= 0)
+            {
+                if($_POST['level'] > $_POST['maxLevel'])
+                {
+                    array_push($errorForm2, 'levelBiggerError');
+                    $is_OK = false;
+                }
+            }
+            else{
+                if(!isset($_POST['level']) or $_POST['level'] < 0)
+                {
+                    array_push($errorForm2, 'levelError');
+                    $is_OK = false;
+                }
+                if(!isset($_POST['maxLevel']) or $_POST['maxLevel'] < 0)
+                {
+                    array_push($errorForm2, 'maxLevelError');
+                    $is_OK = false;
+                }
+            }
+            if($_POST['rent-sell-option'] == "Kiadó")
+            {
+                if(empty($_POST['rentalPeriod']) or $_POST['rentalPeriod'] <= 0)
+                {
+                    array_push($errorForm2, 'rentalPeriodError');
+                    $is_OK = false;
+                }
+            }
+            if(empty($_POST['overhead']) or $_POST['overhead'] <= 0)
+            {
+                array_push($errorForm2, 'overheadError');
+                $is_OK = false;
+            }
+            if(empty($_POST['price']) or $_POST['price'] <= 0)
+            {
+                array_push($errorForm2, 'priceError');
+                $is_OK = false;
+            }
+            if(empty($_POST['description']))
+            {
+                array_push($errorForm2, 'descriptionError');
+                $is_OK = false;
+            }
         }
-    }
-    if(isset($_POST['level']) and isset($_POST['maxLevel']) and $_POST['level'] >= 0 and $_POST['maxLevel'] >= 0)
-    {
-        if($_POST['level'] > $_POST['maxLevel'])
+        if($_POST['type'] == "Ház")
         {
-            array_push($errorForm2, 'levelBiggerError');
-            $is_OK = false;
+            if(empty($_POST['area']) or $_POST['area'] <= 0)
+            {
+                array_push($errorForm2, 'areaError');
+                $is_OK = false;
+            }
+            if(empty($_POST['plotArea']) or $_POST['plotArea'] <= 0)
+            {
+                array_push($errorForm2, 'plotAreaError');
+                $is_OK = false;
+            }
+            if(empty($_POST['rooms']) or $_POST['rooms'] <= 0)
+            {
+                array_push($errorForm2, 'roomsError');
+                $is_OK = false;
+            }
+            if(!empty($_POST['halfrooms']))
+            {
+                if($_POST['halfrooms'] < 0)
+                {
+                    array_push($errorForm2, 'halfroomError');
+                    $is_OK = false;
+                }
+            }
+            if(!isset($_POST['maxLevel']) or $_POST['maxLevel'] < 0)
+            {
+                array_push($errorForm2, 'maxLevelError');
+                $is_OK = false;
+            }
+            if($_POST['rent-sell-option'] == "Kiadó")
+            {
+                if(empty($_POST['rentalPeriod']) or $_POST['rentalPeriod'] <= 0)
+                {
+                    array_push($errorForm2, 'rentalPeriodError');
+                    $is_OK = false;
+                }
+            }
+            if(empty($_POST['overhead']) or $_POST['overhead'] <= 0)
+            {
+                array_push($errorForm2, 'overheadError');
+                $is_OK = false;
+            }
+            if(empty($_POST['price']) or $_POST['price'] <= 0)
+            {
+                array_push($errorForm2, 'priceError');
+                $is_OK = false;
+            }
+            if(empty($_POST['description']))
+            {
+                array_push($errorForm2, 'descriptionError');
+                $is_OK = false;
+            }
         }
-    }
-    else{
-        if(!isset($_POST['level']) or $_POST['level'] < 0)
+
+        if($_POST['type'] == "Telek")
         {
-            array_push($errorForm2, 'levelError');
-            $is_OK = false;
+            if(empty($_POST['PlotFormArea']) or $_POST['PlotFormArea'] <= 0)
+            {
+                array_push($errorForm2, 'PlotFormAreaError');
+                $is_OK = false;
+            }
+            if(empty($_POST['coverage']) or $_POST['coverage'] <= 0)
+            {
+                    array_push($errorForm2, 'coverageError');
+                    $is_OK = false;
+            }
+            else{
+                if($_POST['coverage'] > 100)
+                {
+                    array_push($errorForm2, 'coverageTooHighError');
+                    $is_OK = false;
+                }
+            }
+            if(empty($_POST['price']) or $_POST['price'] <= 0)
+            {
+                array_push($errorForm2, 'priceError');
+                $is_OK = false;
+            }
+            if(empty($_POST['description']))
+            {
+                array_push($errorForm2, 'descriptionError');
+                $is_OK = false;
+            }
         }
-        if(!isset($_POST['maxLevel']) or $_POST['maxLevel'] < 0)
-        {
-            array_push($errorForm2, 'maxLevelError');
-            $is_OK = false;
-        }
-    }
-    if(empty($_POST['rentalPeriod']) or $_POST['rentalPeriod'] <= 0)
-    {
-        array_push($errorForm2, 'rentalPeriodError');
-        $is_OK = false;
-    }
-    if(empty($_POST['overhead']) or $_POST['overhead'] <= 0)
-    {
-        array_push($errorForm2, 'overheadError');
-        $is_OK = false;
-    }
-    if(empty($_POST['common']) or $_POST['common'] <= 0)
-    {
-        array_push($errorForm2, 'commonError');
-        $is_OK = false;
-    }
-    if(empty($_POST['price']) or $_POST['price'] <= 0)
-    {
-        array_push($errorForm2, 'priceError');
-        $is_OK = false;
-    }
-    if(empty($_POST['description']))
-    {
-        array_push($errorForm2, 'descriptionError');
-        $is_OK = false;
-    }
+    
+
+        
+    
+    
+    
+    
 
     if($is_OK == true)
     {
-        $_SESSION['rent-sell-option'] = $_POST['rent-sell-option'];
-        $_SESSION['type'] = $_POST['type'];
-        $_SESSION['city'] = $_POST['city'];
-        $_SESSION['street'] = $_POST['street'];
-        $_SESSION['housenumber'] = $_POST['housenumber'];
-        $_SESSION['area'] = $_POST['area'];
-        $_SESSION['rooms'] = $_POST['rooms'];
-        $_SESSION['halfrooms'] = $_POST['halfrooms'];
-        $_SESSION['condition'] = $_POST['condition'];
-        $_SESSION['comfort'] = $_POST['comfort'];
-        $_SESSION['furnished'] = $_POST['furnished'];
-        $_SESSION['height'] = $_POST['height'];
-        $_SESSION['wc'] = $_POST['wc'];
-        $_SESSION['airconditioner'] = $_POST['airconditioner'];
-        $_SESSION['animal'] = $_POST['animal'];
-        $_SESSION['smoking'] = $_POST['smoking'];
-        $_SESSION['barrier-free'] = $_POST['barrier-free'];
-        $_SESSION['moved'] = $_POST['moved'];
-        $_SESSION['level'] = $_POST['level'];
-        $_SESSION['maxLevel'] = $_POST['maxLevel'];
-        $_SESSION['elevator'] = $_POST['elevator'];
-        $_SESSION['rentalPeriod'] = $_POST['rentalPeriod'];
-        $_SESSION['overhead'] = $_POST['overhead'];
-        $_SESSION['common'] = $_POST['common'];
-        $_SESSION['price'] = $_POST['price'];
-        $_SESSION['description'] = $_POST['description'];
-        echo "none";
+        if($_POST['rent-sell-option'] == "Kiadó")
+        {
+            if($_POST['type'] == "Lakás")
+            {
+                if(!empty($_POST['city']) and !empty($_POST['condition']) and !empty($_POST['comfort']) and !empty($_POST['furnished']) and !empty($_POST['height'])
+                and !empty($_POST['wc']) and !empty($_POST['airconditioner']) and !empty($_POST['animal']) and !empty($_POST['smoking']) and !empty($_POST['barrier-free'])
+                and !empty($_POST['moved']) and !empty($_POST['elevator']) and !empty($_POST['heating']))
+                {
+                    if($_FILES['images']['name'][0] != "")
+                    {
+                        if(ImgChecK($_FILES) == 1)
+                        {
+
+                            $sql = 'UPDATE property SET city="'.$_POST["city"].'",street="'.$_POST["street"].'",housenumber="'.$_POST["housenumber"].'",area="'.$_POST["area"].'",rooms="'.$_POST["rooms"].'",halfrooms="'.$_POST["halfrooms"].'",propertycondition="'.$_POST["condition"].'",comfort="'.$_POST["comfort"].'",furnished="'.$_POST["furnished"].'",height="'.$_POST["height"].'",wc="'.$_POST["wc"].'",airconditioner="'.$_POST["airconditioner"].'",animal="'.$_POST["animal"].'",smoking="'.$_POST["smoking"].'",barrier_free="'.$_POST["barrier-free"].'",moved="'.$_POST["moved"].'",level="'.$_POST["level"].'",maxLevel="'.$_POST["maxLevel"].'",elevator="'.$_POST["elevator"].'",rentalPeriod="'.$_POST["rentalPeriod"].'",overhead="'.$_POST["overhead"].'", price="'.$_POST["price"].'",description="'.$_POST["description"].'",heating="'.$_POST["heating"].'" WHERE property_id='.$_POST['sendID'].'';
+                            mysqli_query($conn, $sql);
+
+                            $last_id = $_POST['sendID'];
+
+                            $folder = "../img/$last_id";
+
+                            if(file_exists($folder))
+                            {
+                                $files = glob($folder . "/*");
+
+                                foreach ($files as $file) {
+                                    if (is_file($file)) {
+                                    unlink($file);
+                                    }
+                                }
+                            }
+                            else{
+                                mkdir($folder,0777,true);
+                            }
+
+                            $c = 1;
+                            for($i=0; $i<count($_FILES['images']['name']); $i++)
+                            {
+                                $fileName = $_FILES['images']['name'][$i];
+                                $file_tmp = $_FILES["images"]["tmp_name"][$i];
+
+                                $fileNameParts = explode('.', $fileName);
+                                $ext = end($fileNameParts);
+
+                                move_uploaded_file($file_tmp, $folder.'/'.$c.'.'.$ext);
+                                $c++;
+                            }
+                        }
+                        else if(ImgChecK($_FILES) == 2)
+                        {
+                            array_push($errorIMG, 'max10mb');
+                            $is_OK = false;
+                        }
+                        else if(ImgChecK($_FILES) == 3)
+                        {
+                            array_push($errorIMG, 'badFormat');
+                            $is_OK = false;
+                        }
+                    }
+                    else{
+                        $sql = 'UPDATE property SET city="'.$_POST["city"].'",street="'.$_POST["street"].'",housenumber="'.$_POST["housenumber"].'",area="'.$_POST["area"].'",rooms="'.$_POST["rooms"].'",halfrooms="'.$_POST["halfrooms"].'",propertycondition="'.$_POST["condition"].'",comfort="'.$_POST["comfort"].'",furnished="'.$_POST["furnished"].'",height="'.$_POST["height"].'",wc="'.$_POST["wc"].'",airconditioner="'.$_POST["airconditioner"].'",animal="'.$_POST["animal"].'",smoking="'.$_POST["smoking"].'",barrier_free="'.$_POST["barrier-free"].'",moved="'.$_POST["moved"].'",level="'.$_POST["level"].'",maxLevel="'.$_POST["maxLevel"].'",elevator="'.$_POST["elevator"].'",rentalPeriod="'.$_POST["rentalPeriod"].'",overhead="'.$_POST["overhead"].'", price="'.$_POST["price"].'",description="'.$_POST["description"].'",heating="'.$_POST["heating"].'" WHERE property_id='.$_POST['sendID'].'';
+                        mysqli_query($conn, $sql);
+                    }
+                }
+                else{
+                    echo 'insertError';
+                }
+            }
+            if($_POST['type'] == "Ház")
+            {
+                if(!empty($_POST['city']) and !empty($_POST['condition']) and !empty($_POST['comfort']) and !empty($_POST['furnished']) and !empty($_POST['height'])
+                and !empty($_POST['wc']) and !empty($_POST['airconditioner']) and !empty($_POST['animal']) and !empty($_POST['smoking']) and !empty($_POST['barrier-free'])
+                and !empty($_POST['moved']) and !empty($_POST['rentHousecellar']) and !empty($_POST['heating']))
+                {
+                    if($_FILES['images']['name'][0] != "")
+                    {
+                        if(ImgChecK($_FILES) == 1)
+                        {
+
+                            $sql = 'UPDATE property SET city="'.$_POST["city"].'",street="'.$_POST["street"].'",housenumber="'.$_POST["housenumber"].'",area="'.$_POST["area"].'",rooms="'.$_POST["rooms"].'",halfrooms="'.$_POST["halfrooms"].'",plotArea="'.$_POST["plotArea"].'",propertycondition="'.$_POST["condition"].'",comfort="'.$_POST["comfort"].'",furnished="'.$_POST["furnished"].'",height="'.$_POST["height"].'",wc="'.$_POST["wc"].'",airconditioner="'.$_POST["airconditioner"].'",animal="'.$_POST["animal"].'",smoking="'.$_POST["smoking"].'",barrier_free="'.$_POST["barrier-free"].'",moved="'.$_POST["moved"].'",maxLevel="'.$_POST["maxLevel"].'",cellar="'.$_POST["rentHousecellar"].'",heating="'.$_POST["heating"].'",rentalPeriod="'.$_POST["rentalPeriod"].'",overhead="'.$_POST["overhead"].'", price="'.$_POST["price"].'",description="'.$_POST["description"].'" WHERE property_id='.$_POST['sendID'].'';
+                            mysqli_query($conn, $sql);
+
+                            $last_id = $_POST['sendID'];
+
+                            $folder = "../img/$last_id";
+
+                            if(file_exists($folder))
+                            {
+                                $files = glob($folder . "/*");
+
+                                foreach ($files as $file) {
+                                    if (is_file($file)) {
+                                    unlink($file);
+                                    }
+                                }
+                            }
+                            else{
+                                mkdir($folder,0777,true);
+                            }
+
+                            $c = 1;
+                            for($i=0; $i<count($_FILES['images']['name']); $i++)
+                            {
+                                $fileName = $_FILES['images']['name'][$i];
+                                $file_tmp = $_FILES["images"]["tmp_name"][$i];
+
+                                $fileNameParts = explode('.', $fileName);
+                                $ext = end($fileNameParts);
+
+                                move_uploaded_file($file_tmp, $folder.'/'.$c.'.'.$ext);
+                                $c++;
+                            }
+                        }
+                        else if(ImgChecK($_FILES) == 2)
+                        {
+                            array_push($errorIMG, 'max10mb');
+                            $is_OK = false;
+                        }
+                        else if(ImgChecK($_FILES) == 3)
+                        {
+                            array_push($errorIMG, 'badFormat');
+                            $is_OK = false;
+                        }
+                    }
+                    else{
+                        $sql = 'UPDATE property SET city="'.$_POST["city"].'",street="'.$_POST["street"].'",housenumber="'.$_POST["housenumber"].'",area="'.$_POST["area"].'",rooms="'.$_POST["rooms"].'",halfrooms="'.$_POST["halfrooms"].'",plotArea="'.$_POST["plotArea"].'",propertycondition="'.$_POST["condition"].'",comfort="'.$_POST["comfort"].'",furnished="'.$_POST["furnished"].'",height="'.$_POST["height"].'",wc="'.$_POST["wc"].'",airconditioner="'.$_POST["airconditioner"].'",animal="'.$_POST["animal"].'",smoking="'.$_POST["smoking"].'",barrier_free="'.$_POST["barrier-free"].'",moved="'.$_POST["moved"].'",maxLevel="'.$_POST["maxLevel"].'",cellar="'.$_POST["rentHousecellar"].'",heating="'.$_POST["heating"].'",rentalPeriod="'.$_POST["rentalPeriod"].'",overhead="'.$_POST["overhead"].'", price="'.$_POST["price"].'",description="'.$_POST["description"].'" WHERE property_id='.$_POST['sendID'].'';
+                        mysqli_query($conn, $sql);
+                    }
+                }
+                else{
+                    echo 'insertError';
+                }
+            }
+        }
+        if($_POST['rent-sell-option'] == "Eladó")
+        {
+            if($_POST['type'] == "Lakás")
+            {
+                if(!empty($_POST['city']) and !empty($_POST['condition']) and !empty($_POST['comfort']) and !empty($_POST['furnished']) and !empty($_POST['height'])
+                and !empty($_POST['wc']) and !empty($_POST['airconditioner']) and !empty($_POST['barrier-free'])
+                and !empty($_POST['sellApartmentinsulation']) and !empty($_POST['elevator']) and !empty($_POST['heating']))
+                {
+                    if($_FILES['images']['name'][0] != "")
+                    {
+                        if(ImgChecK($_FILES) == 1)
+                        {
+
+                            $sql = 'UPDATE property SET city="'.$_POST["city"].'",street="'.$_POST["street"].'",housenumber="'.$_POST["housenumber"].'",area="'.$_POST["area"].'",rooms="'.$_POST["rooms"].'",halfrooms="'.$_POST["halfrooms"].'",propertycondition="'.$_POST["condition"].'",comfort="'.$_POST["comfort"].'",furnished="'.$_POST["furnished"].'",height="'.$_POST["height"].'",wc="'.$_POST["wc"].'",airconditioner="'.$_POST["airconditioner"].'",barrier_free="'.$_POST["barrier-free"].'",level="'.$_POST["level"].'",maxLevel="'.$_POST["maxLevel"].'",elevator="'.$_POST["elevator"].'", heating="'.$_POST["heating"].'",insulation="'.$_POST["insulation"].'",overhead="'.$_POST["overhead"].'", price="'.$_POST["price"].'",description="'.$_POST["description"].'" WHERE property_id='.$_POST['sendID'].'';
+                            mysqli_query($conn, $sql);
+
+                            $last_id = $_POST['sendID'];
+
+                            $folder = "../img/$last_id";
+
+                            if(file_exists($folder))
+                            {
+                                $files = glob($folder . "/*");
+
+                                foreach ($files as $file) {
+                                    if (is_file($file)) {
+                                    unlink($file);
+                                    }
+                                }
+                            }
+                            else{
+                                mkdir($folder,0777,true);
+                            }
+
+                            $c = 1;
+                            for($i=0; $i<count($_FILES['images']['name']); $i++)
+                            {
+                                $fileName = $_FILES['images']['name'][$i];
+                                $file_tmp = $_FILES["images"]["tmp_name"][$i];
+
+                                $fileNameParts = explode('.', $fileName);
+                                $ext = end($fileNameParts);
+
+                                move_uploaded_file($file_tmp, $folder.'/'.$c.'.'.$ext);
+                                $c++;
+                            }
+                        }
+                        else if(ImgChecK($_FILES) == 2)
+                        {
+                            array_push($errorIMG, 'max10mb');
+                            $is_OK = false;
+                        }
+                        else if(ImgChecK($_FILES) == 3)
+                        {
+                            array_push($errorIMG, 'badFormat');
+                            $is_OK = false;
+                        }
+                    }
+                    else{
+                        $sql = 'UPDATE property SET city="'.$_POST["city"].'",street="'.$_POST["street"].'",housenumber="'.$_POST["housenumber"].'",area="'.$_POST["area"].'",rooms="'.$_POST["rooms"].'",halfrooms="'.$_POST["halfrooms"].'",propertycondition="'.$_POST["condition"].'",comfort="'.$_POST["comfort"].'",furnished="'.$_POST["furnished"].'",height="'.$_POST["height"].'",wc="'.$_POST["wc"].'",airconditioner="'.$_POST["airconditioner"].'",barrier_free="'.$_POST["barrier-free"].'",level="'.$_POST["level"].'",maxLevel="'.$_POST["maxLevel"].'",elevator="'.$_POST["elevator"].'", heating="'.$_POST["heating"].'",insulation="'.$_POST["insulation"].'",overhead="'.$_POST["overhead"].'", price="'.$_POST["price"].'",description="'.$_POST["description"].'" WHERE property_id='.$_POST['sendID'].'';
+                        mysqli_query($conn, $sql);
+                    }
+                }
+                else{
+                    echo 'insertError';
+                }
+            }
+            if($_POST['type'] == "Ház")
+            {
+                if(!empty($_POST['city']) and !empty($_POST['condition']) and !empty($_POST['comfort']) and !empty($_POST['furnished']) and !empty($_POST['height'])
+                and !empty($_POST['wc']) and !empty($_POST['airconditioner']) and !empty($_POST['barrier-free']) and !empty($_POST['sellHousecellar']) and !empty($_POST['heating'])
+                and !empty($_POST['sellHouseinsulation']))
+                {
+                    if($_FILES['images']['name'][0] != "")
+                    {
+                        if(ImgChecK($_FILES) == 1)
+                        {
+
+                            $sql = 'UPDATE property SET city="'.$_POST["city"].'",street="'.$_POST["street"].'",housenumber="'.$_POST["housenumber"].'",area="'.$_POST["area"].'",rooms="'.$_POST["rooms"].'",halfrooms="'.$_POST["halfrooms"].'",plotArea="'.$_POST["plotArea"].'",propertycondition="'.$_POST["condition"].'",comfort="'.$_POST["comfort"].'",furnished="'.$_POST["furnished"].'",height="'.$_POST["height"].'",wc="'.$_POST["wc"].'",airconditioner="'.$_POST["airconditioner"].'",barrier_free="'.$_POST["barrier-free"].'",maxLevel="'.$_POST["maxLevel"].'",cellar="'.$_POST["sellHousecellar"].'",heating="'.$_POST["heating"].'",insulation="'.$_POST["sellHouseinsulation"].'",overhead="'.$_POST["overhead"].'", price="'.$_POST["price"].'",description="'.$_POST["description"].'" WHERE property_id='.$_POST['sendID'].'';
+                            mysqli_query($conn, $sql);
+
+                            $last_id = $_POST['sendID'];
+
+                            $folder = "../img/$last_id";
+
+                            if(file_exists($folder))
+                            {
+                                $files = glob($folder . "/*");
+
+                                foreach ($files as $file) {
+                                    if (is_file($file)) {
+                                    unlink($file);
+                                    }
+                                }
+                            }
+                            else{
+                                mkdir($folder,0777,true);
+                            }
+
+                            $c = 1;
+                            for($i=0; $i<count($_FILES['images']['name']); $i++)
+                            {
+                                $fileName = $_FILES['images']['name'][$i];
+                                $file_tmp = $_FILES["images"]["tmp_name"][$i];
+
+                                $fileNameParts = explode('.', $fileName);
+                                $ext = end($fileNameParts);
+
+                                move_uploaded_file($file_tmp, $folder.'/'.$c.'.'.$ext);
+                                $c++;
+                            }
+                        }
+                        else if(ImgChecK($_FILES) == 2)
+                        {
+                            array_push($errorIMG, 'max10mb');
+                            $is_OK = false;
+                        }
+                        else if(ImgChecK($_FILES) == 3)
+                        {
+                            array_push($errorIMG, 'badFormat');
+                            $is_OK = false;
+                        }
+                    }
+                    else{
+                        $sql = 'UPDATE property SET city="'.$_POST["city"].'",street="'.$_POST["street"].'",housenumber="'.$_POST["housenumber"].'",area="'.$_POST["area"].'",rooms="'.$_POST["rooms"].'",halfrooms="'.$_POST["halfrooms"].'",plotArea="'.$_POST["plotArea"].'",propertycondition="'.$_POST["condition"].'",comfort="'.$_POST["comfort"].'",furnished="'.$_POST["furnished"].'",height="'.$_POST["height"].'",wc="'.$_POST["wc"].'",airconditioner="'.$_POST["airconditioner"].'",barrier_free="'.$_POST["barrier-free"].'",maxLevel="'.$_POST["maxLevel"].'",cellar="'.$_POST["sellHousecellar"].'",heating="'.$_POST["heating"].'",insulation="'.$_POST["sellHouseinsulation"].'",overhead="'.$_POST["overhead"].'", price="'.$_POST["price"].'",description="'.$_POST["description"].'" WHERE property_id='.$_POST['sendID'].'';
+                        mysqli_query($conn, $sql);
+                    }
+                }
+                else{
+                    echo 'insertError';
+                }
+            }
+        }
+        if($_POST['type'] == "Telek")
+        {
+            if(!empty($_POST['city']) and !empty($_POST['electricity']) and !empty($_POST['water']) and !empty($_POST['gas']) and !empty($_POST['canal']))
+            {
+                if($_FILES['images']['name'][0] != "")
+                    {
+                        if(ImgChecK($_FILES) == 1)
+                        {
+
+                            $sql = 'UPDATE property SET city="'.$_POST["city"].'",street="'.$_POST["street"].'",housenumber="'.$_POST["housenumber"].'",plotArea="'.$_POST["PlotFormArea"].'",coverage="'.$_POST["coverage"].'",electricity="'.$_POST["electricity"].'",water="'.$_POST["water"].'",gas="'.$_POST["gas"].'",canal="'.$_POST["canal"].'",price="'.$_POST["price"].'",description="'.$_POST["description"].'" WHERE property_id='.$_POST['sendID'].'';
+                            mysqli_query($conn, $sql);
+
+                            $last_id = $_POST['sendID'];
+
+                            $folder = "../img/$last_id";
+
+                            if(file_exists($folder))
+                            {
+                                $files = glob($folder . "/*");
+
+                                foreach ($files as $file) {
+                                    if (is_file($file)) {
+                                    unlink($file);
+                                    }
+                                }
+                            }
+                            else{
+                                mkdir($folder,0777,true);
+                            }
+
+                            $c = 1;
+                            for($i=0; $i<count($_FILES['images']['name']); $i++)
+                            {
+                                $fileName = $_FILES['images']['name'][$i];
+                                $file_tmp = $_FILES["images"]["tmp_name"][$i];
+
+                                $fileNameParts = explode('.', $fileName);
+                                $ext = end($fileNameParts);
+
+                                move_uploaded_file($file_tmp, $folder.'/'.$c.'.'.$ext);
+                                $c++;
+                            }
+                        }
+                        else if(ImgChecK($_FILES) == 2)
+                        {
+                            array_push($errorIMG, 'max10mb');
+                            $is_OK = false;
+                        }
+                        else if(ImgChecK($_FILES) == 3)
+                        {
+                            array_push($errorIMG, 'badFormat');
+                            $is_OK = false;
+                        }
+                    }
+                    else{
+                        $sql = 'UPDATE property SET city="'.$_POST["city"].'",street="'.$_POST["street"].'",housenumber="'.$_POST["housenumber"].'",plotArea="'.$_POST["PlotFormArea"].'",coverage="'.$_POST["coverage"].'",electricity="'.$_POST["electricity"].'",water="'.$_POST["water"].'",gas="'.$_POST["gas"].'",canal="'.$_POST["canal"].'",price="'.$_POST["price"].'",description="'.$_POST["description"].'" WHERE property_id='.$_POST['sendID'].'';
+                        mysqli_query($conn, $sql);
+                    }
+            }
+            else{
+                echo 'insertError';
+            }
+        }
+        
     }
     else{
         echo json_encode($errorForm2);

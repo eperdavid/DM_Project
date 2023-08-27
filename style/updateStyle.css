@@ -1,0 +1,235 @@
+html{
+    height: 100%;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    background-color: #f2f2f2 !important;
+    height: 100%;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: .5rem;
+    padding: 3rem 0;
+    height: fit-content;
+    width: 70%;
+    margin: 0 auto;
+    min-height: 80%;
+}
+
+main h3{
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.progress{
+    height: 8px !important;
+    border-radius: 0;
+    display: flex;
+    overflow: visible !important;
+    align-items: center;
+    font-size: 1.2rem !important;    
+}
+
+.progress div{
+    flex: 1;
+    color: #b1b1b1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-height: 100%;
+    position: relative;
+}
+
+.progress div label{
+    position: absolute;
+    font-size: small;
+    bottom: -55px !important;
+    color: #9e9e9e;
+}
+
+.progress div i{
+    padding: .9rem;
+    background-color: #f2f2f2;
+    border-radius: 50%;
+}
+
+.progress div:nth-child(1){
+    background-color: #286DF3;
+}
+
+.progress div:nth-child(1) i{
+    background-color: #286DF3;
+    color: white;
+}
+
+.progress div:nth-child(1) label{
+    color: #286DF3 !important;
+}
+
+
+
+/*--------------------Form1-----------------------*/
+
+.firstForm{
+    margin: 0 auto;
+    margin-top: 6rem;
+    width: 45%;
+    padding: 0 2rem;
+    min-width: 490px;
+}
+
+.firstForm input{
+    width: 100%;
+    box-sizing: border-box;
+    padding: .6rem;
+    border-radius: .5rem;
+    border: none;
+    outline: 1px solid #9e9e9e;
+}
+
+
+form label{
+    color: #5f5f5f !important;
+}
+
+#form1{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.double{
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.double div{
+    flex: 1;
+    flex-grow: 1;
+    min-width: 200px;
+    line-height: 1.5;
+}
+
+form button{
+    width: 100%;
+    padding: .7rem;
+    border-radius: .5rem;
+    color: white;
+    background-color: #286DF3;
+    border: none;
+}
+
+
+.secondForm select{
+    width: 100% !important;
+    box-sizing: border-box;
+    padding: .6rem;
+    border-radius: .5rem;
+    border: none;
+    outline: 1px solid #9e9e9e;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.secondForm select:hover{
+    background-color: #ebeaea;
+    color: #636363;
+}
+
+.search_select_box button{
+    background-color: white;
+    padding: .8rem;
+    border: none;
+    outline: 1px solid #9e9e9e;
+    border-radius: .5rem;
+    font-weight: 500;
+    font-size: 13px;
+    color: black;
+}
+
+
+textarea{
+    width: 100%;
+    min-height: 5rem;
+    border-radius: .5rem;
+    padding: .4rem;
+}
+
+
+input[type="file"]::file-selector-button {
+    border-radius: 4px;
+    padding: 0 16px;
+    height: 40px;
+    cursor: pointer;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.05);
+    margin-right: 16px;
+    transition: background-color 200ms;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background-color: #f3f4f6;
+}
+
+.errorMsg{
+    font-size: small;
+    color: rgb(255, 90, 90);
+}
+
+
+@media only screen and (max-width: 700px) {
+    .firstForm, .secondForm, .thirdForm{
+        min-width: 100%;
+    }
+
+    .name div{
+        min-width: 100% !important;
+    }
+
+    main{
+        width: 90%;
+    }
+}
+
+
+#rentApartment > div, #rentHouse > div, #rentPlot > div, #sellApartment > div, #sellHouse > div{
+    margin: 1.6rem 0;
+}
+
+.firstDiv{
+    margin-top: 0 !important;
+}
+
+.lastDiv{
+    margin-bottom: 0 !important;
+}
+
+.type{
+    width: 100%;
+    box-sizing: border-box;
+    padding: .6rem;
+    border-radius: .5rem;
+    border: none;
+    outline: 1px solid #9e9e9e;
+    background-color:#e4e4e4;
+}
+
+.rent-sell{
+    text-align: center;
+    padding: .7rem;
+    background-color: #286DF3;
+    color: white;
+    border: 1px solid #9e9e9e;
+    border-radius: .5rem;
+}
