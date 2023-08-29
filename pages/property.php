@@ -31,6 +31,8 @@ if(!empty($_GET['id']))
       if (mysqli_num_rows($userresult) > 0) {
         while($row = mysqli_fetch_assoc($userresult)) {
           $phone = $row['phone'];
+          $email = $row['email'];
+          $name = $row['firstname'];
         }
       }
     }
@@ -352,35 +354,38 @@ else{
               </div>
               
               <div class="modal-body">
-              <div>
+              <div class="input-wrapper">
                 <div class="form-outline">
                   <input type="text" id="form12" class="form-control" <?php if(isset($_SESSION['lastname'])) { echo 'value="'.$_SESSION['lastname'].'" disabled'; } else { echo 'name="lastname"'; } ?>/>
                   <label class="form-label" for="form12">Vezetéknév</label>
                 </div>
                 <span class="errorMsg" id="lastnameErrorMSG">Ezt a mezőt kötelező kitölteni</span>
               </div>
-              <div>
+              <div class="input-wrapper">
                 <div class="form-outline">
                   <input type="text" id="form13" class="form-control" <?php if(isset($_SESSION['firstname'])) { echo 'value="'.$_SESSION['firstname'].'" disabled'; } else { echo 'name="firstname"'; } ?>/>
                   <label class="form-label" for="form13">Keresztnév</label>
                 </div>
                 <span class="errorMsg" id="firstnameErrorMSG">Ezt a mezőt kötelező kitölteni</span>
               </div>
-              <div>
+              <?php echo '<input type="hidden" name="ownerEmail" value="'.$email.'">'; ?>
+              <?php echo '<input type="hidden" name="name" value="'.$name.'">'; ?>
+              <?php echo '<input type="hidden" name="propertyID" value="'.$_GET['id'].'">'; ?>
+              <div class="input-wrapper">
                 <div class="form-outline">
                   <input type="email" id="form14" class="form-control" <?php if(isset($_SESSION['email'])) { echo 'value="'.$_SESSION['email'].'" disabled'; } else { echo 'name="email"'; } ?>/>
                   <label class="form-label" for="form14">Email</label>
                 </div>
                 <span class="errorMsg" id="emailErrorMSG">Ezt a mezőt kötelező kitölteni</span>
               </div>
-              <div>
+              <div class="input-wrapper">
                 <div class="form-outline">
-                  <input type="text" id="form15" name="phone" class="form-control" <?php if(isset($_SESSION['phone'])) { echo 'value="'.$_SESSION['phone'].'" disabled'; } else { echo 'name="phone"'; } ?>/>
+                  <input type="number" id="form15" name="phone" class="form-control" <?php if(isset($_SESSION['phone'])) { echo 'value="'.$_SESSION['phone'].'" disabled'; } else { echo 'name="phone"'; } ?>/>
                   <label class="form-label" for="form15">Telefon</label>
                 </div>
                 <span class="errorMsg" id="phoneErrorMSG">Ezt a mezőt kötelező kitölteni</span>
               </div>
-              <div>
+              <div class="input-wrapper">
                 <div class="form-outline">
                   <textarea class="form-control" name="message" id="textAreaExample" data-mdb-showcounter="true" maxlength="200" rows="5"></textarea>
                   <label class="form-label" for="textAreaExample">Üzenet</label>
@@ -388,10 +393,13 @@ else{
                 </div>
                 <span class="errorMsg" id="messageErrorMSG">Ezt a mezőt kötelező kitölteni</span>
               </div>
-              
+              <div class="success-mail" id="success-msg">
+                <p>Üzenet sikeressen elküldve</p>
+              </div>
               </div>
               <div class="modal-footer">
-                <button class="sendMSG">Küldés</button>
+                <button id="mailsendBtn" class="sendMSG">Küldés</button>
+                <button id="okBtn" type="button" class="sendMSG" data-mdb-dismiss="modal" aria-label="Close">Ok</button>
               </div>
             </div>
           </form>

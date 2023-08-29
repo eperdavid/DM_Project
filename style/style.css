@@ -119,6 +119,7 @@ form .typeText{
     flex: 1;
 }
 
+
 form select{
     border: none;
     outline: 1px solid gray;
@@ -342,11 +343,19 @@ main{
 /*----Cards-------*/
 /*--------------Modal----------------*/
 
-#exampleModal .modal-body div{
-    margin: 1rem;
+#exampleModal{
+    box-sizing: border-box;
 }
 
-.modal-body{
+
+#exampleModal .modal-body div{
+    max-width: 100%;
+    margin: 0 auto !important;
+    padding: 0;
+    min-width: 200px;
+}
+
+#search-modal-body{
     max-height: 65vh;
     overflow: auto;
 }
@@ -356,7 +365,7 @@ main{
 }
 
 .modal-body .input-wrapper input{
-    width: 46%;
+    width: 45%;
 }
 
 .modal-col{
@@ -366,6 +375,16 @@ main{
 
 form .row{
     gap: 1rem;
+}
+
+.modal-body form{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.modal-body form div{
+    width: 100%;
 }
 
 .modal-body form .numberInput

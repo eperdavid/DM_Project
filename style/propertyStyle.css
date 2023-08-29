@@ -318,3 +318,17 @@ main{
   margin-left: 2px;
   visibility: hidden;
 }
+
+.success-mail p{
+  width: 100%;
+  padding: 1rem;
+  text-align: center;
+  color: white;
+  background-color: #4CAF50 ;
+  border: 2px solid #4CAF50 ;
+  border-radius: .5rem;
+}
+
+.success-mail, #okBtn{
+  display: none;
+}

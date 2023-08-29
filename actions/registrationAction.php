@@ -110,6 +110,7 @@ if($is_OK == true)
     $mail->Username   = 'eper.david01@gmail.com';                     //SMTP username
     $mail->Password   = 'mqxripzgcqtcqhdn';                               //SMTP password
     $mail->SMTPSecure = 465;            //Enable implicit TLS encryption
+    $mail->CharSet = 'UTF-8';
     
     //Recipients
     $mail->setFrom('eper.david01@gmail.com', 'HomeDeals');
@@ -119,8 +120,15 @@ if($is_OK == true)
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
 
-    $mail->Subject = 'Regisztracio';
-    $mail->Body    = '<a href="localhost/DM_Project/actions/emailActivation.php?token='.$token.'">Aktivacio</a>';
+    $mail->Subject = 'Profil megerősítés';
+    $mail->Body    = 'Köszönjük, hogy regisztrált a HomeDeals weboldalán. Ahhoz, hogy teljeskörűen használhassa szolgáltatásainkat, kérjük, kattintson az 
+    alábbi linkre a profil megerősítéséhez: <br>
+    <a href="localhost/DM_Project/actions/emailActivation.php?token='.$token.'">Profil megerősítése</a><br>
+    <br>
+    Köszönjük a közreműködését!<br>
+    <br>
+    Üdvözlettel,<br>
+    A HomeDeals Csapata';
     
     $mail->send();
 

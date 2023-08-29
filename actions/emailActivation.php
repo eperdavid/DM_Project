@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 
 if(!empty($_GET['token']))
 {
@@ -14,7 +16,7 @@ if(!empty($_GET['token']))
         mysqli_query($conn, $sql);
 
     }
-
+    $_SESSION['check'] = true;
     header('Location: ../pages/index.php?emailActivated');
 }
 else{

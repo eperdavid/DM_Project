@@ -18,14 +18,21 @@ if(!empty($_POST['email']) and !empty($_POST['password']))
         while($row = mysqli_fetch_assoc($result)) {
             if(password_verify($password, $row['password']))
             {
-                $_SESSION['id'] = $row['id'];
-                $_SESSION['email'] = $email;
-                $_SESSION['userlevel'] = $row['level'];
-                $_SESSION['firstname'] = $row['firstname'];
-                $_SESSION['lastname'] = $row['lastname'];
-                $_SESSION['phone'] = $row['phone'];
+                if($row['verify'] == 1)
+                {
+                    $_SESSION['id'] = $row['id'];
+                    $_SESSION['email'] = $email;
+                    $_SESSION['userlevel'] = $row['level'];
+                    $_SESSION['firstname'] = $row['firstname'];
+                    $_SESSION['lastname'] = $row['lastname'];
+                    $_SESSION['phone'] = $row['phone'];
 
-                array_push($error, 'none');
+                    array_push($error, 'none');
+                }
+                else{
+                    array_push($error, 'notActiveError');
+                    $is_OK = false;
+                }
             }
             else{
                 array_push($error, 'loginFail');

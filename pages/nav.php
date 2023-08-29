@@ -2,7 +2,7 @@
 if (session_status() === PHP_SESSION_NONE) {
   session_start();
 }
-$cities = array('Belgrád','Újvidék','Pristina','Nis','Kragujevac','Szabadka','Zombor','Bor','Verbász','Topolya');
+$cities = array('Belgrád','Újvidék','Pristina','Nis','Kragujevac','Szabadka','Zombor','Bor','Verbász','Topolya','Zombor','Bor','Verbász','Topolya');
 ?>
 
 <!DOCTYPE html>
@@ -76,7 +76,15 @@ $cities = array('Belgrád','Újvidék','Pristina','Nis','Kragujevac','Szabadka',
           <a class="nav-link p-2 m-1" href="properties.php">Épitkezési telkek</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link p-2 m-1 bg-primary rounded color-danger text-light" href="addProperty.php"><b>Hirdetésfeladás</b></a>
+          <?php
+          if(isset($_SESSION['id']))
+          {
+            echo '<a class="nav-link p-2 m-1 bg-primary rounded color-danger text-light" href="addProperty.php"><b>Hirdetésfeladás</b></a>';
+          }
+          else{
+            echo '<a class="nav-link p-2 m-1 bg-primary rounded color-danger text-light" data-mdb-toggle="modal" data-mdb-target="#loginModal"><b>Hirdetésfeladás</b></a>';
+          }
+          ?>
         </li>
       </ul>
       <!-- Left links -->
@@ -129,6 +137,40 @@ $cities = array('Belgrád','Újvidék','Pristina','Nis','Kragujevac','Szabadka',
   <!-- Container wrapper -->
 </nav>
 <!-- Navbar -->
+
+<div class="modal fade" id="ActivateMail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Regisztráció</h5>
+        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        A megadott email címre elkültünk egy aktiváló linket, amivel megerősítheted a profilodat.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-mdb-dismiss="modal">Rendben</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="SuccessActivation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Sikeres aktiválás</h5>
+        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Gratulálunk, <b>HomeDeals</b> fiókod mostantól aktív!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-mdb-dismiss="modal">Rendben</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModal" aria-hidden="true">
@@ -267,6 +309,17 @@ $cities = array('Belgrád','Újvidék','Pristina','Nis','Kragujevac','Szabadka',
     {
       echo '<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>';
     }
+
+    if(isset($_GET['emailActivated']) and isset($_SESSION['check']))
+    {
+      echo "<script type='text/javascript'>
+              $(document).ready(function(){
+              $('#SuccessActivation').modal('toggle');
+              });
+            </script>";
+
+      unset($_SESSION['check']);
+    }
     ?>
     
     <script>
@@ -293,6 +346,9 @@ $cities = array('Belgrád','Újvidék','Pristina','Nis','Kragujevac','Szabadka',
               $('input[name="email"]').val("");
               $('input[name="password"]').val("");
               $('input[name="passwordRepeat"]').val("");
+
+              $("#loginModal").modal('toggle');
+              $("#ActivateMail").modal('toggle');
             }
 
             if(data.includes("invalidLastname"))
@@ -414,7 +470,13 @@ $cities = array('Belgrád','Újvidék','Pristina','Nis','Kragujevac','Szabadka',
           $("#loginError").text("Hibás email vagy jelszó!");
         }
         else{
-          $("#loginError").text("");
+          if(data.includes("notActiveError"))
+          {
+            $("#loginError").text("Nincs aktiválva a fiók");
+          }
+          else{
+            $("#loginError").text("");
+          }
         }
         if(data.includes("none"))
         {

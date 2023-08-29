@@ -9,8 +9,13 @@ $("#messageForm").submit(function(e) {
         type: "POST",
         url: "../actions/sendMessageAction.php",
         data: form.serialize(), 
+        beforeSend: function(){
+            $("#mailsendBtn").prop('disabled', true);
+        },
         success: function(data)
         {    
+            $("#mailsendBtn").prop('disabled', false);
+
             if(data.includes('lastnameError'))
             {
                 $("#lastnameErrorMSG").css("visibility", "visible");
@@ -53,6 +58,19 @@ $("#messageForm").submit(function(e) {
             }
             else{
                 $("#messageErrorMSG").css("visibility", "hidden"); 
+            }
+
+
+
+
+
+            if(data.includes('mailSend'))
+            {
+                $('.input-wrapper').hide();
+                $('#mailsendBtn').hide();
+
+                $('#success-msg').show();
+                $('#okBtn').show();
             }
             console.log(data);
         }
