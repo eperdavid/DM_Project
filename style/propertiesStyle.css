@@ -33,75 +33,6 @@ main{
 
 /*--------------Modal----------------*/
 
-#exampleModal .modal-body div{
-    margin: 1rem;
-}
-
-.modal-body .input-wrapper{
-    margin: 0 !important;
-}
-
-.modal-body .input-wrapper input{
-    width: 46%;
-}
-
-.modal-col{
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-form .row{
-    gap: 1rem;
-}
-
-.modal-body form .numberInput
-{
-    padding: .7rem;
-    border: none;
-    border-radius: .4rem;
-    outline: 1px solid gray;
-    -webkit-box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.25);
-    -moz-box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.25);
-    box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.25);
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.modal-body form button{
-    border: none;
-    border-radius: .5rem;
-    margin-top: .5rem;
-    box-sizing: border-box;
-    width: 100%;
-    padding: .7rem;
-    background-color: #286DF3;
-    color: white;
-}
-
-.modal-btn{
-    padding: .5rem 5rem;
-    border-radius: 1rem;
-    border: 1px solid black;
-    font-weight: 500;
-}
-
-form .typeText{
-    padding: .7rem;
-    border: none;
-    border-radius: .4rem;
-    outline: 1px solid gray;
-    -webkit-box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.25);
-    -moz-box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.25);
-    box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.25);
-    width: 100%;
-    box-sizing: border-box;
-}
-
-#exampleModal form div{
-    flex-grow: 1;
-    line-height: 1.8;
-}
-
 form select{
     border: none;
     outline: 1px solid gray;
@@ -138,13 +69,132 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-.modal-col input{
+.searchBtn{
+    padding: .75rem 1rem;
+    border-radius: .4rem;
+    border: none;
+    background-color: var(--textColor);
+    color: white;
+    cursor: pointer;
+    -webkit-box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
+    box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
+    width: 100%;
+}
+
+.filters{
+    width: 100%;
+    font-size: small;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    gap: .2rem;
+    cursor: pointer;
+}
+
+.rent-sell-active{
+    background-color: #286DF3;
+    color: white;
+    border: none !important;
+}
+
+#exampleModal{
+    box-sizing: border-box;
+}
+
+.modal-body input[type="radio"]{
     display: none;
 }
 
-.labels{
+
+#exampleModal .modal-body div{
+    max-width: 100%;
+    margin: 0 auto !important;
+    padding: 0;
+    min-width: 200px;
+}
+
+#exampleModal form div{
+    flex-grow: 1;
+    line-height: 1.8;
+    flex: 1;
+}
+
+#search-modal-body{
+    max-height: 65vh;
+    overflow: auto;
+}
+
+.modal-body .input-wrapper{
+    margin: 0 !important;
+}
+
+.modal-body .input-wrapper input{
+    width: 45%;
+}
+
+.modal-col{
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+form .row{
+    gap: 1rem;
+}
+
+.modal-body form{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.modal-body form div{
+    width: 100%;
+}
+
+.modal-body form .numberInput
+{
+    padding: .7rem;
+    border: none;
+    border-radius: .4rem;
+    outline: 1px solid gray;
+    -webkit-box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.25);
+    box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.25);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.modal-footer{
+    margin: 0 !important;
+    display: block !important;
+    padding: 1rem 1.6rem !important;
+}
+
+.modal-footer button{
+    border: none;
+    border-radius: .5rem;
+    margin-top: .5rem;
+    box-sizing: border-box;
+    width: 100%;
+    padding: .7rem;
+    background-color: #286DF3;
+    color: white;
+}
+
+.modal-btn{
+    padding: .5rem 5rem;
+    border-radius: 1rem;
+    border: 1px solid black;
+    font-weight: 500;
+}
+
+
+/*--------ModalForm-------------*/
+
+.rent-sell label{
     margin: .2rem;
-    padding: .9rem 5rem;
+    padding: .2rem 1.2rem;
     display: inline-block;
     border-radius: .9rem;
     font-size: 15px;
@@ -154,14 +204,46 @@ input::-webkit-inner-spin-button {
     cursor: pointer;
 }
 
-.modal-col input[type="radio"]:checked+label{
-    background-color: #286DF3;
-    color: white;
-    border: none;
-    font-weight: 500;
+.rent-sell-btn{
+    width: 100% !important;
+
 }
 
-/*--------------------modal---------------------*/
+.widthSet{
+    min-width: 200px;
+}
+
+.rent-sell input[type="radio"]:checked+label{
+    background-color: #286DF3 !important;
+    color: white;
+    border: none;
+}
+
+#plotArea{
+    display: none;
+}
+
+#maxLevel{
+    display: none;
+}
+
+#cellar{
+    display: none;
+}
+
+#insulation{
+    display: none;
+}
+
+#formPlotArea{
+    display: none;
+}
+
+#water, #gas, #canal, #electricity, #coverage{
+    display: none;
+}
+
+/*----------------------*/
 /*----Cards-------*/
 
 .cards{
@@ -220,6 +302,16 @@ input::-webkit-inner-spin-button {
     margin: 5px 0 0 0;
     font-size: small;
     color: gray;
+}
+
+.search_select_box button{
+    background-color: white;
+    outline: 1px solid gray;
+    padding: .9rem .6rem;
+    border-radius: .4rem;
+    -webkit-box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
+    box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
 }
 
 /*----Cards-------*/

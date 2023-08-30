@@ -119,6 +119,10 @@ form .typeText{
     flex: 1;
 }
 
+#water, #gas, #canal, #electricity, #coverage{
+    display: none;
+}
+
 
 form select{
     border: none;

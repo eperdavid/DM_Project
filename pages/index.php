@@ -175,6 +175,55 @@
                             <input type="number" placeholder="max" id="plotareamax2">
                         </div>
                     </div>
+                    <div id="water">
+                    <label>Víz</label>
+                        <div class="search_select_box"> 
+                            <select class="my-select w-100">
+                                <option>Mindegy</option>
+                                <option>Igen</option>
+                                <option>Nem</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="gas">
+                    <label>Gáz</label>
+                        <div class="search_select_box"> 
+                            <select class="my-select w-100">
+                                <option>Mindegy</option>
+                                <option>Igen</option>
+                                <option>Nem</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="canal">
+                    <label>Csatorna</label>
+                        <div class="search_select_box"> 
+                            <select class="my-select w-100">
+                                <option>Mindegy</option>
+                                <option>Igen</option>
+                                <option>Nem</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="electricity">
+                    <label>Villany</label>
+                        <div class="search_select_box"> 
+                            <select class="my-select w-100">
+                                <option>Mindegy</option>
+                                <option>Igen</option>
+                                <option>Nem</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="coverage">
+                        <label>Beépíthetőség</label><br>  
+                        <div class="input-wrapper">
+                            <input type="number" placeholder="min">
+                            -
+                            <input type="number" placeholder="max">
+                        </div>
+                    </div>
                     <div class="row">
                     <div id="roomDiv2">
                     <label>Szobák</label>
@@ -374,7 +423,7 @@
                     <div>
                         <button>Keresés</button>
                     </div>
-                    </div>
+                </div>
             </form>
         </div>
         </div>

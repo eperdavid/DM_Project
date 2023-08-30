@@ -11,6 +11,10 @@ function searchChange() {
             $("#propertyLevel").show();
             $("#elevator").show();
             $("#formPlotArea").hide();
+            $("#gas").hide();
+            $("#canal").hide();
+            $("#electricity").hide();
+            $("#coverage").hide();
             
             $("#maxLevel").hide();
             $("#cellar").hide();
@@ -36,6 +40,10 @@ function searchChange() {
             $("#propertyLevel").hide();
             $("#elevator").hide();
             $("#formPlotArea").hide();
+            $("#gas").hide();
+            $("#canal").hide();
+            $("#electricity").hide();
+            $("#coverage").hide();
 
             $("#maxLevel").show();
             $("#cellar").show();
@@ -56,7 +64,12 @@ function searchChange() {
     if(type == "Telek")
     {
         $("#formPlotArea").show();
-        $("#PlotArea").show();
+        $("#plotArea").show();
+        $("#water").show();
+        $("#gas").show();
+        $("#canal").show();
+        $("#electricity").show();
+        $("#coverage").show();
 
 
         $("#area2").hide();
@@ -191,3 +204,19 @@ $('#areamax').keyup(function (){
 $('#areamax2').keyup(function (){
     $('#areamax').val($(this).val());
 });
+
+
+$('#plotareamin').keyup(function (){
+    $('#plotareamin2').val($(this).val());
+});
+$('#plotareamin2').keyup(function (){
+    $('#plotareamin').val($(this).val());
+});
+
+$('#plotareamax').keyup(function (){
+    $('#plotareamax2').val($(this).val());
+});
+$('#plotareamax2').keyup(function (){
+    $('#plotareamax').val($(this).val());
+});
+
