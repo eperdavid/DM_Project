@@ -11,27 +11,7 @@ $.ajax({
     url: "../actions/insertAction.php",
     data: form.serialize(), // serializes the form's elements.
     success: function(data)
-    {
-        if(data.includes("emptyPhone"))
-        {
-            $("#phoneErrorMSG").text("Ezt a mezőt kötelező kitölteni");
-        }
-        else{
-            if(data.includes("phoneError"))
-            {
-                $("#phoneErrorMSG").text("Érvénytelen telefonszám");
-            }
-            else{
-                if(data.includes("existphError"))
-                {
-                    $("#phoneErrorMSG").text("Ez a telefonszám már foglalt!");
-                }
-                else{
-                    $("#phoneErrorMSG").text("");
-                }
-            }
-        }
-        
+    {       
 
         if(data.includes("none"))
         {

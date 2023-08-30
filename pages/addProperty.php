@@ -48,8 +48,8 @@
                     <span class="errorMsg" id="emailErrorMSG"></span>
                 </div>
                 <div>
-                    <label>Telefon (nem kötelező)</label>
-                    <input type="number" name="phone" value="'.$_SESSION['phone'].'">
+                    <label>Telefon</label>
+                    <input class="disabled" disabled type="number" name="phone" value="'.$_SESSION['phone'].'">
                     <span class="errorMsg" id="phoneErrorMSG"></span>
                 </div>
                 <div>

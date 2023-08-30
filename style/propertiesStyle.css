@@ -340,3 +340,11 @@ form .row{
         font-size: medium;
     }
 }
+
+.pages{
+    display: none;
+}
+
+#page1{
+    display: grid;
+}

@@ -73,7 +73,7 @@ $cities = array('Belgrád','Újvidék','Pristina','Nis','Kragujevac','Szabadka',
           <a class="nav-link p-2 m-1" href="properties.php">Ingatlanok</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link p-2 m-1" href="properties.php">Épitkezési telkek</a>
+          <a class="nav-link p-2 m-1" href="plots.php">Épitkezési telkek</a>
         </li>
         <li class="nav-item">
           <?php
@@ -118,6 +118,18 @@ $cities = array('Belgrád','Újvidék','Pristina','Nis','Kragujevac','Szabadka',
           {
             echo '<li>
                     <a class="dropdown-item" href="myProperties.php">Hirdetéseim</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="../actions/logoutAction.php">Kijelentkezés</a>
+                  </li>';
+          }
+          else if($_SESSION['userlevel'] == 2)
+          {
+            echo '<li>
+                    <a class="dropdown-item" href="myProperties.php">Hirdetéseim</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="admin.php">Admin</a>
                   </li>
                   <li>
                     <a class="dropdown-item" href="../actions/logoutAction.php">Kijelentkezés</a>

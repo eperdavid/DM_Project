@@ -51,38 +51,6 @@ if(isset($_POST['form1_submit']) and $_POST['form1_submit'] == 'form1_chk')
     $error = array();
     $is_OK = true;
 
-    if(!empty($_POST['phone']))
-    {
-        if(strlen((string)$_POST['phone']) == 10)
-        {
-
-            if($_SESSION['phone'] != $_POST['phone'])
-            {
-                $phonenum = $_POST['phone'];
-                $sql = "SELECT phone FROM users WHERE phone='$phonenum'";
-                $result = mysqli_query($conn, $sql);
-
-                if (mysqli_num_rows($result) > 0) {
-                    array_push($error, 'existphError');
-                    $is_OK = false;
-                }
-                else{
-                    $_SESSION['newphone'] = $_POST['phone'];
-                }
-            }
-            else{
-                unset($_SESSION['newphone']);
-            }
-        }
-        else{
-            array_push($error, 'phoneError');
-            $is_OK = false;
-        }
-    }
-    else{
-        array_push($error, 'emptyPhone');
-        $is_OK = false;
-    }
 
     if($is_OK == true)
     {
@@ -489,13 +457,6 @@ if(isset($_POST['form3_submit']) and $_POST['form3_submit'] == 'form3_chk')
                     mysqli_query($conn, $sql);
 
                     
-                    if(isset($_SESSION['newphone']) and !empty($_SESSION['newphone']))
-                    {
-                        $sql = 'UPDATE users SET phone="'.$_SESSION["newphone"].'" WHERE id="'.$_SESSION["id"].'"';
-                        mysqli_query($conn, $sql);
-
-                        $_SESSION['phone'] = $_SESSION['newphone'];
-                    } 
                 }
 
 
@@ -577,13 +538,6 @@ if(isset($_POST['form3_submit']) and $_POST['form3_submit'] == 'form3_chk')
                     $sql = 'INSERT INTO property (user_id, rent_sell, type, city, street, housenumber, area, rooms, halfrooms, propertycondition, comfort, furnished, height, wc, airconditioner, animal, smoking, barrier_free, moved, maxLevel, rentalPeriod, overhead, heating, price, description, cellar, plotArea) VALUES ("'.$_SESSION["id"].'","'.$_SESSION["rent-sell-option"].'","'.$_SESSION["type"].'","'.$_SESSION["city"].'","'.$_SESSION["street"].'","'.$_SESSION["housenumber"].'","'.$_SESSION["area"].'","'.$_SESSION["rooms"].'","'.$_SESSION["halfrooms"].'","'.$_SESSION["condition"].'","'.$_SESSION["comfort"].'","'.$_SESSION["furnished"].'","'.$_SESSION["height"].'","'.$_SESSION["wc"].'","'.$_SESSION["airconditioner"].'","'.$_SESSION["animal"].'","'.$_SESSION["smoking"].'","'.$_SESSION["barrier-free"].'","'.$_SESSION["moved"].'","'.$_SESSION["maxLevel"].'","'.$_SESSION["rentalPeriod"].'","'.$_SESSION["overhead"].'","'.$_SESSION["heating"].'","'.$_SESSION["price"].'","'.$_SESSION["description"].'","'.$_SESSION["cellar"].'","'.$_SESSION["plotArea"].'")';
                     mysqli_query($conn, $sql);
 
-                    if(isset($_SESSION['newphone']) and !empty($_SESSION['newphone']))
-                    {
-                        $sql = 'UPDATE users SET phone="'.$_SESSION["newphone"].'" WHERE id="'.$_SESSION["id"].'"';
-                        mysqli_query($conn, $sql);
-
-                        $_SESSION['phone'] = $_SESSION['newphone'];
-                    } 
                 }
 
 
@@ -666,14 +620,7 @@ if(isset($_POST['form3_submit']) and $_POST['form3_submit'] == 'form3_chk')
                     $sql = 'INSERT INTO property (user_id, rent_sell, type, city, street, housenumber, area, rooms, halfrooms, propertycondition, comfort, furnished, height, wc, airconditioner, barrier_free, level, maxLevel, elevator, overhead, heating, price, description, insulation) VALUES ("'.$_SESSION["id"].'","'.$_SESSION["rent-sell-option"].'","'.$_SESSION["type"].'","'.$_SESSION["city"].'","'.$_SESSION["street"].'","'.$_SESSION["housenumber"].'","'.$_SESSION["area"].'","'.$_SESSION["rooms"].'","'.$_SESSION["halfrooms"].'","'.$_SESSION["condition"].'","'.$_SESSION["comfort"].'","'.$_SESSION["furnished"].'","'.$_SESSION["height"].'","'.$_SESSION["wc"].'","'.$_SESSION["airconditioner"].'","'.$_SESSION["barrier-free"].'","'.$_SESSION["level"].'","'.$_SESSION["maxLevel"].'","'.$_SESSION["elevator"].'","'.$_SESSION["overhead"].'","'.$_SESSION["heating"].'","'.$_SESSION["price"].'","'.$_SESSION["description"].'","'.$_SESSION["insulation"].'")';
                     mysqli_query($conn, $sql);
 
-                    
-                    if(isset($_SESSION['newphone']) and !empty($_SESSION['newphone']))
-                    {
-                        $sql = 'UPDATE users SET phone="'.$_SESSION["newphone"].'" WHERE id="'.$_SESSION["id"].'"';
-                        mysqli_query($conn, $sql);
 
-                        $_SESSION['phone'] = $_SESSION['newphone'];
-                    } 
                 }
 
 
@@ -754,16 +701,7 @@ if(isset($_POST['form3_submit']) and $_POST['form3_submit'] == 'form3_chk')
                     $sql = 'INSERT INTO property (user_id, rent_sell, type, city, street, housenumber, area, rooms, halfrooms, propertycondition, comfort, furnished, height, wc, airconditioner, barrier_free, maxLevel, overhead, heating, price, description, cellar, plotArea, insulation) VALUES ("'.$_SESSION["id"].'","'.$_SESSION["rent-sell-option"].'","'.$_SESSION["type"].'","'.$_SESSION["city"].'","'.$_SESSION["street"].'","'.$_SESSION["housenumber"].'","'.$_SESSION["area"].'","'.$_SESSION["rooms"].'","'.$_SESSION["halfrooms"].'","'.$_SESSION["condition"].'","'.$_SESSION["comfort"].'","'.$_SESSION["furnished"].'","'.$_SESSION["height"].'","'.$_SESSION["wc"].'","'.$_SESSION["airconditioner"].'","'.$_SESSION["barrier-free"].'","'.$_SESSION["maxLevel"].'","'.$_SESSION["overhead"].'","'.$_SESSION["heating"].'","'.$_SESSION["price"].'","'.$_SESSION["description"].'","'.$_SESSION["cellar"].'","'.$_SESSION["plotArea"].'","'.$_SESSION["insulation"].'")';
                     mysqli_query($conn, $sql);
 
-                    if(isset($_SESSION['newphone']) and !empty($_SESSION['newphone']))
-                    {
-                        if(isset($_SESSION['newphone']) and !empty($_SESSION['newphone']))
-                        {
-                            $sql = 'UPDATE users SET phone="'.$_SESSION["newphone"].'" WHERE id="'.$_SESSION["id"].'"';
-                            mysqli_query($conn, $sql);
 
-                            $_SESSION['phone'] = $_SESSION['newphone'];
-                        } 
-                    } 
                 }
 
                 if($is_OK == true)
@@ -842,16 +780,7 @@ if(isset($_POST['form3_submit']) and $_POST['form3_submit'] == 'form3_chk')
                 $sql = 'INSERT INTO property (user_id, rent_sell, type, city, street, housenumber, plotArea, water, gas, canal, electricity, coverage, price, description) VALUES ("'.$_SESSION["id"].'","'.$_SESSION["rent-sell-option"].'","'.$_SESSION["type"].'","'.$_SESSION["city"].'","'.$_SESSION["street"].'","'.$_SESSION["housenumber"].'","'.$_SESSION["PlotFormArea"].'","'.$_SESSION["water"].'","'.$_SESSION["gas"].'","'.$_SESSION["canal"].'","'.$_SESSION["electricity"].'","'.$_SESSION["coverage"].'","'.$_SESSION["price"].'","'.$_SESSION["description"].'")';
                 mysqli_query($conn, $sql);
 
-                if(isset($_SESSION['newphone']) and !empty($_SESSION['newphone']))
-                {
-                    if(isset($_SESSION['newphone']) and !empty($_SESSION['newphone']))
-                    {
-                        $sql = 'UPDATE users SET phone="'.$_SESSION["newphone"].'" WHERE id="'.$_SESSION["id"].'"';
-                        mysqli_query($conn, $sql);
 
-                        $_SESSION['phone'] = $_SESSION['newphone'];
-                    } 
-                } 
             }
 
             if($is_OK == true)
