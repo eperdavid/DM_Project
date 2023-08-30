@@ -343,6 +343,12 @@ main{
 /*----Cards-------*/
 /*--------------Modal----------------*/
 
+.rent-sell-active{
+    background-color: var(--textColor);
+    color: white;
+    border: none !important;
+}
+
 #exampleModal{
     box-sizing: border-box;
 }
@@ -424,6 +430,30 @@ form .row{
     font-weight: 500;
 }
 
+
+/*--------ModalForm-------------*/
+
+#plotArea{
+    display: none;
+}
+
+#maxLevel{
+    display: none;
+}
+
+#cellar{
+    display: none;
+}
+
+#insulation{
+    display: none;
+}
+
+#formPlotArea{
+    display: none;
+}
+
+/*----------------------*/
 @media only screen and (max-width: 500px) {
     .cards{
         grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
