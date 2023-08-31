@@ -15,6 +15,7 @@ function searchChange() {
             $("#canal").hide();
             $("#electricity").hide();
             $("#coverage").hide();
+            $("#water").hide();
             
             $("#maxLevel").hide();
             $("#cellar").hide();
@@ -30,6 +31,8 @@ function searchChange() {
             $("#barrier").show();
             $("#wc").show();
             $("#overhead").show();
+
+            $("#form2").attr("action", "properties.php");
     }
 
     if(type== "Ház")
@@ -44,6 +47,7 @@ function searchChange() {
             $("#canal").hide();
             $("#electricity").hide();
             $("#coverage").hide();
+            $("#water").hide();
 
             $("#maxLevel").show();
             $("#cellar").show();
@@ -59,6 +63,8 @@ function searchChange() {
             $("#barrier").show();
             $("#wc").show();
             $("#overhead").show();
+
+            $("#form2").attr("action", "properties.php");
     }
 
     if(type == "Telek")
@@ -95,11 +101,19 @@ function searchChange() {
         $("#wc").hide();
         $("#overhead").hide();
 
-    }
 
+        $("#form2").attr("action", "plots.php");
+    }
+    
 
     if(rent_sell == "Kiadó")
     {
+        $("#sellBtn").removeClass("rent-sell-active");
+        $("#sellBtn2").removeClass("rent-sell-active");
+
+        $("#rentBtn").addClass("rent-sell-active");
+        $("#rentBtn2").addClass("rent-sell-active");
+
         if(type == "Lakás")
         {
             $("#smoking").show();
@@ -117,6 +131,12 @@ function searchChange() {
     }
     else if(rent_sell == "Eladó")
     {
+        $("#rentBtn").removeClass("rent-sell-active");
+        $("#rentBtn2").removeClass("rent-sell-active");
+
+        $("#sellBtn").addClass("rent-sell-active");
+        $("#sellBtn2").addClass("rent-sell-active");
+
         if(type == "Lakás")
         {
             $("#smoking").hide();

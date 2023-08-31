@@ -97,6 +97,9 @@
                             <a href="property.php?id='.$row['property_id'].'">
                             <div class="card">
                                 <img src="../img/'.$image.'" alt="Avatar" style="width:100%;">
+                                <div class="property_type">
+                                '.$row['rent_sell'].' '.strtolower($row['type']).'
+                                </div>
                                 <div class="container">
                                 <h4><b>'.$row['price'].' EUR</b></h4> 
                                 <p>'.$row['housenumber'].'. '.$row['street'].', '.$row['city'].'</p> 
@@ -210,122 +213,47 @@
             <table id="myTable" class="display">
                 <thead>
                     <tr>
-                        <th>Column 1</th>
-                        <th>Column 2</th>
-                        <th>Column 3</th>
-                        <th>Column 4</th>
+                        <th>Email</th>
+                        <th>Teljes név</th>
+                        <th>Hirdetések</th>
+                        <th>Bejelentkezés</th>
+                        <th>Műveletek</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Row 1 Data 1</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 2</td>
-                    </tr>
-                    <tr>
-                        <td>bdsa</td>
-                        <td>asd</td>
-                        <td>asd</td>
-                        <td>asd</td>
-                    </tr>
-                    <tr>
-                        <td>Row 1 Data 1</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 2</td>
-                    </tr>
-                    <tr>
-                        <td>Row 1 Data 1</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 2</td>
-                    </tr>
-                    <tr>
-                        <td>Row 1 Data 1</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 2</td>
-                    </tr>
-                    <tr>
-                        <td>Row 1 Data 1</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 2</td>
-                    </tr>
-                    <tr>
-                        <td>Row 1 Data 1</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 2</td>
-                    </tr>
-                    <tr>
-                        <td>Row 1 Data 1</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 2</td>
-                    </tr>
-                    <tr>
-                        <td>Row 1 Data 1</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 2</td>
-                    </tr>
-                    <tr>
-                        <td>Row 1 Data 1</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 2</td>
-                    </tr>
-                    <tr>
-                        <td>Row 1 Data 1</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 2</td>
-                    </tr>
-                    <tr>
-                        <td>Row 1 Data 1</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 2</td>
-                    </tr>
-                    <tr>
-                        <td>Row 1 Data 1</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 2</td>
-                    </tr>
-                    <tr>
-                        <td>Row 1 Data 1</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 2</td>
-                    </tr>
-                    <tr>
-                        <td>Row 1 Data 1</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 2</td>
-                    </tr>
-                    <tr>
-                        <td>Row 1 Data 1</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 2</td>
-                    </tr>
-                    <tr>
-                        <td>Row 1 Data 1</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 2</td>
-                    </tr>
-                    <tr>
-                        <td>Row 1 Data 1</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 2</td>
-                        <td>Row 1 Data 2</td>
-                    </tr>
-                    
+                    <?php
+
+                    $sql = "SELECT * FROM users";
+                    $result = mysqli_query($conn, $sql);
+
+                    if (mysqli_num_rows($result) > 0) {
+                        while($row = mysqli_fetch_assoc($result)) {
+                            if($row['verify'] = 1)
+                            {
+                                $status = '<div style="background: #55b555; color: white; padding: 6px 5px; display: inline; font-weight: 500; border-radius: .5rem;">Engedélyezve</div>';
+                            }
+                            else{
+                                $status = '<div style="background: #d9534f; color: white; padding: 5px;">Engedélyezve</div>';
+                            }
+                            echo '
+                            <tr>
+                                <td>'.$row['email'].'</td>
+                                <td>'.$row['lastname'].' '.$row['firstname'].'</td>
+                                <td><a href="adminList.php?userID='.$row['id'].'">Megtekintés</a></td>
+                                <td>'.$status.'</td>
+                                <td>
+                                    <div class="actionBtn">
+                                        <form>
+                                            <button><i class="fa-solid fa-lock"></i></button>
+                                            <button><i class="fa-solid fa-trash-can"></i></button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>';
+                        }
+                    }
+
+                    ?>
                 </tbody>
                 
             </table>
@@ -342,8 +270,58 @@
         } );
     </script>
 
+    <?php
+        $dataArr = array();
+
+         $sql = "SELECT type FROM property WHERE type = 'Lakás'";
+        $result = mysqli_query($conn, $sql);
+        array_push($dataArr, mysqli_num_rows($result));
+
+        $sql = "SELECT type FROM property WHERE type = 'Ház'";
+        $result = mysqli_query($conn, $sql);
+        array_push($dataArr, mysqli_num_rows($result));
+
+        $sql = "SELECT type FROM property WHERE type = 'Telek'";
+        $result = mysqli_query($conn, $sql);
+        array_push($dataArr, mysqli_num_rows($result));
+
+        ?>
     <script src="../script/swiper-admin.js"></script>
-    <script src="../script/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('myChart');
+
+        var data = <?php echo json_encode($dataArr); ?>;
+
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+            labels: ['Lakás', 'Ház', 'Telek'],
+            datasets: [{
+                label: '# of Votes',
+                data: data,
+                backgroundColor: [
+                    '#286DF3',
+                    '#1cc88a',
+                    '#36b9cc'
+                ],
+                borderWidth: 1
+            }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 30,
+                            usePointStyle: true,
+                            pointStyle: 'circle'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
 
 </body>
 </html>

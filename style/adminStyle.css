@@ -295,3 +295,29 @@ thead th{
         font-size: 14px;
     }
 }
+
+.property_type{
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    background-color: rgba(0, 0, 0, 0.404);
+    color: white;
+    padding: 4px 5px;
+    font-size: small;
+    border-radius: .5rem;
+}
+
+
+
+.actionBtn button{
+    width: 40px;
+    height: 40px;
+    border: none;
+    background-color: #286DF3;
+    color: white;
+    border-radius: .5rem;
+}
+
+.actionBtn button:nth-child(2){
+    background-color: #d9534f;
+}

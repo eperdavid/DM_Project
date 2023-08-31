@@ -332,3 +332,23 @@ main{
 .success-mail, #okBtn{
   display: none;
 }
+
+fieldset .buttons{
+  justify-content: right;
+  display: flex;
+}
+
+fieldset .buttons button{
+  padding: 1rem;
+  margin: 0 5px;
+  border: none;
+  background-color: #33b249;
+  color: white;
+  border-radius: .5rem;
+  font-weight: 500;
+}
+
+.buttons button:nth-child(2), #ModalDeleteBtn{
+  background-color: #d12d2a;
+  color: white;
+}

@@ -25,6 +25,12 @@ var swiper = new Swiper(".mySwiper", {
 
 
   var swiper = new Swiper(".mySwiper2", {
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false,
+    },
+    loop: true,
+    effect: "fade",
     pagination: {
       el: ".swiper-pagination2",
     },

@@ -16,6 +16,7 @@ if(!empty($_GET['id']))
       $type = $row['type'];
       $plotArea = $row['plotArea'];
       $coverage = $row['coverage'];
+      $verify = $row['verify'];
 
       if($row['halfrooms'] != "" and $row['halfrooms'] != 0)
       {
@@ -23,6 +24,8 @@ if(!empty($_GET['id']))
       }
       
       $description = $row['description'];
+
+      
 
 
 
@@ -62,8 +65,64 @@ else{
     <title>Document</title>
 </head>
 <body>
-  <?php include 'nav.php'; ?>
+  <?php 
+  include 'nav.php'; 
+  if(isset($_SESSION['userlevel']))
+  {
+    if($verify == 0 and $_SESSION['userlevel'] == 1)
+    {
+      echo '<script>window.location.href = "index.php" </script>';
+    }
+  }
+  else{
+    if($verify == 0)
+    {
+      echo '<script>window.location.href = "index.php" </script>';
+    }
+  }
+
+
+  ?>
+
     <main>
+      <?php
+        if(isset($_SESSION['userlevel']))
+        {
+          if($verify == 0 and $_SESSION['userlevel'] == 2)
+          {
+            echo '
+            
+            <fieldset class="border rounded-3 p-3 mb-4">
+              <legend class="float-none w-auto px-3 mb-0">A hirdetés megerősítésre vár</legend>
+                <div class="buttons">
+                  <form action="../actions/propertyVerifyAction.php" method="post"><button name="accept"><i class="fa-solid fa-circle-check"></i>&nbsp;Megerősítés</button><input type="hidden" name="propId" value="'.$_GET['id'].'"></form>
+                  <button data-mdb-toggle="modal" data-mdb-target="#deleteModal"><i class="fa-solid fa-trash-can"></i>&nbsp;Törlés</button>
+                </div>
+            </fieldset>
+            ';
+            
+            echo '
+            <!-- Modal -->
+            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Hirdetés törlése</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    Biztossan törölni szeretné ezt a hirdetést?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-mdb-dismiss="modal">Mégsem</button>
+                    <form action="../actions/propertyVerifyAction.php" method="post"><input type="hidden" name="propId" value="'.$_GET['id'].'"><button class="btn" id="ModalDeleteBtn" name="delete">Törlés</button></form>
+                  </div>
+                </div>
+              </div>
+            </div>';
+          }
+        }
+      ?>
         <div class="img-info">
             <div class="img">
                 <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2">

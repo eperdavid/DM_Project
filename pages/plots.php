@@ -24,7 +24,30 @@
     
     include '../actions/db_config.php';
 
-    $sql = 'SELECT * FROM property WHERE type = "Telek"';
+    $rentSellSearch = $searchcity = $type = $water = $gas = $canal = $electricity = "";
+
+    $plotAreaMin = $priceMin = $coveragemin = 0;
+    $plotAreaMax = $priceMax = $coveragemax = 9999999;
+
+    if(isset($_GET['city'])) { $searchcity = $_GET['city']; }
+    if(isset($_GET['rent-sell-option'])) { $rentSellSearch = $_GET['rent-sell-option']; }
+    if(isset($_GET['type'])) { $type = $_GET['type']; }
+    if(isset($_GET['priceMin']) and $_GET['priceMin'] > 0) { $priceMin = $_GET['priceMin']; }
+    if(isset($_GET['priceMax']) and $_GET['priceMax'] > 0) { $priceMax = $_GET['priceMax']; }
+    if(isset($_GET['plotAreaMin']) and $_GET['plotAreaMin'] > 0) { $plotAreaMin = $_GET['plotAreaMin']; }
+    if(isset($_GET['plotAreaMax']) and $_GET['plotAreaMax'] > 0) { $plotAreaMax = $_GET['plotAreaMax']; }
+    if(isset($_GET['coveragemin']) and $_GET['coveragemin'] > 0) { $coveragemin = $_GET['coveragemin']; }
+    if(isset($_GET['coveragemax']) and $_GET['coveragemax'] > 0) { $coveragemax = $_GET['coveragemax']; }
+    if(isset($_GET['water'])) { $water = $_GET['water']; }
+    if(isset($_GET['gas'])) { $gas = $_GET['gas']; }
+    if(isset($_GET['canal'])) { $canal = $_GET['canal']; }
+    if(isset($_GET['electricity'])) { $electricity = $_GET['electricity']; }
+
+
+    $sql = 'SELECT * FROM property WHERE type = "Telek" AND verify = 1 AND rent_sell LIKE "%'.$rentSellSearch.'%" AND city LIKE "%'.$searchcity.'%" AND type LIKE "%'.$type.'%" 
+    AND price > '.$priceMin.' AND price < '.$priceMax.' AND plotArea > '.$plotAreaMin.' AND plotArea < '.$plotAreaMax.' AND water LIKE "%'.$water.'%" AND gas LIKE "%'.$gas.'%"
+    AND canal LIKE "%'.$canal.'%" AND electricity LIKE "%'.$electricity.'%" AND coverage > '.$coveragemin.' AND coverage < '.$coveragemax.'';
+
     $result = mysqli_query($conn, $sql);
     
     ?>
@@ -48,22 +71,22 @@
             <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body" id="search-modal-body">
-            <form action="" method="post">
+            <form action="plots.php" method="get" id="form2">
                     <div class="row">
                         <div class="col modal-col widthSet" style="text-align: center;">
-                            <label class="modal-btn rent-sell-btn rent-sell-active" for="rent">Kiadó</label>
-                            <input type="radio" id="rent" name="rent-sell-option" onchange="searchChange();" value="Kiadó">
+                            <label class="modal-btn rent-sell-btn rent-sell-active" for="rent" id="rentBtn">Kiadó</label>
+                            <input type="radio" id="rent" name="rent-sell-option" onchange="searchChange();" value="Kiadó" checked>
                         </div>
                         <div class="col modal-col widthSet" style="text-align: center;">
-                            <label class="modal-btn rent-sell-btn" for="sell">Eladó</label>
+                            <label class="modal-btn rent-sell-btn" for="sell" id="sellBtn">Eladó</label>
                             <input type="radio" id="sell" name="rent-sell-option" onchange="searchChange();" value="Eladó">
                         </div>
                     </div>
                     <div>
                         <label>Város</label>
                         <div class="search_select_box">
-                            <select class="my-select w-100" data-live-search="true" id="city2">
-                                <option disabled selected hidden></option>
+                            <select class="my-select w-100" data-live-search="true" id="city2" name="city">
+                                <option value="">Mindegy</option>
                                 <?php
                                 foreach($cities as $city)
                                 {
@@ -76,74 +99,74 @@
                     <div>
                     <label>Típus</label>
                         <div class="search_select_box"> 
-                            <select class="my-select w-100" id="type"  onchange="searchChange();">
+                            <select class="my-select w-100" id="type"  onchange="searchChange();" name="type">
                                 <option>Lakás</option>
                                 <option>Ház</option>
-                                <option>Telek</option>
+                                <option selected>Telek</option>
                             </select>
                         </div>
                     </div>
                     <div>
                         <label>Ár</label><br>  
                         <div class="input-wrapper">
-                            <input type="number" placeholder="min" id="pricemin2">
+                            <input type="number" placeholder="min" id="pricemin2" name="priceMin">
                             -
-                            <input type="number" placeholder="max" id="pricemax2">
+                            <input type="number" placeholder="max" id="pricemax2" name="priceMax">
                         </div>
                     </div>
                     <div id="area2">
                         <label>Alapterület</label><br>  
                         <div class="input-wrapper">
-                            <input type="number" placeholder="min" id="areamin2">
+                            <input type="number" placeholder="min" id="areamin2" name="areamin">
                             -
-                            <input type="number" placeholder="max" id="areamax2">
+                            <input type="number" placeholder="max" id="areamax2" name="areamax">
                         </div>
                     </div>
                     <div id="plotArea">
                         <label>Telekterület</label><br>  
                         <div class="input-wrapper">
-                            <input type="number" placeholder="min" id="plotareamin2">
+                            <input type="number" placeholder="min" id="plotareamin2" name="plotAreaMin">
                             -
-                            <input type="number" placeholder="max" id="plotareamax2">
+                            <input type="number" placeholder="max" id="plotareamax2" name="plotAreaMax">
                         </div>
                     </div>
                     <div id="water">
                     <label>Víz</label>
                         <div class="search_select_box"> 
-                            <select class="my-select w-100">
-                                <option>Mindegy</option>
-                                <option>Igen</option>
-                                <option>Nem</option>
+                            <select class="my-select w-100" name="water">
+                                <option value="">Mindegy</option>
+                                <option>Telken belül</option>
+                                <option>Utcában</option>
                             </select>
                         </div>
                     </div>
                     <div id="gas">
                     <label>Gáz</label>
                         <div class="search_select_box"> 
-                            <select class="my-select w-100">
-                                <option>Mindegy</option>
-                                <option>Igen</option>
-                                <option>Nem</option>
+                            <select class="my-select w-100" name="gas">
+                                <option value="">Mindegy</option>
+                                <option>Telken belül</option>
+                                <option>Utcában</option>
                             </select>
                         </div>
                     </div>
                     <div id="canal">
                     <label>Csatorna</label>
                         <div class="search_select_box"> 
-                            <select class="my-select w-100">
-                                <option>Mindegy</option>
-                                <option>Igen</option>
-                                <option>Nem</option>
+                            <select class="my-select w-100" name="canal">
+                                <option value="">Mindegy</option>
+                                <option>Telken belül</option>
+                                <option>Utcában</option>
                             </select>
                         </div>
                     </div>
                     <div id="electricity">
                     <label>Villany</label>
                         <div class="search_select_box"> 
-                            <select class="my-select w-100">
-                                <option>Mindegy</option>
-                                <option>Igen</option>
-                                <option>Nem</option>
+                            <select class="my-select w-100" name="electricity">
+                                <option value="">Mindegy</option>
+                                <option>Telken belül</option>
+                                <option>Utcában</option>
                             </select>
                         </div>
                     </div>
@@ -151,29 +174,29 @@
                     <div id="coverage">
                         <label>Beépíthetőség</label><br>  
                         <div class="input-wrapper">
-                            <input type="number" placeholder="min">
+                            <input type="number" placeholder="min" name="coveragemin">
                             -
-                            <input type="number" placeholder="max">
+                            <input type="number" placeholder="max" name="coveragemax">
                         </div>
                     </div>
                     <div class="row">
                     <div id="roomDiv2">
                     <label>Szobák</label>
                         <div class="search_select_box"> 
-                            <select class="my-select w-100" id="room2">
+                            <select class="my-select w-100" id="room2" name="room">
+                                <option value="5">Mindegy</option>
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
                                 <option>4</option>
-                                <option>4+</option>
                             </select>
                         </div>
                     </div>
                     <div id="furnished">
                     <label>Bútorzott</label>
                         <div class="search_select_box"> 
-                            <select class="my-select w-100">
-                                <option>Mindegy</option>
+                            <select class="my-select w-100" name="furnished">
+                                <option value="">Mindegy</option>
                                 <option>Igen</option>
                                 <option>Nem</option>
                             </select>
@@ -183,7 +206,8 @@
                     <div id="condition">
                     <label>Állapot</label>
                         <div class="search_select_box"> 
-                            <select class="my-select w-100">
+                            <select class="my-select w-100" name="condition">
+                                <option value="">Mindegy</option>
                                 <option>Új építésű</option>
                                 <option>Újszerű</option>
                                 <option>Felújíitott</option>
@@ -197,25 +221,23 @@
                     <div id="heating">
                     <label>Fűtés</label>
                         <div class="search_select_box"> 
-                            <select class="my-select w-100">
-                                <option>Mindegy</option>
+                            <select class="my-select w-100" name="heating">
+                                <option value="">Mindegy</option>
                                 <option>Gáz</option>
                                 <option>Házközponti</option>
-                                <option>Elektromos kazán</option>
-                                <option>Hűtő - fűtő klíma</option>
                                 <option>Kandalló</option>
                                 <option>Padlófűtés</option>
+                                <option>Kályha</option>
                             </select>
                         </div>
                     </div>
                     <div id="comfort">
                     <label>Komfort</label>
                         <div class="search_select_box"> 
-                            <select class="my-select w-100">
-                                <option>Mindegy</option>
+                            <select class="my-select w-100" name="comfort">
+                                <option value="">Mindegy</option>
                                 <option>Luxus</option>
                                 <option>Összkomfortos</option>
-                                <option>Komfortos</option>
                                 <option>Komfortos</option>
                                 <option>Komfort nélküli</option>
                             </select>
@@ -224,8 +246,8 @@
                     <div id="height">
                     <label>Belmagasság</label>
                         <div class="search_select_box"> 
-                            <select class="my-select w-100">
-                                <option>Mindegy</option>
+                            <select class="my-select w-100" name="height">
+                                <option value="">Mindegy</option>
                                 <option>3 méternél alacsonyabb</option>
                                 <option>3 méter vagy magasabb</option>
                             </select>
@@ -235,9 +257,9 @@
                         <div id="propertyLevel">
                         <label>Emelet</label>
                             <div class="search_select_box"> 
-                                <select class="my-select w-100">
-                                    <option>Mindegy</option>
-                                    <option>Földszint</option>
+                                <select class="my-select w-100" name="propertyLevel">
+                                    <option value="">Mindegy</option>
+                                    <option value="0">Földszint</option>
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
@@ -248,15 +270,14 @@
                                     <option>8</option>
                                     <option>9</option>
                                     <option>10</option>
-                                    <option>10+</option>
                                 </select>
                             </div>
                         </div>
                         <div id="elevator">
                         <label>Lift</label>
                             <div class="search_select_box"> 
-                                <select class="my-select w-100">
-                                    <option>Mindegy</option>
+                                <select class="my-select w-100" name="elevator">
+                                    <option value="">Mindegy</option>
                                     <option>Van</option>
                                 </select>
                             </div>
@@ -266,19 +287,21 @@
                         <div id="maxLevel">
                         <label>Épület szintje</label>
                             <div class="search_select_box"> 
-                                <select class="my-select w-100">
-                                    <option>Mindegy</option>
+                                <select class="my-select w-100" name="maxLevel">
+                                    <option value="">Mindegy</option>
                                     <option>1</option>
                                     <option>2</option>
-                                    <option>3+</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
                                 </select>
                             </div>
                         </div>
                         <div id="cellar">
                         <label>Pince</label>
                             <div class="search_select_box"> 
-                                <select class="my-select w-100">
-                                    <option>Mindegy</option>
+                                <select class="my-select w-100" name="cellar">
+                                    <option value="">Mindegy</option>
                                     <option>Van</option>
                                 </select>
                             </div>
@@ -290,8 +313,8 @@
                         <div id="airconditioner">
                         <label>Légkondicionáló</label>
                             <div class="search_select_box"> 
-                                <select class="my-select w-100">
-                                    <option>Mindegy</option>
+                                <select class="my-select w-100" name="airconditioner">
+                                    <option value="">Mindegy</option>
                                     <option>Van</option>
                                 </select>
                             </div>
@@ -299,8 +322,8 @@
                         <div id="insulation">
                         <label>Szigetelés</label>
                             <div class="search_select_box"> 
-                                <select class="my-select w-100">
-                                    <option>Mindegy</option>
+                                <select class="my-select w-100" name="insulation">
+                                    <option value="">Mindegy</option>
                                     <option>Van</option>
                                 </select>
                             </div>
@@ -308,8 +331,8 @@
                         <div id="smoking">
                         <label>Dohányzás</label>
                             <div class="search_select_box"> 
-                                <select class="my-select w-100">
-                                    <option>Mindegy</option>
+                                <select class="my-select w-100" name="smoking">
+                                    <option value="">Mindegy</option>
                                     <option>Megengedett</option>
                                 </select>
                             </div>
@@ -319,8 +342,8 @@
                         <div id="animal">
                         <label>Állat hozható-e</label>
                             <div class="search_select_box"> 
-                                <select class="my-select w-100">
-                                    <option>Mindegy</option>
+                                <select class="my-select w-100" name="animal">
+                                    <option value="">Mindegy</option>
                                     <option>Igen</option>
                                 </select>
                             </div>
@@ -328,8 +351,8 @@
                         <div id="barrier">
                         <label>Akadálymentesített</label>
                             <div class="search_select_box"> 
-                                <select class="my-select w-100">
-                                    <option>Mindegy</option>
+                                <select class="my-select w-100" name="barrier">
+                                    <option value="">Mindegy</option>
                                     <option>Igen</option>
                                 </select>
                             </div>
@@ -338,8 +361,8 @@
                     <div id="wc">
                         <label>Fürdő és wc</label>
                             <div class="search_select_box"> 
-                                <select class="my-select w-100">
-                                    <option>Mindegy</option>
+                                <select class="my-select w-100" name="wc">
+                                    <option value="">Mindegy</option>
                                     <option>Külön helyiségben</option>
                                     <option>Egy helyiségben</option>
                                     <option>Külön és egyben is</option>
@@ -348,7 +371,7 @@
                         </div>
                     <div id="overhead">
                         <label>Maximum rezsiköltség</label>
-                        <input type="number" class="numberInput">
+                        <input type="number" class="numberInput" name="overhead">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -403,59 +426,25 @@
                                 else{
                                     $rooms = $row['rooms'];
                                 }
-                                if($row['type'] == "Lakás")
+                                if($row['type'] == "Telek")
                                 {
-                                    echo '
-                                    <div class="info">
-                                        <div>
-                                            <div class="icon">
-                                                <i class="fa-solid fa-vector-square"></i>
-                                                <span><b>'.$row['area'].'m<sup>2</sup></b></span>
-                                            </div>
-                                            <p>Alapterület</p>
+                                echo '
+                                <div class="info">
+                                    <div>
+                                        <div class="icon">
+                                            <i class="fa-solid fa-maximize"></i>
+                                            <span><b>'.$row['plotArea'].'m<sup>2</sup></b></span>
                                         </div>
-                                        <div>
-                                            <div class="icon">
-                                                <i class="fa-solid fa-door-open"></i>
-                                                <span><b>'.$rooms.'</b></span>
-                                            </div>
-                                            <p>Szobák</p>
+                                        <p>Telekterület</p>
+                                    </div>
+                                    <div>
+                                        <div class="icon">
+                                            <i class="fa-solid fa-door-open"></i>
+                                            <span><b>'.$row['coverage'].'%</b></span>
                                         </div>
-                                        <div>
-                                            <div class="icon">
-                                                <i class="fa-solid fa-building"></i>
-                                                <span><b>'.$row['level'].'.</b></span>
-                                            </div>
-                                            <p>Emelet</p>
-                                        </div>
-                                    </div>';
-                                }
-                                if($row['type'] == "Ház")
-                                {
-                                    echo '
-                                    <div class="info">
-                                        <div>
-                                            <div class="icon">
-                                                <i class="fa-solid fa-vector-square"></i>
-                                                <span><b>'.$row['area'].'m<sup>2</sup></b></span>
-                                            </div>
-                                            <p>Alapterület</p>
-                                        </div>
-                                        <div>
-                                            <div class="icon">
-                                                <i class="fa-solid fa-door-open"></i>
-                                                <span><b>'.$rooms.'</b></span>
-                                            </div>
-                                            <p>Szobák</p>
-                                        </div>
-                                        <div>
-                                            <div class="icon">
-                                                <i class="fa-solid fa-maximize"></i>
-                                                <span><b>'.$row['plotArea'].'m<sup>2</sup></b></span>
-                                            </div>
-                                            <p>Telekterület</p>
-                                        </div>
-                                    </div></a>';
+                                        <p>Beépíthetőség</p>
+                                    </div>
+                                </div>';
                                 }
                             echo '</div>';
 
@@ -526,5 +515,11 @@
 
     <script src="../script/search-form-change.js"></script>
     <script src="../script/pagination.js"></script>
+
+    <script>
+        $( document ).ready(function() {
+            searchChange();
+        });
+    </script>
 </body>
 </html>
