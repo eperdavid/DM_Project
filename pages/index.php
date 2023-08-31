@@ -461,7 +461,7 @@
         <div class="wrapper">
             <h3>Legfrissebb hirdetések</h3>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-            <button><a href="#">Mutass többet</a></button>
+            <button><a href="properties.php">Mutass többet</a></button>
             <div class="cards">
             <?php
 
@@ -496,7 +496,7 @@
                     {
                         $rooms = $rooms.'+'.$row['halfrooms'].' fél';
                     }
-                    echo '
+                    echo '<a href="property.php?id='.$row['property_id'].'">
                     <div class="card">
                         <img src="'.$image.'" alt="Avatar" style="width:100%">
                         <div class="container">
@@ -578,7 +578,7 @@
                             </div>';
                         }
                         
-                    echo '</div>';
+                    echo '</div></a>';
                 }
             }
             ?>

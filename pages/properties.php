@@ -34,7 +34,7 @@
             <hr>
             <div class="flex">
                 <div>
-                    1234 találat
+                    <?php echo mysqli_num_rows($result) ?> találat
                 </div>
                 <div class="filter">
                     <button data-mdb-toggle="modal" data-mdb-target="#exampleModal"><i class="fa-solid fa-magnifying-glass fa-sm"></i> Kereső</button>
@@ -379,9 +379,19 @@
                     {
                         $j = 0;
                         while($row = mysqli_fetch_assoc($result)) {
-                            echo '
+
+                            if(file_exists('../img/'.$row['property_id']))
+                            {
+                                $images = array_diff(scandir('../img/'.$row['property_id'].''), array('..', '.'));
+                                $image = $row['property_id'].'/'.$images[2];
+                            }
+                            else{
+                                $image = "noimage.png";
+                            }
+
+                            echo '<a href="property.php?id='.$row['property_id'].'">
                             <div class="card">
-                                <img src="../img/room.jpg" alt="Avatar" style="width:100%">
+                                <img src="../img/'.$image.'" alt="Avatar" style="width:100%">
                                 <div class="container">
                                 <h4><b>'.$row['price'].' EUR</b></h4> 
                                 <p>'.$row['housenumber'].'. '.$row['street'].', '.$row['city'].'</p> 
@@ -447,7 +457,7 @@
                                         </div>
                                     </div>';
                                 }
-                            echo '</div>';
+                            echo '</div></a>';
 
                             if($j == 11)
                             {

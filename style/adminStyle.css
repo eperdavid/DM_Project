@@ -210,10 +210,17 @@ thead th{
     width: 100%;
     border-radius: .5rem;
     border: 1px solid rgba(119, 119, 119, 0.25) !important;
+    height: 100% !important;
 }
 
 .card img{
     border-radius: .5rem .5rem 0 0;
+    height: 100%;
+    object-fit: cover;
+}
+
+.swiper-wrapper a{
+    height: 100%;
 }
 
 .container h4{

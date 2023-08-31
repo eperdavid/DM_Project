@@ -72,99 +72,108 @@
 
         if (mysqli_num_rows($result) > 0) {
             while($row = mysqli_fetch_assoc($result)) {
-                echo '
-                <div class="card">
-                    <img src="../img/room.jpg" alt="Avatar" style="width:100%">
-                    <div class="card-icons">
-                        <div><a href="update.php?id='.$row['property_id'].'"><i class="fa-solid fa-pen-to-square"></i></a></div>
-                        <div><i class="fa-solid fa-trash-can"></i></div>
-                    </div>
-                    <div class="container">
-                    <h4><b>'.$row['price'].' EUR</b></h4> 
-                    <p>'.$row['housenumber'].'. '.$row['street'].', '.$row['city'].'</p> 
-                    </div>';
-                    if($row['halfrooms'] != "" and $row['halfrooms'] != 0)
-                    {
-                        $rooms = $row['rooms'].'+'.$row['halfrooms'].' fél';
-                    }
-                    else{
-                        $rooms = $row['rooms'];
-                    }
-                    if($row['type'] == "Lakás")
-                    {
-                        echo '
-                        <div class="info">
-                            <div>
-                                <div class="icon">
-                                    <i class="fa-solid fa-vector-square"></i>
-                                    <span><b>'.$row['area'].'m<sup>2</sup></b></span>
+                if(file_exists('../img/'.$row['property_id']))
+                            {
+                                $images = array_diff(scandir('../img/'.$row['property_id'].''), array('..', '.'));
+                                $image = $row['property_id'].'/'.$images[2];
+                            }
+                            else{
+                                $image = "noimage.png";
+                            }
+
+                            echo '<a href="property.php?id='.$row['property_id'].'">
+                            <div class="card">
+                                <img src="../img/'.$image.'" alt="Avatar" style="width:100%">
+                                <div class="card-icons">
+                                    <div><a href="update.php?id='.$row['property_id'].'"><i class="fa-solid fa-pen-to-square"></i></a></div>
+                                    <div><i class="fa-solid fa-trash-can"></i></div>
                                 </div>
-                                <p>Alapterület</p>
-                            </div>
-                            <div>
-                                <div class="icon">
-                                    <i class="fa-solid fa-door-open"></i>
-                                    <span><b>'.$rooms.'</b></span>
-                                </div>
-                                <p>Szobák</p>
-                            </div>
-                            <div>
-                                <div class="icon">
-                                    <i class="fa-solid fa-building"></i>
-                                    <span><b>'.$row['level'].'.</b></span>
-                                </div>
-                                <p>Emelet</p>
-                            </div>
-                        </div>';
-                    }
-                    if($row['type'] == "Ház")
-                    {
-                        echo '
-                        <div class="info">
-                            <div>
-                                <div class="icon">
-                                    <i class="fa-solid fa-vector-square"></i>
-                                    <span><b>'.$row['area'].'m<sup>2</sup></b></span>
-                                </div>
-                                <p>Alapterület</p>
-                            </div>
-                            <div>
-                                <div class="icon">
-                                    <i class="fa-solid fa-door-open"></i>
-                                    <span><b>'.$rooms.'</b></span>
-                                </div>
-                                <p>Szobák</p>
-                            </div>
-                            <div>
-                                <div class="icon">
-                                    <i class="fa-solid fa-maximize"></i>
-                                    <span><b>'.$row['plotArea'].'m<sup>2</sup></b></span>
-                                </div>
-                                <p>Telekterület</p>
-                            </div>
-                        </div>';
-                    }
-                    if($row['type'] == "Telek")
-                        {
-                            echo '
-                            <div class="info">
-                                <div>
-                                    <div class="icon">
-                                        <i class="fa-solid fa-maximize"></i>
-                                        <span><b>'.$row['plotArea'].'m<sup>2</sup></b></span>
-                                    </div>
-                                    <p>Telekterület</p>
-                                </div>
-                                <div>
-                                    <div class="icon">
-                                        <i class="fa-solid fa-door-open"></i>
-                                        <span><b>'.$row['coverage'].'%</b></span>
-                                    </div>
-                                    <p>Beépíthetőség</p>
-                                </div>
-                            </div>';
-                        }
-                echo '</div>';
+                                <div class="container">
+                                <h4><b>'.$row['price'].' EUR</b></h4> 
+                                <p>'.$row['housenumber'].'. '.$row['street'].', '.$row['city'].'</p> 
+                                </div>';
+                                if($row['halfrooms'] != "" and $row['halfrooms'] != 0)
+                                {
+                                    $rooms = $row['rooms'].'+'.$row['halfrooms'].' fél';
+                                }
+                                else{
+                                    $rooms = $row['rooms'];
+                                }
+                                if($row['type'] == "Lakás")
+                                {
+                                    echo '
+                                    <div class="info">
+                                        <div>
+                                            <div class="icon">
+                                                <i class="fa-solid fa-vector-square"></i>
+                                                <span><b>'.$row['area'].'m<sup>2</sup></b></span>
+                                            </div>
+                                            <p>Alapterület</p>
+                                        </div>
+                                        <div>
+                                            <div class="icon">
+                                                <i class="fa-solid fa-door-open"></i>
+                                                <span><b>'.$rooms.'</b></span>
+                                            </div>
+                                            <p>Szobák</p>
+                                        </div>
+                                        <div>
+                                            <div class="icon">
+                                                <i class="fa-solid fa-building"></i>
+                                                <span><b>'.$row['level'].'.</b></span>
+                                            </div>
+                                            <p>Emelet</p>
+                                        </div>
+                                    </div>';
+                                }
+                                if($row['type'] == "Ház")
+                                {
+                                    echo '
+                                    <div class="info">
+                                        <div>
+                                            <div class="icon">
+                                                <i class="fa-solid fa-vector-square"></i>
+                                                <span><b>'.$row['area'].'m<sup>2</sup></b></span>
+                                            </div>
+                                            <p>Alapterület</p>
+                                        </div>
+                                        <div>
+                                            <div class="icon">
+                                                <i class="fa-solid fa-door-open"></i>
+                                                <span><b>'.$rooms.'</b></span>
+                                            </div>
+                                            <p>Szobák</p>
+                                        </div>
+                                        <div>
+                                            <div class="icon">
+                                                <i class="fa-solid fa-maximize"></i>
+                                                <span><b>'.$row['plotArea'].'m<sup>2</sup></b></span>
+                                            </div>
+                                            <p>Telekterület</p>
+                                        </div>
+                                    </div>';
+                                }
+                                if($row['type'] == "Telek")
+                                    {
+                                        echo '
+                                        <div class="info">
+                                            <div>
+                                                <div class="icon">
+                                                    <i class="fa-solid fa-maximize"></i>
+                                                    <span><b>'.$row['plotArea'].'m<sup>2</sup></b></span>
+                                                </div>
+                                                <p>Telekterület</p>
+                                            </div>
+                                            <div>
+                                                <div class="icon">
+                                                    <i class="fa-solid fa-door-open"></i>
+                                                    <span><b>'.$row['coverage'].'%</b></span>
+                                                </div>
+                                                <p>Beépíthetőség</p>
+                                            </div>
+                                        </div>';
+                                    }
+                            echo '</div></a>';
             }
         }
 

@@ -84,10 +84,19 @@
 
                     if (mysqli_num_rows($result) > 0) {
                         while($row = mysqli_fetch_assoc($result)) {
+                            if(file_exists('../img/'.$row['property_id']))
+                            {
+                                $images = array_diff(scandir('../img/'.$row['property_id'].''), array('..', '.'));
+                                $image = $row['property_id'].'/'.$images[2];
+                            }
+                            else{
+                                $image = "noimage.png";
+                            }
                             echo '
                             <div class="swiper-slide">
+                            <a href="property.php?id='.$row['property_id'].'">
                             <div class="card">
-                                <img src="../img/room.jpg" alt="Avatar" style="width:100%">
+                                <img src="../img/'.$image.'" alt="Avatar" style="width:100%;">
                                 <div class="container">
                                 <h4><b>'.$row['price'].' EUR</b></h4> 
                                 <p>'.$row['housenumber'].'. '.$row['street'].', '.$row['city'].'</p> 
@@ -174,7 +183,7 @@
                                         </div>';
                                     }
                             echo '</div>
-                                </div>';
+                                </div></a>';
                         }
                     }
                     else{
