@@ -1,12 +1,14 @@
 const ctx = document.getElementById('myChart');
 
+var data = [12,15,11];
+
 new Chart(ctx, {
     type: 'doughnut',
     data: {
       labels: ['Lakás', 'Ház', 'Telek'],
       datasets: [{
         label: '# of Votes',
-        data: [12, 19, 3],
+        data: data,
         backgroundColor: [
             '#286DF3',
             '#1cc88a',
