@@ -10,6 +10,7 @@ main{
     font-family: 'Inter', sans-serif;
     background-color: white;
     border-radius: .5rem;
+    margin-bottom: 2rem;
 }
 
 .maingap{

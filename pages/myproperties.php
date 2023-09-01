@@ -14,8 +14,14 @@
     
     include '../actions/db_config.php';
 
+    if(!isset($_SESSION['id']))
+    {
+        echo '<script>window.location.href = "index.php";</script>';
+    }
+
     $sql = 'SELECT * FROM property WHERE user_id = "'.$_SESSION['id'].'"';
     $result = mysqli_query($conn, $sql);
+
     
     ?>
     <main>
@@ -26,6 +32,7 @@
             <div class="inputsFlex">
                 <div class="inputs">
                     <div>
+                        <input type="hidden" name="Userid" value="<?php echo $_SESSION['id']; ?>">
                         <label>Vezetéknév</label>
                         <input type="name" name="lastname" value="<?php if(isset($_SESSION['lastname'])) { echo $_SESSION['lastname']; } ?>">
                         <span class="errorMSG" id="lastnameErrorMsg">Ezt a mezőt kötelező kitölteni!</span>
@@ -45,7 +52,7 @@
                     <div>
                         <label>Telefonszám</label>
                         <input type="number" name="phone" value="<?php if(isset($_SESSION['phone'])) { echo $_SESSION['phone']; } ?>">
-                        
+                        <span class="errorMSG" id="phoneErr">Ezt a mezőt kötelező kitölteni!</span>
                     </div>
                 </div>
                 <div class="inputs">
@@ -66,7 +73,7 @@
         </div>
         <div class="wrapper">
             <h3>Hirdetéseim</h3>
-            <p>Jelenleg 4 aktív hirdetésed van</p>
+            <p>Jelenleg <?php echo mysqli_num_rows($result); ?> hirdetésed van</p>
         <div class="cards">
             <?php
 
@@ -85,8 +92,8 @@
                             <div class="card">
                                 <img src="../img/'.$image.'" alt="Avatar" style="width:100%">
                                 <div class="card-icons">
-                                    <div><a href="update.php?id='.$row['property_id'].'"><i class="fa-solid fa-pen-to-square"></i></a></div>
-                                    <div><i class="fa-solid fa-trash-can"></i></div>
+                                    <div onclick="updateHref('.$row['property_id'].')"><i class="fa-solid fa-pen-to-square"></i></div>
+                                    <div onclick="deleteProperty('.$row['property_id'].')"><i class="fa-solid fa-trash-can"></i></div>
                                 </div>
                                 <div class="container">
                                 <h4><b>'.$row['price'].' EUR</b></h4> 
@@ -184,7 +191,23 @@
     </div>
     </main>
 
-
+    <div class="modal fade" id="changeData" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Sikeres mentés</h5>
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <b>Elmentettük beállitásait.</b><br><br>
+                *megjegyzés: <br>Új email cím esetén a megerősítés után kerül beállításra.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-mdb-dismiss="modal">Rendben</button>
+            </div>
+            </div>
+        </div>
+        </div>
 
     <script>
         // this is the id of the form
@@ -216,10 +239,34 @@ $.ajax({
         }
         if(data.includes("emailError"))
         {
+            $("#mailErrorMsg").text("Ezt a mezőt kötelező kitölteni!");
             $("#mailErrorMsg").css("visibility", "visible");
         }
         else{
-            $("#mailErrorMsg").css("visibility", "hidden");
+            if(data.includes("existError"))
+            {
+                $("#mailErrorMsg").text("Ez az email cím már fogalt!");
+                $("#mailErrorMsg").css("visibility", "visible");
+            }
+            else{
+                $("#mailErrorMsg").css("visibility", "hidden");
+            }
+            
+        }
+        if(data.includes("phoneError"))
+        {
+            $("#phoneErr").text("Ezt a mezőt kötelező kitölteni!");
+            $("#phoneErr").css("visibility", "visible");
+        }
+        else{
+            if(data.includes("phoneFormatError"))
+            {
+                $("#phoneErr").text("Érvénytelen formátum");
+                $("#phoneErr").css("visibility", "visible");
+            }
+            else{
+                $("#phoneErr").css("visibility", "hidden");
+            }
         }
         if(data.includes("passwordError"))
         {
@@ -236,11 +283,49 @@ $.ajax({
             $("#passwordNotMatchErrorMsg").css("visibility", "hidden");
         }
 
+        if(data.includes('ok'))
+        {
+            $('#changeData').modal('toggle');
+            $('#changeData').on('hidden.bs.modal', function () {
+                location.reload();
+            })
+        }
         console.log(data);
     }
 });
 
 });
     </script>
+
+    <script>
+        function updateHref(id)
+        {
+            if (event.target.classList.contains('fa-solid')) {
+                event.preventDefault();
+                window.location.href = "update.php?id=" + id;
+            } 
+        }
+
+
+
+        function deleteProperty(id)
+        {
+            if (event.target.classList.contains('fa-solid')) {
+                event.preventDefault();
+                if(confirm("Törölni fogja ezt a hirdetést!"))
+                {
+                    $.ajax({
+                        url: '../actions/deleteProperty.php',
+                        type: 'post',
+                        data: {'id' : id, 'action' : 'delete'},
+                        success: function(data) {
+                            location.reload();
+                        }
+                    })
+                }
+            }
+        } 
+    </script>
+    <?php include 'footer.html'; ?>
 </body>
 </html>

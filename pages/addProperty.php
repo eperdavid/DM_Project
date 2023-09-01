@@ -56,6 +56,7 @@
                     <br>
                     <input type="hidden" name="form1_submit" value="form1_chk">
                     <button>Tovább</button>
+                    <button type="button" class="mt-4 editBtn"><a href="#">Adatok módosítása</a></button>
                 </div>
                 </form>
             </div>

@@ -184,6 +184,23 @@ $cities = array('Belgrád','Újvidék','Pristina','Nis','Kragujevac','Szabadka',
   </div>
 </div>
 
+<div class="modal fade" id="SuccessActivationnewemail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Sikeres aktiválás</h5>
+        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Sikeressen aktiváltad az új email címedet
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-mdb-dismiss="modal">Rendben</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Modal -->
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModal" aria-hidden="true">
   <div class="modal-dialog">
@@ -236,7 +253,7 @@ $cities = array('Belgrád','Újvidék','Pristina','Nis','Kragujevac','Szabadka',
 
         <div class="col-md-6 d-flex justify-content-center">
           <!-- Simple link -->
-          <a href="#!">Elfelejtette jelszavát?</a>
+          <a href="forgotPassword.php">Elfelejtette jelszavát?</a>
         </div>
       </div>
 
@@ -332,6 +349,17 @@ $cities = array('Belgrád','Újvidék','Pristina','Nis','Kragujevac','Szabadka',
 
       unset($_SESSION['check']);
     }
+    if(isset($_GET['newemailActivated']) and isset($_SESSION['check']))
+    {
+      echo "<script type='text/javascript'>
+              $(document).ready(function(){
+              $('#SuccessActivationnewemail').modal('toggle');
+              });
+            </script>";
+
+      unset($_SESSION['check']);
+    }
+
     ?>
     
     <script>

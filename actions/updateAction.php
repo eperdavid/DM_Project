@@ -563,6 +563,7 @@ if(isset($_POST['form2_submit']) and $_POST['form2_submit'] == 'form2_chk')
     else{
         echo json_encode($errorForm2);
     }
+    header('myproperties.php');
 }
 
 

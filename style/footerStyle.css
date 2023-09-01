@@ -1,0 +1,40 @@
+footer{
+    font-family: 'Inter', sans-serif;
+    padding: 1rem 0 2rem 0;
+    border-top: 1px solid rgba(119, 119, 119, .25);
+    background-color: white !important;
+}
+
+footer h6{
+    font-size: 22px !important;
+    text-align: left;
+}
+
+footer p{
+    text-align: left;
+    font-size: 15px !important;
+    display: block;
+    padding: .4rem 0 !important;
+    margin: 0 !important;
+}
+
+.gapDiv{
+    gap: 1rem !important;
+}
+
+@media only screen and (max-width: 1200px) {
+    .listDiv{
+        min-width: 320px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    footer h6{
+        font-size: 19px !important;
+
+    }
+    
+    footer p{
+        font-size: 14px !important;
+    }
+}

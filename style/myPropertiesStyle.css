@@ -98,6 +98,7 @@ main{
     grid-auto-rows: auto;
     grid-gap: 1rem;
     position: relative;
+    z-index: 1;
 }
 
 .card-icons{
@@ -107,6 +108,7 @@ main{
     display: flex;
     flex-direction: column;
     gap: .4rem;
+    z-index: 10;
 }
 
 .card-icons div a{

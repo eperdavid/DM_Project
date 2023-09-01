@@ -12,12 +12,29 @@ if(!empty($_GET['token']))
 
     if (mysqli_num_rows($result) > 0) {
 
-        $sql = 'UPDATE users SET token="", verify=1 WHERE token = "'.$_GET['token'].'"';
-        mysqli_query($conn, $sql);
+        while($row = mysqli_fetch_assoc($result)) {
+            if($row['new_email'] != "")
+            {
+                $sql = 'UPDATE users SET token="", email="'.$row['new_email'].'", new_email = "" WHERE token = "'.$_GET['token'].'"';
+                mysqli_query($conn, $sql);
+
+                $_SESSION['check'] = true;
+                header('Location: ../pages/index.php?newemailActivated');
+            }
+            else{
+                $sql = 'UPDATE users SET token="", verify=1 WHERE token = "'.$_GET['token'].'"';
+                mysqli_query($conn, $sql);
+
+                $_SESSION['check'] = true;
+                header('Location: ../pages/index.php?emailActivated');
+            }
+        }
 
     }
-    $_SESSION['check'] = true;
-    header('Location: ../pages/index.php?emailActivated');
+    else{
+        header('Location: ../pages/index.php');
+    }
+    
 }
 else{
     header('Location: ../pages/index.php');
