@@ -91,6 +91,9 @@
                             echo '<a href="property.php?id='.$row['property_id'].'">
                             <div class="card">
                                 <img src="../img/'.$image.'" alt="Avatar" style="width:100%">
+                                <div class="property_type">
+                                '.$row['rent_sell'].' '.strtolower($row['type']).'
+                                </div>
                                 <div class="card-icons">
                                     <div onclick="updateHref('.$row['property_id'].')"><i class="fa-solid fa-pen-to-square"></i></div>
                                     <div onclick="deleteProperty('.$row['property_id'].')"><i class="fa-solid fa-trash-can"></i></div>

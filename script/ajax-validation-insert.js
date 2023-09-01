@@ -324,10 +324,9 @@ success: function(data)
 
 
 
-// this is the id of the form
 $("#form3").submit(function(e) {
 
-e.preventDefault(); // avoid to execute the actual submit of the form.
+e.preventDefault(); 
 
 var form = $(this)[0];
 var formData = new FormData(form);
@@ -338,7 +337,10 @@ url: "../actions/insertAction.php",
 enctype: "multipart/form-data",
 processData: false,
 contentType: false,
-data: formData, // serializes the form's elements.
+data: formData, 
+beforeSend: function() {
+    $("#uploadBtn").prop('disabled', true);
+},
 success: function(data)
 {
     if(data.includes("insertError"))
@@ -362,6 +364,7 @@ success: function(data)
         }
     }
 
+    $("#uploadBtn").prop('disabled', false);
 
     if(data.includes("ok"))
     {

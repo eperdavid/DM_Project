@@ -1,3 +1,8 @@
+<?php
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +19,11 @@
     <?php 
     include '../actions/db_config.php';
     include 'nav.php'; 
+
+    if(!isset($_SESSION['id']))
+    {
+        header('Location: index.php');
+    }
     ?>
     <main>
         <h3>Hirdetésfeladás</h3>
@@ -803,7 +813,7 @@
                 <div>
                     <br>
                     <input type="hidden" name="form3_submit" value="form3_chk">
-                    <button>Feltöltés</button>
+                    <button id="uploadBtn">Feltöltés</button>
                 </div>
             </form>
             </div>

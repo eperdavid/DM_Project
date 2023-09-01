@@ -269,6 +269,7 @@ form .row{
     border-radius: .5rem .5rem 0 0;
     height: 100%;
     object-fit: cover;
+    min-height: 220px;
 }
 
 .container h4{

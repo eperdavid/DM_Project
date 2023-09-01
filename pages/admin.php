@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,6 +18,10 @@
     
     include '../actions/db_config.php';
     
+    if(!isset($_SESSION['userlevel']) or $_SESSION['userlevel'] != 2)
+    {
+        echo '<script>window.location.href="index.php";</script>';
+    }
     ?>
     <main>
         <div class="card-info">

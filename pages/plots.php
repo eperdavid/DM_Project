@@ -416,6 +416,9 @@
                             echo '<a href="property.php?id='.$row['property_id'].'">
                             <div class="card">
                                 <img src="../img/'.$image.'" alt="Avatar" style="width:100%">
+                                <div class="property_type">
+                                '.$row['rent_sell'].' '.strtolower($row['type']).'
+                                </div>
                                 <div class="container">
                                 <h4><b>'.$row['price'].' EUR</b></h4> 
                                 <p>'.$row['housenumber'].'. '.$row['street'].', '.$row['city'].'</p> 
@@ -458,7 +461,13 @@
                         }
                     }
                     else{
-                        echo 'Nincs találat';
+                        echo'
+                        <style>
+                        #page1{
+                            display: block;
+                        }
+                        </style>';
+                        echo '<p style="text-align: center; margin: 15rem 0;">Nincs találat</p>';
                     }
                     echo '</div>';
                 }

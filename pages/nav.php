@@ -82,7 +82,7 @@ $cities = array('Belgrád','Újvidék','Pristina','Nis','Kragujevac','Szabadka',
             echo '<a class="nav-link p-2 m-1 bg-primary rounded color-danger text-light" href="addProperty.php"><b>Hirdetésfeladás</b></a>';
           }
           else{
-            echo '<a class="nav-link p-2 m-1 bg-primary rounded color-danger text-light" data-mdb-toggle="modal" data-mdb-target="#loginModal"><b>Hirdetésfeladás</b></a>';
+            echo '<a class="nav-link p-2 m-1 bg-primary rounded color-danger text-light" data-mdb-toggle="modal" data-mdb-target="#loginModal" role="button"><b>Hirdetésfeladás</b></a>';
           }
           ?>
         </li>
@@ -137,7 +137,7 @@ $cities = array('Belgrád','Újvidék','Pristina','Nis','Kragujevac','Szabadka',
           }
         }
         else{
-          echo '<li class="dropdown-item" data-mdb-toggle="modal" data-mdb-target="#loginModal">Bejelentkezés</li>';
+          echo '<li class="dropdown-item" data-mdb-toggle="modal" data-mdb-target="#loginModal" role="button">Bejelentkezés</li>';
         }
         ?>
           <!-- -->

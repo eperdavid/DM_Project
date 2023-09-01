@@ -515,7 +515,13 @@
                         }
                     }
                     else{
-                        echo 'Nincs találat';
+                        echo'
+                        <style>
+                        #page1{
+                            display: block;
+                        }
+                        </style>';
+                        echo '<p style="text-align: center; margin: 15rem 0;">Nincs találat</p>';
                     }
                     echo '</div>';
                 }

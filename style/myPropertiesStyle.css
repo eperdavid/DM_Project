@@ -218,3 +218,14 @@ main{
         font-size: small;
     }
 }
+
+.property_type{
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    background-color: rgba(0, 0, 0, 0.404);
+    color: white;
+    padding: 4px 5px;
+    font-size: small;
+    border-radius: .5rem;
+}
