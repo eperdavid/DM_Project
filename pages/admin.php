@@ -63,10 +63,10 @@
                 <label>Tiltott felhasználók</label>
                 <div class="data-icon">
                     <?php
-                    $bansql = "SELECT type FROM property WHERE verify = 0";
+                    $bansql = "SELECT level FROM users WHERE level = 5";
                     $banresult = mysqli_query($conn, $bansql);
 
-                    echo '<div><h3>Nincs kész</h3></div>';
+                    echo '<div><h3>'.mysqli_num_rows($banresult).'</h3></div>';
                     ?>
                     <div><i class="fa-solid fa-ban"></i></div>
                 </div>
@@ -223,17 +223,17 @@
                 <tbody>
                     <?php
 
-                    $sql = "SELECT * FROM users";
+                    $sql = "SELECT * FROM users WHERE level != 2";
                     $result = mysqli_query($conn, $sql);
 
                     if (mysqli_num_rows($result) > 0) {
                         while($row = mysqli_fetch_assoc($result)) {
-                            if($row['verify'] = 1)
+                            if($row['level'] == 1)
                             {
-                                $status = '<div style="background: #55b555; color: white; padding: 6px 5px; display: inline; font-weight: 500; border-radius: .5rem;">Engedélyezve</div>';
+                                $status = '<div style="background: #55b555; color: white; padding: 6px 5px; display: inline-block; font-weight: 500; border-radius: .5rem; width: 100%; text-align: center; max-width: 120px;">Engedélyezve</div>';
                             }
-                            else{
-                                $status = '<div style="background: #d9534f; color: white; padding: 5px;">Engedélyezve</div>';
+                            else if($row['level'] == 5){
+                                $status = '<div style="background: #d9534f; color: white; padding: 6px 5px; display: inline-block; font-weight: 500; border-radius: .5rem; width: 100%; text-align: center; max-width: 120px;">Tiltva</div>';
                             }
                             echo '
                             <tr>
@@ -243,10 +243,8 @@
                                 <td>'.$status.'</td>
                                 <td>
                                     <div class="actionBtn">
-                                        <form>
-                                            <button><i class="fa-solid fa-lock"></i></button>
-                                            <button><i class="fa-solid fa-trash-can"></i></button>
-                                        </form>
+                                        <button onclick="userBan('.$row['id'].')"><i class="fa-solid fa-lock"></i></button>
+                                        <button onclick="userDelete('.$row['id'].')"><i class="fa-solid fa-trash-can"></i></button>
                                     </div>
                                 </td>
                             </tr>';
@@ -322,6 +320,6 @@
             }
         });
     </script>
-
+    <script src="../script/admin-action-ajax.js"></script>
 </body>
 </html>

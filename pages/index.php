@@ -18,14 +18,14 @@
     include 'nav.php';
     ?>
     <div class="header">
+        <div class="headertext"><h1>Találja meg álmai otthonát nálunk</h1></div>
         <div class="swiper2 mySwiper2">
             <div class="swiper-wrapper">
-                <div class="swiper-slide"><img src="../img/bg.png"></div>
-                <div class="swiper-slide"><img src="../img/card1.png"></div>
-                <div class="swiper-slide"><img src="../img/noimage.png"></div>
-                <div class="swiper-slide"><img src="../img/room.jpg"></div>
+                <div class="swiper-slide"><img src="../img/first.jpg"></div>
+                <div class="swiper-slide"><img src="../img/second.jpg"></div>
+                <div class="swiper-slide"><img src="../img/proba.jpg"></div>
+                <div class="swiper-slide"><img src="../img/harmadik.jpeg"></div>
             </div>
-            <div class="swiper-pagination2"></div>
         </div>
     </div>
     <div class="formbg">

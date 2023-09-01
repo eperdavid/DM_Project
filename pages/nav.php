@@ -487,7 +487,14 @@ $cities = array('Belgrád','Újvidék','Pristina','Nis','Kragujevac','Szabadka',
             $("#loginError").text("Nincs aktiválva a fiók");
           }
           else{
-            $("#loginError").text("");
+            if(data.includes("bannedError"))
+            {
+              $("#loginError").text("Profilja zárolva van");
+            }
+            else{
+              $("#loginError").text("");
+            }
+            
           }
         }
         if(data.includes("none"))
