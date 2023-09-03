@@ -62,7 +62,7 @@ $cities = array('Belgrád','Újvidék','Pristina','Nis','Kragujevac','Szabadka',
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <!-- Navbar brand -->
       <a class="navbar-brand mt-2 mt-lg-0 me-5" href="index.php">
-        HomeDeals
+        <img src="../img/logo.png" style="max-width: 35px">HomeDeals
       </a>
       <!-- Left links -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">

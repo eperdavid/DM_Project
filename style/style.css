@@ -482,6 +482,10 @@ form .row{
     .wrapper a, .wrapper p{
         font-size: 14px;
     }
+
+    .headertext h1{
+        text-align: center;
+    }
 }
 
 .swiper2 {
