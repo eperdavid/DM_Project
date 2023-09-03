@@ -282,7 +282,7 @@
     
         if(data.includes("ok"))
         {
-           window.location.href = "../pages/index.php";
+           window.location.href = "../pages/myproperties.php";
         }
         console.log(data);
     }

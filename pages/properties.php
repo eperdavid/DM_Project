@@ -81,7 +81,7 @@
                     <?php echo mysqli_num_rows($result) ?> találat
                 </div>
                 <div class="filter">
-                    <button data-mdb-toggle="modal" data-mdb-target="#exampleModal"><i class="fa-solid fa-magnifying-glass fa-sm"></i> Kereső</button>
+                    <button data-mdb-toggle="modal" data-mdb-target="#exampleModal" id="searchBtn"><i class="fa-solid fa-magnifying-glass fa-sm"></i> Kereső</button>
                 </div>
             </div>
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -286,10 +286,13 @@ if(isset($_POST['form2_submit']) and $_POST['form2_submit'] == 'form2_chk')
                             array_push($errorIMG, 'badFormat');
                             $is_OK = false;
                         }
+                        echo 'ok';
                     }
                     else{
                         $sql = 'UPDATE property SET city="'.$_POST["city"].'",street="'.$_POST["street"].'",housenumber="'.$_POST["housenumber"].'",area="'.$_POST["area"].'",rooms="'.$_POST["rooms"].'",halfrooms="'.$_POST["halfrooms"].'",propertycondition="'.$_POST["condition"].'",comfort="'.$_POST["comfort"].'",furnished="'.$_POST["furnished"].'",height="'.$_POST["height"].'",wc="'.$_POST["wc"].'",airconditioner="'.$_POST["airconditioner"].'",animal="'.$_POST["animal"].'",smoking="'.$_POST["smoking"].'",barrier_free="'.$_POST["barrier-free"].'",moved="'.$_POST["moved"].'",level="'.$_POST["level"].'",maxLevel="'.$_POST["maxLevel"].'",elevator="'.$_POST["elevator"].'",rentalPeriod="'.$_POST["rentalPeriod"].'",overhead="'.$_POST["overhead"].'", price="'.$_POST["price"].'",description="'.$_POST["description"].'",heating="'.$_POST["heating"].'" WHERE property_id='.$_POST['sendID'].'';
                         mysqli_query($conn, $sql);
+
+                        echo 'ok';
                     }
                 }
                 else{
@@ -351,10 +354,13 @@ if(isset($_POST['form2_submit']) and $_POST['form2_submit'] == 'form2_chk')
                             array_push($errorIMG, 'badFormat');
                             $is_OK = false;
                         }
+                        echo 'ok';
                     }
                     else{
                         $sql = 'UPDATE property SET city="'.$_POST["city"].'",street="'.$_POST["street"].'",housenumber="'.$_POST["housenumber"].'",area="'.$_POST["area"].'",rooms="'.$_POST["rooms"].'",halfrooms="'.$_POST["halfrooms"].'",plotArea="'.$_POST["plotArea"].'",propertycondition="'.$_POST["condition"].'",comfort="'.$_POST["comfort"].'",furnished="'.$_POST["furnished"].'",height="'.$_POST["height"].'",wc="'.$_POST["wc"].'",airconditioner="'.$_POST["airconditioner"].'",animal="'.$_POST["animal"].'",smoking="'.$_POST["smoking"].'",barrier_free="'.$_POST["barrier-free"].'",moved="'.$_POST["moved"].'",maxLevel="'.$_POST["maxLevel"].'",cellar="'.$_POST["rentHousecellar"].'",heating="'.$_POST["heating"].'",rentalPeriod="'.$_POST["rentalPeriod"].'",overhead="'.$_POST["overhead"].'", price="'.$_POST["price"].'",description="'.$_POST["description"].'" WHERE property_id='.$_POST['sendID'].'';
                         mysqli_query($conn, $sql);
+
+                        echo 'ok';
                     }
                 }
                 else{
@@ -419,10 +425,13 @@ if(isset($_POST['form2_submit']) and $_POST['form2_submit'] == 'form2_chk')
                             array_push($errorIMG, 'badFormat');
                             $is_OK = false;
                         }
+                        echo 'ok';
                     }
                     else{
                         $sql = 'UPDATE property SET city="'.$_POST["city"].'",street="'.$_POST["street"].'",housenumber="'.$_POST["housenumber"].'",area="'.$_POST["area"].'",rooms="'.$_POST["rooms"].'",halfrooms="'.$_POST["halfrooms"].'",propertycondition="'.$_POST["condition"].'",comfort="'.$_POST["comfort"].'",furnished="'.$_POST["furnished"].'",height="'.$_POST["height"].'",wc="'.$_POST["wc"].'",airconditioner="'.$_POST["airconditioner"].'",barrier_free="'.$_POST["barrier-free"].'",level="'.$_POST["level"].'",maxLevel="'.$_POST["maxLevel"].'",elevator="'.$_POST["elevator"].'", heating="'.$_POST["heating"].'",insulation="'.$_POST["insulation"].'",overhead="'.$_POST["overhead"].'", price="'.$_POST["price"].'",description="'.$_POST["description"].'" WHERE property_id='.$_POST['sendID'].'';
                         mysqli_query($conn, $sql);
+
+                        echo 'ok';
                     }
                 }
                 else{
@@ -484,10 +493,13 @@ if(isset($_POST['form2_submit']) and $_POST['form2_submit'] == 'form2_chk')
                             array_push($errorIMG, 'badFormat');
                             $is_OK = false;
                         }
+                        echo 'ok';
                     }
                     else{
                         $sql = 'UPDATE property SET city="'.$_POST["city"].'",street="'.$_POST["street"].'",housenumber="'.$_POST["housenumber"].'",area="'.$_POST["area"].'",rooms="'.$_POST["rooms"].'",halfrooms="'.$_POST["halfrooms"].'",plotArea="'.$_POST["plotArea"].'",propertycondition="'.$_POST["condition"].'",comfort="'.$_POST["comfort"].'",furnished="'.$_POST["furnished"].'",height="'.$_POST["height"].'",wc="'.$_POST["wc"].'",airconditioner="'.$_POST["airconditioner"].'",barrier_free="'.$_POST["barrier-free"].'",maxLevel="'.$_POST["maxLevel"].'",cellar="'.$_POST["sellHousecellar"].'",heating="'.$_POST["heating"].'",insulation="'.$_POST["sellHouseinsulation"].'",overhead="'.$_POST["overhead"].'", price="'.$_POST["price"].'",description="'.$_POST["description"].'" WHERE property_id='.$_POST['sendID'].'';
                         mysqli_query($conn, $sql);
+
+                        echo 'ok';
                     }
                 }
                 else{
@@ -548,10 +560,13 @@ if(isset($_POST['form2_submit']) and $_POST['form2_submit'] == 'form2_chk')
                             array_push($errorIMG, 'badFormat');
                             $is_OK = false;
                         }
+                        echo 'ok';
                     }
                     else{
                         $sql = 'UPDATE property SET city="'.$_POST["city"].'",street="'.$_POST["street"].'",housenumber="'.$_POST["housenumber"].'",plotArea="'.$_POST["PlotFormArea"].'",coverage="'.$_POST["coverage"].'",electricity="'.$_POST["electricity"].'",water="'.$_POST["water"].'",gas="'.$_POST["gas"].'",canal="'.$_POST["canal"].'",price="'.$_POST["price"].'",description="'.$_POST["description"].'" WHERE property_id='.$_POST['sendID'].'';
                         mysqli_query($conn, $sql);
+
+                        echo 'ok';
                     }
             }
             else{
@@ -563,7 +578,7 @@ if(isset($_POST['form2_submit']) and $_POST['form2_submit'] == 'form2_chk')
     else{
         echo json_encode($errorForm2);
     }
-    header('myproperties.php');
+    header('../pages/myproperties.php');
 }
 
 

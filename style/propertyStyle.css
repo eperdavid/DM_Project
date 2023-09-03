@@ -353,3 +353,8 @@ fieldset .buttons button{
   background-color: #d12d2a;
   color: white;
 }
+
+#DelBtn{
+  background-color: #d12d2a !important;
+  color: white;
+}

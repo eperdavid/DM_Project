@@ -20,11 +20,9 @@
     include '../actions/db_config.php';
     include 'nav.php'; 
 
-    if(!isset($_SESSION['id']))
-    {
-        header('Location: index.php');
-    }
+    
     ?>
+    <div class="maingap">
     <main>
         <h3>Hirdetésfeladás</h3>
 
@@ -114,7 +112,7 @@
                         <span class="errorMsg" id="houseNumberErrorMSG"></span>
                     </div>
                     <div  id="areaDiv">
-                        <label>Alapterület</label>
+                        <label>Alapterület (m<sup>2</sup>)</label>
                         <input type="number" name="area">
                         <span class="errorMsg" id="areaErrorMSG"></span>
                     </div>
@@ -280,12 +278,12 @@
                         </div>
                     </div>
                     <div>
-                        <label>Minimum bérleti idő</label>
+                        <label>Minimum bérleti idő (hónap)</label>
                         <input type="number" name="rentalPeriod">
                         <span class="errorMsg" id="rentalPeriodErrorMSG"></span>
                     </div>
                     <div class="lastDiv">
-                        <label>Rezsiköltség</label>
+                        <label>Rezsiköltség (Euro)</label>
                         <input type="number" name="overhead">
                         <span class="errorMsg" id="overheadErrorMSG"></span>
                     </div>
@@ -305,7 +303,7 @@
                         </div>
                     </div>
                     <div>
-                        <label>Telekterület</label>
+                        <label>Telekterület (m<sup>2</sup>)</label>
                         <input type="number" name="plotArea">
                         <span class="errorMsg" id="rentHouseplotAreaErrorMSG"></span>
                     </div>
@@ -447,12 +445,12 @@
                         </div>
                     </div>
                     <div>
-                        <label>Minimum bérleti idő</label>
+                        <label>Minimum bérleti idő (hónap)</label>
                         <input type="number" name="rentHouserentalPeriod">
                         <span class="errorMsg" id="rentHouserentalPeriodErrorMSG"></span>
                     </div>
                     <div class="lastDiv">
-                        <label>Rezsiköltség</label>
+                        <label>Rezsiköltség (Euro)</label>
                         <input type="number" name="rentHouseoverhead">
                         <span class="errorMsg" id="rentHouseoverheadErrorMSG"></span>
                     </div>
@@ -460,12 +458,12 @@
 
                 <div id="rentPlot">
                     <div class="firstDiv">
-                        <label>Telekterület</label>
+                        <label>Telekterület (m<sup>2</sup>)</label>
                         <input type="number" name="PlotFormArea">
                         <span class="errorMsg" id="PlotFormAreaErrorMSG"></span>
                     </div>
                     <div>
-                        <label>Beépíthetőség</label>
+                        <label>Beépíthetőség (%)</label>
                         <input type="number" name="coverage">
                         <span class="errorMsg" id="coverageErrorMSG"></span>
                     </div>
@@ -639,7 +637,7 @@
                         </div>
                     </div>
                     <div class="lastDiv">
-                        <label>Rezsiköltség</label>
+                        <label>Rezsiköltség (Euro)</label>
                         <input type="number" name="sellApartmentoverhead">
                         <span class="errorMsg" id="sellApartmentoverheadErrorMSG"></span>
                     </div>
@@ -659,7 +657,7 @@
                         </div>
                     </div>
                     <div>
-                        <label>Telekterület</label>
+                        <label>Telekterület (m<sup>2</sup>)</label>
                         <input type="number" name="sellHouseplotArea">
                         <span class="errorMsg" id="sellHouseplotAreaErrorMSG"></span>
                     </div>
@@ -770,7 +768,7 @@
                         </div>
                     </div>
                     <div class="lastDiv">
-                        <label>Rezsiköltség</label>
+                        <label>Rezsiköltség (Euro)</label>
                         <input type="number" name="sellHouseoverhead">
                         <span class="errorMsg" id="sellHouseoverheadErrorMSG"></span>
                     </div>
@@ -778,7 +776,7 @@
 
 
                 <div>
-                    <label>Ár</label>
+                    <label>Ár (Euro)</label>
                     <input type="number" name="price">
                     <span class="errorMsg" id="priceErrorMSG"></span>
                 </div>
@@ -822,7 +820,7 @@
        
         ?>
     </main>
-
+    </div>                
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>

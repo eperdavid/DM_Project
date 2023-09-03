@@ -8,6 +8,15 @@ if(!empty($_GET['id']))
 
   if (mysqli_num_rows($result) > 0) {
     while($row = mysqli_fetch_assoc($result)) {
+      $verify = $row['verify'];
+
+      if($row['date'] < date('Y-m-d') and $verify != 0)
+      {
+        header('Location: index.php');
+      }
+
+
+
       $city = $row['city'];
       $street = $row['street'];
       $price = $row['price'];
@@ -16,7 +25,9 @@ if(!empty($_GET['id']))
       $type = $row['type'];
       $plotArea = $row['plotArea'];
       $coverage = $row['coverage'];
-      $verify = $row['verify'];
+      
+      $user_ID = $row['user_id'];
+
 
       if($row['halfrooms'] != "" and $row['halfrooms'] != 0)
       {
@@ -75,7 +86,7 @@ else{
     }
   }
   else{
-    if($verify == 0)
+    if($verify == 0 or $verify == 3)
     {
       echo '<script>window.location.href = "index.php" </script>';
     }
@@ -88,14 +99,83 @@ else{
       <?php
         if(isset($_SESSION['userlevel']))
         {
-          if($verify == 0 and $_SESSION['userlevel'] == 2)
+          if($_SESSION['userlevel'] == 2)
           {
+            if($verify == 0)
+            {
             echo '
             
             <fieldset class="border rounded-3 p-3 mb-4">
               <legend class="float-none w-auto px-3 mb-0">A hirdetés megerősítésre vár</legend>
                 <div class="buttons">
-                  <form action="../actions/propertyVerifyAction.php" method="post"><button name="accept"><i class="fa-solid fa-circle-check"></i>&nbsp;Megerősítés</button><input type="hidden" name="propId" value="'.$_GET['id'].'"></form>
+                  <form action="../actions/propertyVerifyAction.php" method="post"><button name="accept"><i class="fa-solid fa-circle-check"></i>&nbsp;Megerősítés</button><input type="hidden" name="propId" value="'.$_GET['id'].'"><input type="hidden" name="owneremail" value="'.$email.'"></form>
+                  <button data-mdb-toggle="modal" data-mdb-target="#deleteModal"><i class="fa-solid fa-trash-can"></i>&nbsp;Törlés</button>
+                </div>
+            </fieldset>
+            ';
+            
+            echo '
+            <!-- Modal -->
+            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Hirdetés törlése</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    Biztossan törölni szeretné ezt a hirdetést?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-mdb-dismiss="modal">Mégsem</button>
+                    <form action="../actions/propertyVerifyAction.php" method="post"><input type="hidden" name="propId" value="'.$_GET['id'].'"><button class="btn" id="ModalDeleteBtn" name="delete">Törlés</button><input type="hidden" name="owneremail" value="'.$email.'"><input type="hidden" name="fromEdit" value="1"></form>
+                  </div>
+                </div>
+              </div>
+            </div>';
+            }
+            else{
+              echo '
+            
+            <fieldset class="border rounded-3 p-3 mb-4">
+              <legend class="float-none w-auto px-3 mb-0">Műveletek</legend>
+                <div class="buttons">
+                  <button data-mdb-toggle="modal" data-mdb-target="#deleteModal" id="DelBtn"><i class="fa-solid fa-trash-can"></i>&nbsp;Törlés</button>
+                </div>
+            </fieldset>
+            ';
+            
+            echo '
+            <!-- Modal -->
+            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Hirdetés törlése</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    Biztossan törölni szeretné ezt a hirdetést?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-mdb-dismiss="modal">Mégsem</button>
+                    <form action="../actions/propertyVerifyAction.php" method="post"><input type="hidden" name="propId" value="'.$_GET['id'].'"><button class="btn" id="ModalDeleteBtn" name="delete">Törlés</button></form>
+                  </div>
+                </div>
+              </div>
+            </div>';
+            }
+          }
+          else if($_SESSION['userlevel'] == 1)
+          {
+            if($_SESSION['id'] == $user_ID)
+            {
+              echo '
+            
+            <fieldset class="border rounded-3 p-3 mb-4">
+              <legend class="float-none w-auto px-3 mb-0">Műveletek</legend>
+                <div class="buttons">
+                  <a href="update.php?id='.$_GET['id'].'"><button type="button"><i class="fa-solid fa-trash-can"></i>&nbsp;Módosítás</button></a>
                   <button data-mdb-toggle="modal" data-mdb-target="#deleteModal"><i class="fa-solid fa-trash-can"></i>&nbsp;Törlés</button>
                 </div>
             </fieldset>
@@ -120,6 +200,7 @@ else{
                 </div>
               </div>
             </div>';
+            }
           }
         }
       ?>
@@ -239,7 +320,7 @@ else{
 
         <div class="description">
           <h3>Leírás</h3>
-          <div class="text">
+          <div class="text" style="word-break: break-all;">
             <?php echo $description; ?>
           </div>
         </div>

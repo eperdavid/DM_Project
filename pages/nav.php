@@ -359,6 +359,16 @@ $cities = array('Belgrád','Újvidék','Pristina','Nis','Kragujevac','Szabadka',
 
       unset($_SESSION['check']);
     }
+    if(isset($_GET['uploaded']) and isset($_SESSION['check']))
+    {
+      echo "<script type='text/javascript'>
+              $(document).ready(function(){
+              $('#uploadedProperty').modal('toggle');
+              });
+            </script>";
+
+      unset($_SESSION['check']);
+    }
 
     ?>
     

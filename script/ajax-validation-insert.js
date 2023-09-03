@@ -363,7 +363,7 @@ success: function(data)
             $("#insertErrorMsg").text("");
         }
     }
-
+    
     $("#uploadBtn").prop('disabled', false);
 
     if(data.includes("ok"))

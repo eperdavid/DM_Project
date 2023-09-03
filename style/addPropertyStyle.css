@@ -25,6 +25,10 @@ main{
     min-height: 80%;
 }
 
+.maingap{
+    padding-bottom: 1rem;
+}
+
 main h3{
     text-align: center;
     margin-bottom: 4rem;

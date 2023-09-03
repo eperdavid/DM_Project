@@ -1,3 +1,10 @@
+<?php
+include '../actions/db_config.php';
+$sql = 'DELETE FROM property WHERE date < "'.date("Y-m-d").'"';
+mysqli_query($conn, $sql)
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +21,6 @@
 <body>
     <div class="overflow-set">
     <?php
-    include '../actions/db_config.php';
     include 'nav.php';
     ?>
     <div class="header">
@@ -440,7 +446,7 @@
 
                 for($i=0; $i<6; $i++)
                 {
-                    $citysql = 'SELECT city FROM property WHERE city="'.$cities[$i].'"';
+                    $citysql = 'SELECT city FROM property WHERE city="'.$cities[$i].'" AND verify = 1 AND type != "Telek"';
                     echo '
                     <div class="swiper-slide">
                     <a href="properties.php?city='.$cities[$i].'">
@@ -469,7 +475,7 @@
             <div class="cards">
             <?php
 
-            $sql = "SELECT * FROM property WHERE verify = 1 ORDER BY property_id DESC LIMIT 6";
+            $sql = 'SELECT * FROM property WHERE verify = 1 AND date > "'.date("Y-m-d").'" ORDER BY property_id DESC LIMIT 6';
             $result = mysqli_query($conn, $sql);
 
             if (mysqli_num_rows($result) > 0) {

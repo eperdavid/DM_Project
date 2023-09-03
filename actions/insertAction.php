@@ -471,7 +471,8 @@ if(isset($_POST['form3_submit']) and $_POST['form3_submit'] == 'form3_chk')
                         }
                     }
 
-                    echo "ok";
+                    echo "okeee";
+
                 }
                 else{
                     echo json_encode($errorIMG);
@@ -482,7 +483,7 @@ if(isset($_POST['form3_submit']) and $_POST['form3_submit'] == 'form3_chk')
                 echo 'insertError';
             }
         }
-        if($_SESSION['type'] == "Ház")
+        if(isset($_SESSION['type']) and $_SESSION['type'] == "Ház")
         {
             if(isset($_SESSION['rent-sell-option']) and isset($_SESSION['type']) and isset($_SESSION['city']) and isset($_SESSION['street'])
             and isset($_SESSION['rentalPeriod']) and isset($_SESSION['housenumber']) and isset( $_SESSION['area']) and isset($_SESSION['rooms']) and isset($_SESSION['halfrooms'])
@@ -563,7 +564,7 @@ if(isset($_POST['form3_submit']) and $_POST['form3_submit'] == 'form3_chk')
             }
         }
     }
-    if($_SESSION['rent-sell-option'] == "Eladó")
+    if(isset($_SESSION['rent-sell-option']) and $_SESSION['rent-sell-option'] == "Eladó")
     {
         if($_SESSION['type'] == "Lakás")
         {
@@ -727,7 +728,7 @@ if(isset($_POST['form3_submit']) and $_POST['form3_submit'] == 'form3_chk')
         }
     }
 
-    if($_SESSION['type'] == "Telek")
+    if(isset($_SESSION['type']) and $_SESSION['type'] == "Telek")
     {
         if(isset($_SESSION['rent-sell-option']) and isset($_SESSION['type']) and isset($_SESSION['city']) and isset($_SESSION['street'])
         and isset($_SESSION['housenumber']) and isset($_SESSION['PlotFormArea']) and isset($_SESSION['coverage']) and isset($_SESSION['electricity']) and isset($_SESSION['water'])

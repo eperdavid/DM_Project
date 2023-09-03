@@ -24,7 +24,7 @@ if(!empty($_GET['token']))
 
         while($row = mysqli_fetch_assoc($result)) {
             echo '
-            <form id="form2">
+            <form id="form2" class="Froms">
                     <div id="formDiv">
                     <h5>Új jelszó beállítása</h5>
                     <p>Add meg az e-mail-címedet és elküldünk neked egy hivatkozást, amellyel visszajuthatsz a fiókodba.</p>
@@ -55,12 +55,12 @@ if(!empty($_GET['token']))
         }
     }
     else{
-        echo 'indexre';
+        echo '<script>window.location.href = "index.php";</script>';
     }
 }
 else{
 echo '
-<form id="form1">
+<form id="form1" class="Froms">
         <div id="formDiv">
         <h5>Elfelejtett jelszó</h5>
         <p>Add meg az e-mail-címedet és elküldünk neked egy hivatkozást, amellyel visszajuthatsz a fiókodba.</p>
