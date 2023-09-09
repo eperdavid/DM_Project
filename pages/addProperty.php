@@ -1,7 +1,4 @@
-<?php
 
-
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +17,10 @@
     include '../actions/db_config.php';
     include 'nav.php'; 
 
-    
+    if(!isset($_SESSION['id']))
+    {
+        echo '<script>window.location.href = "index.php";</script>';
+    }
     ?>
     <div class="maingap">
     <main>
@@ -803,6 +803,7 @@
                 <div>
                     <p>Érvényes kép formátumok: <b>jpg, jpeg, png</b></p>
                     <p>A képek mérete nem haladhatja meg a <b>10 MB</b>-ot</p>
+                    <p>*Minden hirdetés <b>6 hónap</b> után automatikussan törlődik</p>
                 </div>
 
                 <div>

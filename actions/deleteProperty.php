@@ -12,4 +12,18 @@ if($_POST['action'] == "delete")
         $delsql = 'DELETE FROM property WHERE property_id='.$_POST['id'].'';
         mysqli_query($conn,$delsql);
     }
+
+    $folder = '../img/'.$_POST['id'];
+
+    if(file_exists($folder))
+    {
+        $images = glob($folder . '/*');
+
+        foreach($images as $image)
+        {
+            unlink($image);
+        }
+
+        rmdir($folder);
+    }
 }

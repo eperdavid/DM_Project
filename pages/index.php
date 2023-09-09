@@ -24,7 +24,7 @@ mysqli_query($conn, $sql)
     include 'nav.php';
     ?>
     <div class="header">
-        <div class="headertext"><h1>Találja meg álmai otthonát nálunk</h1></div>
+        <div class="headertext"><h1>Találja meg álmai otthonát</h1></div>
         <div class="swiper2 mySwiper2">
             <div class="swiper-wrapper">
                 <div class="swiper-slide"><img src="../img/first.jpg"></div>
@@ -439,7 +439,7 @@ mysqli_query($conn, $sql)
     </div>
     <main>
         <div class="citys">
-            <h3 style="text-align: center; margin-bottom: 4rem">Gyorsszűrő városok szerint</h3>
+            <h3 style="text-align: center; margin-bottom: 4rem">Gyors szűrő városok szerint</h3>
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
                 <?php

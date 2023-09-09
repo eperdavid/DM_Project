@@ -93,5 +93,17 @@ if(isset($_POST['delete']))
         header('Location: ../pages/myproperties.php');
     }
 
-    
+    $folder = '../img/'.$id;
+
+    if(file_exists($folder))
+    {
+        $images = glob($folder . '/*');
+
+        foreach($images as $image)
+        {
+            unlink($image);
+        }
+
+        rmdir($folder);
+    }
 }

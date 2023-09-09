@@ -25,6 +25,7 @@ if(!empty($_GET['id']))
       $type = $row['type'];
       $plotArea = $row['plotArea'];
       $coverage = $row['coverage'];
+      $date = date('Y-m-d', strtotime($row['date']. ' - 6 months'));
       
       $user_ID = $row['user_id'];
 
@@ -292,13 +293,15 @@ else{
                     <div>
                       <label>Szobák</label>
                       <span><b>'.$room.'</b></span>
+                    </div>
+                    <div class="more">
+                      <label>Feladási dátum</label>
+                      <span><b>'.$date.'</b></span>
                     </div>';
                   }
                 ?>
                 
-                <div class="more">
-                  <a href="#data">További adatok</a>
-                </div>
+                
             </div>
         </div>
 
