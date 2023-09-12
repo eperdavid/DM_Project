@@ -25,7 +25,14 @@ if(!empty($_GET['id']))
       $type = $row['type'];
       $plotArea = $row['plotArea'];
       $coverage = $row['coverage'];
-      $date = date('Y-m-d', strtotime($row['date']. ' - 6 months'));
+      if($row['date'] == null)
+      {
+        $date = date('Y-m-d');
+      }
+      else{
+        $date = date('Y-m-d', strtotime($row['date']. ' - 6 months'));
+      }
+      
       
       $user_ID = $row['user_id'];
 
@@ -282,6 +289,10 @@ else{
                     <div>
                       <label>Beépíthetőség</label>
                       <span><b>'.$coverage.' %</b></span>
+                    </div>
+                    <div class="more">
+                      <label>Feladási dátum</label>
+                      <span><b>'.$date.'</b></span>
                     </div>';
                   }
                   else{

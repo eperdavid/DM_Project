@@ -35,12 +35,12 @@ body{
     display: flex;
     gap: .5rem 1rem;
     padding: 1.5rem 0;
-    padding-top: 3.8rem;
+    padding-top: 4rem;
     position: relative;
     font-weight: 500;
     border-radius: 1rem;
     align-items: end;
-    max-width: 1050px;
+    max-width: 1150px;
     width: 100%;
     flex-wrap: wrap;
     margin: 0 auto;
@@ -144,7 +144,7 @@ form select{
 
 .input-wrapper input{
     padding: .7rem .6rem;
-    width: 55px;
+    width: 70px;
     border: none;
 }
 
@@ -558,4 +558,28 @@ form .row{
 .headertext h1{
     background-color: rgba(0, 0, 0, 0.404);
     padding: 1.5rem;
+}
+
+@media only screen and (max-width: 1070px) {
+    #form1{
+        flex-direction: column;
+        padding-top: 4.5rem;
+    }
+
+    #form1 div{
+        width: 100%;
+    }
+
+    .input-wrapper input{
+        width: 47%;
+    }
+
+    .rent-sell{
+        text-align: center;
+    }
+
+    #rentBtn2, #sellBtn2{
+        width: 47%;
+        padding: .5rem 0;
+    }
 }
