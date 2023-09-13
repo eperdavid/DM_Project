@@ -48,7 +48,6 @@
     AND price > '.$priceMin.' AND price < '.$priceMax.' AND plotArea > '.$plotAreaMin.' AND plotArea < '.$plotAreaMax.' AND water LIKE "%'.$water.'%" AND gas LIKE "%'.$gas.'%"
     AND canal LIKE "%'.$canal.'%" AND electricity LIKE "%'.$electricity.'%" AND coverage > '.$coveragemin.' AND coverage < '.$coveragemax.'';
 
-    echo $searchcity;
     $result = mysqli_query($conn, $sql);
     
     ?>
