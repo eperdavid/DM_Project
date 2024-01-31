@@ -1,4 +1,5 @@
 <?php
+include '../actions/email_config.php';
 include '../actions/db_config.php';
 $error = array();
 $is_OK = true;
@@ -62,7 +63,7 @@ if(empty($_POST['phone']))
     $is_OK = false;
 }
 else{
-    if(strlen((string)$_POST['phone']) != 10)
+    if(strlen((string)$_POST['phone']) != 11)
     {
         array_push($error, 'notValidNumber');
         $is_OK = false;
@@ -107,14 +108,14 @@ if($is_OK == true)
     $mail->isSMTP();                                            //Send using SMTP
     $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = 'eper.david01@gmail.com';                     //SMTP username
-    $mail->Password   = 'drjlqdqvtddybfum';                               //SMTP password
+    $mail->Username   = $CONF_email;                     //SMTP username
+    $mail->Password   = $CONF_password;                               //SMTP password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;  
     $mail->Port       = 465;            //Enable implicit TLS encryption
     $mail->CharSet = 'UTF-8';
     
     //Recipients
-    $mail->setFrom('eper.david01@gmail.com', 'HomeDeals');
+    $mail->setFrom($CONF_email, 'HomeDeals');
         
     $mail->addAddress("$email");     //Add a recipient
     

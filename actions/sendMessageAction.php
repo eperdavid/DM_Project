@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+include '../actions/email_config.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -73,13 +73,13 @@ if($is_ok == true)
     $mail->isSMTP();                                            //Send using SMTP
     $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = 'eper.david01@gmail.com';                     //SMTP username
-    $mail->Password   = 'mqxripzgcqtcqhdn';                               //SMTP password
+    $mail->Username   = $CONF_email;                     //SMTP username
+    $mail->Password   = $CONF_password;                               //SMTP password
     $mail->SMTPSecure = 465;            //Enable implicit TLS encryption
     $mail->CharSet = 'UTF-8';
     
     //Recipients
-    $mail->setFrom('eper.david01@gmail.com', 'HomeDeals');
+    $mail->setFrom($CONF_email, 'HomeDeals');
         
     $mail->addAddress("$email");     //Add a recipient
     
