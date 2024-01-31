@@ -1,4 +1,4 @@
 <?php
 
-$CONF_email = 'eper.david01@gmail.com';
-$CONF_password = 'psrszwgziefdtsju';
+$CONF_email = 'your_email@gmail.com';
+$CONF_password = 'your_password';
