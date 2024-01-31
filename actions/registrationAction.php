@@ -108,8 +108,9 @@ if($is_OK == true)
     $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
     $mail->Username   = 'eper.david01@gmail.com';                     //SMTP username
-    $mail->Password   = 'mqxripzgcqtcqhdn';                               //SMTP password
-    $mail->SMTPSecure = 465;            //Enable implicit TLS encryption
+    $mail->Password   = 'drjlqdqvtddybfum';                               //SMTP password
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;  
+    $mail->Port       = 465;            //Enable implicit TLS encryption
     $mail->CharSet = 'UTF-8';
     
     //Recipients
